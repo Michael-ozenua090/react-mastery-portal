@@ -428,4 +428,181 @@ export default App;`,
       }
     ]
   },
+  {
+    dayNumber: 3, week: 1,
+    title: 'State with useState',
+    subtitle: 'Making components remember and react to change',
+    topics: ['What is State', 'useState Hook', 'State Updates', 'Never Mutate State', 'Knowledge Check'],
+    milestone: { icon: '⚡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'What is State?',
+        body: 'State is data that belongs to a component and can change over time. \n\nThink of a component like a person. Props are things given to them (like a name tag). State is what they are feeling right now (like their mood). Moods change! When state changes, React automatically "re-renders" the component to show the new data on the screen.',
+        boxType: 'warn',
+        boxTitle: 'Why not just use a regular variable?',
+        boxBody: 'If you write <code>let score = 0;</code> and then do <code>score = 1;</code>, the math works, but <strong>React will not update the screen</strong>. Regular variables are invisible to React. State is special—when you update State, it taps React on the shoulder and says, "Hey, redraw the screen!"'
+      },
+      {
+        type: 'code',
+        title: 'The useState Hook',
+        body: 'To use state, we have to "import" a special tool from React called a Hook. The `useState` hook gives us two things: a variable to hold the data, and a special function to change it.',
+        code: `// 1. You MUST import useState at the very top of your file
+import { useState } from "react";
+
+export default function Counter() {
+  // 2. Destructuring the array returned by useState
+  //    [currentValue, functionToChangeIt] = useState(initialValue)
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="card">
+      <h2>Score: {count}</h2>
+      
+      {/* 3. We call setCount to change the data. NEVER do count++ */}
+      <button onClick={() => setCount(count + 1)}>
+        Add Point
+      </button>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: '⚠️ The Golden Rule: Never Mutate State',
+        body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**.',
+        code: `import { useState } from "react";
+
+export default function ShoppingCart() {
+  const [items, setItems] = useState(["Shoes", "Shirt"]);
+
+  const addItemWrong = () => {
+    // ❌ WRONG: Mutating the array directly
+    items.push("Hat"); 
+    setItems(items); // React thinks nothing changed, screen won't update!
+  };
+
+  const addItemRight = () => {
+    // ✅ CORRECT: Using the "Spread Operator" (...) to create a NEW array
+    // This says: "Copy all existing items, and add Hat to the end."
+    setItems([...items, "Hat"]); 
+  };
+
+  return (
+    <div>
+      <button onClick={addItemRight}>Add Hat</button>
+    </div>
+  );
+}`,
+        lang: 'jsx',
+        boxType: 'danger',
+        boxTitle: 'Mutation leads to bugs',
+        boxBody: 'Never do <code>items.push()</code>, <code>array[0] = value</code>, or <code>count = count + 1</code>. Always pass a brand new value into the setter function!'
+      },
+      {
+        type: 'code',
+        title: 'Guided Project: The Speta Like Button',
+        body: 'Let\'s build something you see every day on social media. Create a new file called `LikeButton.jsx` in your `src/` folder and paste this code. Notice how we use a boolean (true/false) state!',
+        code: `// src/LikeButton.jsx
+import { useState } from "react";
+import './App.css'; // Let's assume we put styles here
+
+export default function LikeButton() {
+  // State 1: Is it liked? (Boolean)
+  const [isLiked, setIsLiked] = useState(false);
+  // State 2: Total like count (Number)
+  const [likeCount, setLikeCount] = useState(120);
+
+  const handleLikeClick = () => {
+    if (isLiked === false) {
+      setIsLiked(true);
+      setLikeCount(likeCount + 1);
+    } else {
+      setIsLiked(false);
+      setLikeCount(likeCount - 1);
+    }
+  };
+
+  return (
+    <div className="card">
+      <p>Do you like this course?</p>
+      <button 
+        // We use a dynamic className to change colors if it is liked!
+        className={\`btn \${isLiked ? 'liked' : 'default'}\`} 
+        onClick={handleLikeClick}
+      >
+        {isLiked ? '❤️ Liked' : '🤍 Like'} ({likeCount})
+      </button>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The Habit Tracker',
+        body: 'Time to build your own stateful component from scratch! \n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create a component that tracks how many glasses of water you drank today.\n3. You need one `useState` variable starting at `0`.\n4. Create an "Add Water" button that increases the count by 1.\n5. Create a "Reset" button that sets the count back to 0.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you <code>import { useState } from "react";</code> at the very top? <br/>✓ Did you use the setter function (e.g., <code>setWater(water + 1)</code>) instead of <code>water++</code>? <br/>✓ Did you pass a function to onClick like <code>onClick={() => setWater(0)}</code>?'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'Why do we use useState instead of a regular variable like `let count = 0`?',
+            options: [
+              'Regular variables are too slow in JavaScript.',
+              'Because useState automatically saves the data to a database.',
+              'When State changes, it tells React to re-render the screen. Regular variables do not.',
+              'It is just a newer syntax for regular variables.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'Which of the following is the CORRECT syntax to create a state variable?',
+            options: [
+              'const [score, setScore] = useState(0);',
+              'const {score, setScore} = useState(0);',
+              'let score = useState(0);',
+              'const [score] = useState(0);'
+            ],
+            correct: 0
+          },
+          {
+            question: 'You have a state array: `const [cars, setCars] = useState(["Toyota"])`. How do you correctly add "Honda"?',
+            options: [
+              'cars.push("Honda");',
+              'setCars(["Honda"]);',
+              'setCars(cars + "Honda");',
+              'setCars([...cars, "Honda"]);'
+            ],
+            correct: 3
+          },
+          {
+            question: 'What is the Golden Rule of React State?',
+            options: [
+              'Always use strings, never arrays.',
+              'Never mutate (change) state directly. Always use the setter function.',
+              'State can only be used in App.jsx.',
+              'State must be passed down from Parent to Child.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'If you want a button to reset a score to 0, how should you write the onClick event?',
+            options: [
+              '<button onClick={setScore(0)}>',
+              '<button onClick="setScore(0)">',
+              '<button onClick={() => setScore(0)}>',
+              '<button onClick={score = 0}>'
+            ],
+            correct: 2
+          }
+        ]
+      }
+    ]
+  },
 ];
