@@ -8,32 +8,42 @@ import MainContent from './components/MainContent';
 function App() {
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // NEW: State to track how far they are allowed to go.
+  // Index 2 represents Day 3. So Days 1, 2, and 3 are open by default.
+  const [maxUnlockedDay, setMaxUnlockedDay] = useState(2); 
 
   const currentDayData = curriculum[selectedDayIndex];
 
+  // Function to unlock the next week
+  const unlockNextWeek = () => {
+    setMaxUnlockedDay(11); // Unlocks the rest of the course! (Index 11 is Day 12)
+    alert("🎉 Congratulations! Week 2 is now unlocked! 🎉");
+  };
+
   return (
     <>
-      {/* Pass the toggle function to the Header */}
       <Header onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
-      
       <div className="layout">
-        {/* Pass the state to the Sidebar */}
         <Sidebar 
           curriculum={curriculum} 
           selectedIndex={selectedDayIndex} 
           onSelectDay={(index) => {
             setSelectedDayIndex(index);
-            setIsMobileMenuOpen(false); // Auto-close menu when a day is clicked
+            setIsMobileMenuOpen(false);
           }} 
           isOpen={isMobileMenuOpen}
+          maxUnlocked={maxUnlockedDay} // Pass the lock state to the sidebar
         />
         
-        {/* Overlay that dims the background when mobile menu is open */}
         {isMobileMenuOpen && (
           <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
         )}
 
-        <MainContent dayData={currentDayData} />
+        <MainContent 
+          dayData={currentDayData} 
+          onPassCheckpoint={unlockNextWeek} // Pass the unlock function down
+        />
       </div>
     </>
   );

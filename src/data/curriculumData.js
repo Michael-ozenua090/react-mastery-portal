@@ -428,7 +428,7 @@ export default App;`,
       }
     ]
   },
-  {
+ {
     dayNumber: 3, week: 1,
     title: 'State with useState',
     subtitle: 'Making components remember and react to change',

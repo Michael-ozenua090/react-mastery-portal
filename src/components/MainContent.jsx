@@ -37,8 +37,86 @@ function QuizWidget({ questionData, index }) {
   );
 }
 
+// --- WEEK 1 FINAL EXAM COMPONENT ---
+function CheckpointExam({ questions, onPass }) {
+  const [answers, setAnswers] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const handleSelect = (qIndex, optIndex) => {
+    if (!submitted) setAnswers({ ...answers, [qIndex]: optIndex });
+  };
+
+  const handleSubmit = () => {
+    let totalScore = 0;
+    questions.forEach((q, i) => {
+      if (answers[i] === q.correct) totalScore += 1;
+    });
+    setScore(totalScore);
+    setSubmitted(true);
+
+    // 80% to pass (8 out of 10)
+    if (totalScore >= (questions.length * 0.8)) {
+      onPass(); 
+    }
+  };
+
+  return (
+    <div style={{ background: 'rgba(163, 113, 247, 0.05)', padding: '2rem', borderRadius: '12px', border: '2px solid #a371f7' }}>
+      <h2 style={{ color: '#a371f7', marginTop: 0 }}>🏆 Week 1 Certification Exam</h2>
+      <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>You must score at least 80% to unlock Week 2.</p>
+
+      {questions.map((q, i) => {
+        const isCorrect = answers[i] === q.correct;
+        return (
+          <div key={i} style={{ marginBottom: '2rem' }}>
+            <div className="quiz-q">{i + 1}. {q.question}</div>
+            <div className="quiz-options">
+              {q.options.map((opt, optIdx) => (
+                <button 
+                  key={optIdx} disabled={submitted}
+                  className={`quiz-opt ${answers[i] === optIdx ? 'selected' : ''} ${submitted && optIdx === q.correct ? 'correct' : ''} ${submitted && answers[i] === optIdx && !isCorrect ? 'wrong' : ''}`}
+                  onClick={() => handleSelect(i, optIdx)}
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+      {!submitted ? (
+        <button className="quiz-submit" style={{ width: '100%', padding: '1rem', fontSize: '1.1rem' }} onClick={handleSubmit}>
+          Submit Exam
+        </button>
+      ) : (
+        <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1.5rem', background: 'var(--card)', borderRadius: '8px' }}>
+          <h3 style={{ margin: 0, color: score >= (questions.length * 0.8) ? '#7ee787' : '#ff7b72' }}>
+            You scored {score} / {questions.length}
+          </h3>
+          {score >= (questions.length * 0.8) ? (
+            <p>Amazing job! You have mastered Week 1. Week 2 is now unlocked!</p>
+          ) : (
+            <p>You need a few more correct to pass. Refresh the page to try again!</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function MainContent({ dayData }) {
-  if (!dayData) return <div className="main">Loading...</div>;
+
+  // Add this safety check:
+  if (!dayData) {
+    return (
+      <main className="main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <h2>🚧 Day coming soon! Stay tuned.</h2>
+      </main>
+    );
+  }
+  
   const wc = WEEK_COLORS[dayData.week];
 
   const renderTree = (treeString) => {
@@ -110,7 +188,7 @@ export default function MainContent({ dayData }) {
             </div>
           )}
 
-          {/* Render the Interactive Quizzes! */}
+            {/* Render standard mid-lesson quizzes */}
           {sec.type === 'quiz' && (
             <div className="quiz-container">
               {sec.questions.map((q, i) => (
@@ -118,6 +196,12 @@ export default function MainContent({ dayData }) {
               ))}
             </div>
           )}
+
+          {/* Render the BOSS FIGHT EXAM */}
+          {sec.type === 'exam' && (
+            <CheckpointExam questions={sec.questions} onPass={onPassCheckpoint} />
+          )}
+
         </div>
       ))}
     </main>

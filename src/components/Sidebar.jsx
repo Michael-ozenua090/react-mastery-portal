@@ -1,16 +1,10 @@
 import { WEEK_COLORS } from '../data/curriculumData';
 
-// Add the isOpen prop here!
-export default function Sidebar({ curriculum, selectedIndex, onSelectDay, isOpen }) {
-  const weeks = [
-    { week: 1, days: [0, 1, 2] },
-    { week: 2, days: [3, 4, 5] },
-    { week: 3, days: [6, 7, 8] },
-    { week: 4, days: [9, 10, 11] }
-  ];
-
+export default function Sidebar({ curriculum, selectedIndex, onSelectDay, isOpen, maxUnlocked }) {
+    const weeks = [
+    { week: 1, days: [0, 1, 2] } // Only index 0, 1, and 2 exist (Day 1, 2, 3)
+    ];
   return (
-    // Add dynamic class for mobile sliding
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       {weeks.map(({ week, days }) => {
         const wc = WEEK_COLORS[week];
@@ -23,14 +17,18 @@ export default function Sidebar({ curriculum, selectedIndex, onSelectDay, isOpen
             {validDays.map((di) => {
               const day = curriculum[di];
               const isActive = di === selectedIndex;
+              const isLocked = di > maxUnlocked; // Logic to check if locked
+
               return (
                 <button 
                   key={di}
+                  disabled={isLocked} // Prevents clicking
                   className={`day-btn ${isActive ? 'active' : ''}`} 
+                  style={{ opacity: isLocked ? 0.5 : 1, cursor: isLocked ? 'not-allowed' : 'pointer' }}
                   onClick={() => onSelectDay(di)}
                 >
                   <div className="day-dot" style={{ background: `${wc.color}22`, color: wc.color }}>
-                    D{day.dayNumber}
+                    {isLocked ? '🔒' : `D${day.dayNumber}`}
                   </div>
                   <div className="day-btn-text">
                     <div className="day-btn-num">Day {day.dayNumber}</div>
