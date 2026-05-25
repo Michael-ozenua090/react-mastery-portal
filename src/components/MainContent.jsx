@@ -59,9 +59,27 @@ export default function MainContent({ dayData }) {
         </div>
         <h1 className="day-title">{dayData.title}</h1>
         <p className="day-subtitle">{dayData.subtitle}</p>
+        
         <div className="topics-row">
           {dayData.topics.map(t => <span key={t} className="topic-tag">{t}</span>)}
         </div>
+
+        {/* --- DYNAMIC PROGRESS BAR --- */}
+        <div className="progress-wrap" style={{ marginTop: '1.5rem' }}>
+          <div style={{ fontSize: '0.7rem', color: 'var(--muted)', marginBottom: '0.4rem', display: 'flex', justifyContent: 'space-between' }}>
+            <span>Course Progress</span>
+            <span>{dayData.dayNumber} / 12 classes</span>
+          </div>
+          <div style={{ height: '4px', background: 'var(--border)', borderRadius: '2px', overflow: 'hidden' }}>
+            <div style={{ 
+              width: `${(dayData.dayNumber / 12) * 100}%`, 
+              background: wc.color, 
+              height: '100%', 
+              transition: 'width 0.4s ease' 
+            }}></div>
+          </div>
+        </div>
+        {/* ---------------------------- */}
       </div>
 
       {dayData.sections.map((sec, idx) => (
