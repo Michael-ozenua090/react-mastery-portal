@@ -707,29 +707,34 @@ export default function EventExamples() {
         boxBody: 'For Ternaries: "Is it raining <strong>?</strong> Take an umbrella <strong>:</strong> Wear sunglasses." <br>For ANDs: "Is it raining <strong>&&</strong> Take an umbrella."'
       },
       {
-        type: 'code',
+        type: 'text',
         title: 'Guided Project: The Login Gate',
-        body: 'Create a file named `Dashboard.jsx`. We will use a Ternary to show a Login button OR a Logout button, and an `&&` to show a secret message ONLY if they are logged in.',
+        body: 'Let\'s build a secure portal. We will use a Ternary to show a Login or Logout button, and the `&&` operator to reveal secret data ONLY if the user is logged in.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create Dashboard.jsx',
+        body: 'Create a new file named `Dashboard.jsx` inside your `src/` folder and paste this logic:',
         code: `// src/Dashboard.jsx
 import { useState } from "react";
 
 export default function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // We can write one function to toggle the boolean!
+  // One function to toggle the boolean to its opposite state!
   const toggleLogin = () => {
-    setIsLoggedIn(!isLoggedIn); // Sets it to the opposite of what it is
+    setIsLoggedIn(!isLoggedIn); 
   };
 
   return (
-    <div className="card">
+    <div className="auth-card">
       <h2>Welcome to the Portal</h2>
 
       {/* TERNARY (? :) -> If true show Logout, else show Login */}
       {isLoggedIn ? (
-        <button onClick={toggleLogin}>Log Out</button>
+        <button className="btn-logout" onClick={toggleLogin}>Log Out</button>
       ) : (
-        <button onClick={toggleLogin}>Log In</button>
+        <button className="btn-login" onClick={toggleLogin}>Log In</button>
       )}
 
       {/* LOGICAL AND (&&) -> Only show this div if isLoggedIn is true! */}
@@ -743,6 +748,60 @@ export default function Dashboard() {
   );
 }`,
         lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Update App.jsx',
+        body: 'Now, bridge your new component into your main application file so it actually renders on the screen.',
+        code: `// src/App.jsx
+import './App.css';
+import Dashboard from './Dashboard'; // Import the new component
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Week 2: Conditional Rendering</h1>
+      <Dashboard /> 
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Add this to your `App.css` so our secret dashboard looks like a real secure vault when it opens!',
+        code: `/* Add to App.css */
+.auth-card {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #334155;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.btn-login { background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+.btn-logout { background: #ef4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+
+.secret-content {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px dashed #10b981;
+  border-radius: 8px;
+  color: #10b981;
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}`,
+        lang: 'css'
       },
       {
         type: 'text',
