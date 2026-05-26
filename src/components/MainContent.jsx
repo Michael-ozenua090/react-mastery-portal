@@ -234,13 +234,13 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
 
       {dayData.sections.map((sec, idx) => (
         <div key={idx} className="section">
-          {sec.title && <div className="section-title">{sec.title}</div>}
-          {sec.timeEstimate && (
+          {sec.type !== 'homework' && sec.title && <div className="section-title">{sec.title}</div>}
+          {sec.type !== 'homework' && sec.timeEstimate && (
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(247,183,49,0.12)', color: '#f7b731', border: '1px solid rgba(247,183,49,0.3)', borderRadius: '20px', padding: '0.2rem 0.75rem', fontSize: '0.75rem', fontWeight: '600', marginBottom: '0.75rem' }}>
               ⏱ {sec.timeEstimate}
             </div>
           )}
-          {sec.body && <p className="section-body">{sec.body}</p>}
+          {sec.type !== 'homework' && sec.body && <p className="section-body">{sec.body}</p>}
           
           {sec.type === 'filetree' && <div className="file-tree">{renderTree(sec.tree)}</div>}
 

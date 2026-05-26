@@ -990,5 +990,222 @@ export default App;`,
         ]
       }
     ]
+  },
+  // --- DAY 5 ---
+  {
+    dayNumber: 5, week: 2,
+    title: 'Lists & Keys',
+    subtitle: 'Rendering arrays of data dynamically',
+    topics: ['Array.map()', 'Dynamic UI', 'The Key Prop', 'List of Components', 'Knowledge Check'],
+    milestone: { icon: '📋', title: 'Data-Driven UI', text: 'Stop hardcoding your components. Today you will learn how to take an array of data and automatically generate a beautiful interface for it.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'Say Goodbye to Hardcoding',
+        body: 'If you are building Netflix and have a list of 100 movies, you cannot write `<MovieCard />` 100 times in your code. Instead, we use JavaScript to loop over the data and generate the components for us.\n\nIn React, we do not use `for` loops or `.forEach()`. Instead, we use the **`.map()`** array method. Why? Because `.map()` takes an array of data and *returns a brand new array* of JSX elements that React can instantly draw on the screen.',
+        boxType: 'tip',
+        boxTitle: 'Quick Vanilla JS Refresher: .map()',
+        boxBody: 'The <code>.map()</code> method runs a function on every item in an array. <br/><code>const numbers = [1, 2, 3];</code><br/><code>const doubled = numbers.map(num => num * 2);</code><br/>In React, instead of returning math, we return HTML/JSX: <code>num => &lt;p&gt;{num}&lt;/p&gt;</code>.'
+      },
+      {
+        type: 'code',
+        title: 'Rendering a Basic List',
+        body: 'Here is how we take a simple array of strings and turn it into an HTML list (`<ul>`). Notice how we wrap the `.map()` function inside curly braces `{}` so React knows it is JavaScript!',
+        code: `export default function TechStack() {
+  const skills = ["React", "TypeScript", "Node.js", "Python"];
+
+  return (
+    <div className="card">
+      <h2>My Tech Stack</h2>
+      <ul>
+        {/* We map over the array and return an <li> for every string */}
+        {skills.map((skill) => (
+          <li key={skill}>{skill}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: '🔑 The Danger Zone: The Key Prop',
+        body: 'Did you notice the `key={skill}` in the code above? **This is mandatory.**\n\nWhenever you map over a list in React, the outermost element you return MUST have a unique `key` prop. If you forget it, React will scream at you in the console with a red warning.',
+        boxType: 'danger',
+        boxTitle: 'Why does React need Keys?',
+        boxBody: 'Remember the Virtual DOM from Day 1? When an array changes (maybe an item is deleted or reordered), React needs to figure out exactly which item changed so it only updates that tiny piece of the screen. <br><br>The <code>key</code> is like a tracking ID. If you do not provide it, React gets confused, destroys the whole list, and redraws it from scratch — which is terrible for performance.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The Netflix Movie List',
+        body: 'Let\'s build something real. We are going to take an array of Movie Objects (like you would get from an API) and map them into reusable `<MovieCard />` components.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create MovieList.jsx',
+        body: 'Create a new file named `MovieList.jsx`. We will put our data array at the top, and map over it in the `return`.',
+        code: `// src/MovieList.jsx
+
+// 1. A simulated database array of objects
+const MOVIE_DATA = [
+  { id: "m1", title: "Inception", year: 2010, rating: "⭐️⭐️⭐️⭐️⭐️" },
+  { id: "m2", title: "Interstellar", year: 2014, rating: "⭐️⭐️⭐️⭐️" },
+  { id: "m3", title: "The Dark Knight", year: 2008, rating: "⭐️⭐️⭐️⭐️⭐️" }
+];
+
+export default function MovieList() {
+  return (
+    <div className="movie-container">
+      <h2>Christopher Nolan Classics</h2>
+      
+      <div className="movie-grid">
+        {MOVIE_DATA.map((movie) => (
+          // The KEY goes on the outermost element returned by the map!
+          <div key={movie.id} className="movie-card">
+            <h3>{movie.title}</h3>
+            <p className="year">Release: {movie.year}</p>
+            <p className="rating">{movie.rating}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Update App.jsx',
+        body: 'Bridge your `MovieList` into your main `App.jsx`.',
+        code: `// src/App.jsx
+import './App.css';
+import MovieList from './MovieList';
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Week 2: Lists & Keys</h1>
+      <MovieList />
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Paste this into `App.css` to give it that dark, cinematic feel.',
+        code: `/* Add to App.css */
+.movie-container {
+  background: #0f172a;
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.movie-container h2 { color: #38bdf8; text-align: center; margin-bottom: 2rem; }
+
+.movie-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.movie-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.movie-card:hover { transform: translateY(-5px); border-color: #38bdf8; }
+.movie-card h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+.year { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
+.rating { font-size: 1.2rem; margin: 0; }`,
+        lang: 'css'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The High Score Leaderboard',
+        timeEstimate: '30 min',
+        body: 'Time to practice! Your task is to build a leaderboard ranking component.\n\n**Requirements:**\n1. Create a file named `Leaderboard.jsx`.\n2. Inside the file (but above the component), create an array of objects called `PLAYERS`. Each object should have an `id`, `name`, and `score` (e.g., `{ id: 1, name: "David", score: 9500 }`). Add at least 3 players.\n3. Build the `Leaderboard` component. Map over the `PLAYERS` array and render a `<div>` for each player showing their name and score.\n4. Make sure the parent `<div>` inside the map has a `key` prop!\n5. Import and display it in `App.jsx`.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you use <code>.map()</code> inside curly braces <code>{}</code> in your JSX? <br/>✓ Did you use <code>key={player.id}</code> on the outermost element returned by the map? <br/>✓ Did you export the component and import it successfully?'
+      },
+      {
+        type: 'homework',
+        title: 'Combining .map() with Components',
+        timeEstimate: '45–60 min',
+        body: 'In the Guided Project, we mapped the array directly into standard HTML `<div>` tags. In the real world, you map data into **Reusable Components** (like what we learned on Day 2!).\n\n**Requirements:**\n1. In your `MovieList.jsx` file, create a second, separate component at the bottom of the file called `function MovieItem({ title, year, rating })`. \n2. Move the HTML structure (the `div`, `h3`, `p` tags) out of the `.map()` and into the `MovieItem` return statement.\n3. Update your `.map()` to return `<MovieItem />` components instead of divs! Pass the data down as props (e.g. `title={movie.title}`).\n4. **CRITICAL:** Where does the `key` go now? It must go on the `<MovieItem>` tag itself, inside the map (e.g. `<MovieItem key={movie.id} ... />`).',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you extract the UI into a child component? <br/>✓ Does your map look like: <code>MOVIE_DATA.map(movie =&gt; &lt;MovieItem key={movie.id} title={movie.title} /&gt;)</code>? <br/>✓ Is the <code>key</code> placed on the custom component tag?'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'Which JavaScript array method is exclusively used to render lists of data in React?',
+            options: [
+              '.forEach()',
+              '.filter()',
+              '.map()',
+              '.reduce()'
+            ],
+            correct: 2
+          },
+          {
+            question: 'Why does React require a "key" prop when mapping over an array?',
+            options: [
+              'To apply unique CSS styles to each element.',
+              'To help the Virtual DOM track which specific items changed, were added, or removed.',
+              'To pass secret data to the backend database.',
+              'Because JavaScript arrays require keys by default.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What is the BEST value to use for a key prop?',
+            options: [
+              'The index of the array (0, 1, 2...).',
+              'A random number generated by Math.random().',
+              'A unique ID from your data (like a database ID).',
+              'The same string for every item.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'Where must the key prop be placed?',
+            options: [
+              'On the <ul> or parent wrapper outside the map.',
+              'On the outermost element or component returned INSIDE the .map() callback.',
+              'On every single HTML tag inside the map.',
+              'It doesn\'t matter as long as it is somewhere in the component.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'If you use .map() to return a custom <UserCard /> component, what is the correct syntax?',
+            options: [
+              'users.map(u => <UserCard key={u.id} name={u.name} />)',
+              '{users.map(u => UserCard(u))}',
+              '<UserCard map={users} />',
+              'users.forEach(u => <UserCard />)'
+            ],
+            correct: 0
+          }
+        ]
+      }
+    ]
   }
 ];
