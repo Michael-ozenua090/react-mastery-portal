@@ -1,9 +1,13 @@
 import { WEEK_COLORS } from '../data/curriculumData';
 
 export default function Sidebar({ curriculum, selectedIndex, onSelectDay, isOpen, maxUnlocked }) {
-    const weeks = [
-    { week: 1, days: [0, 1, 2] } // Only index 0, 1, and 2 exist (Day 1, 2, 3)
-    ];
+  // Dynamically group days by week — no manual updates needed when new days are added
+  const weekMap = {};
+  curriculum.forEach((day, index) => {
+    if (!weekMap[day.week]) weekMap[day.week] = [];
+    weekMap[day.week].push(index);
+  });
+  const weeks = Object.keys(weekMap).map(w => ({ week: Number(w), days: weekMap[w] }));
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       {weeks.map(({ week, days }) => {

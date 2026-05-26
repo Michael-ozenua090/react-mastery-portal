@@ -64,6 +64,7 @@ export const curriculum = [
       {
         type: 'text',
         title: 'Beginner Trap: Asset Paths & Styling',
+        body: 'Two mistakes trip up almost every beginner in their first Vite project. Read this box carefully before you write a single line of code in the guided project below.',
         boxType: 'danger',
         boxTitle: 'Asset Paths & Styling',
         boxBody: '<strong>Images:</strong> Notice the image source in the code below is <code>/avatar.png</code>. In Vite, static images should be placed inside your <code>public/</code> folder, not your <code>src/</code> folder.<br><br><strong>CSS:</strong> You must explicitly write <code>import "./App.css";</code> at the top of your component file, otherwise your <code>className</code> tags will do nothing.'
@@ -182,10 +183,19 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: Build a Twitter Clone Card',
+        timeEstimate: '30–45 min',
         body: 'Now it is your turn to write code from scratch. Clear out your App.jsx and App.css. Your task is to build a single "Tweet" card.\n\n**Requirements for Audit:**\n1. You must define a `const username` and `const tweetBody` at the top of your function.\n2. You must inject those variables into your JSX using `{}`.\n3. You must use `className` to style it to look like a Tweet (white box, gray border, bold name).\n4. You must add an image of a heart icon for the "Like" button, and it must load from your `/public` folder.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
         boxBody: '✓ Did you use exactly one parent <code>&lt;div&gt;</code>? <br/>✓ Did you use <code>className</code> instead of <code>class</code>? <br/>✓ Does your <code>&lt;img /&gt;</code> tag have a closing slash?'
+      },
+      {
+        type: 'homework',
+        title: 'The Retweet Counter',
+        timeEstimate: '45–60 min',
+        body: 'You built a static Tweet Card in class. Now make it come alive! Your job is to add an interactive Retweet counter to your Tweet Card.\n\n**Requirements:**\n1. Add a `const [retweetCount, setRetweetCount]` state variable starting at `0` — you will need to import `{ useState }` from `"react"`.\n2. Add a 🔁 Retweet button below the tweet body.\n3. Clicking the button must increase `retweetCount` by 1 and display the current count next to the button.\n4. Style the button so it turns green after being clicked (use a second boolean state variable like `isRetweeted`).',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you import <code>useState</code> at the top of the file? <br/>✓ Does clicking Retweet increase the count each time? <br/>✓ Did you use the setter function <code>setRetweetCount(retweetCount + 1)</code> and not <code>retweetCount++</code>? <br/>✓ <strong>Bonus:</strong> Can you make it toggle — so clicking again un-retweets and decreases the count?'
       },
       {
         type: 'quiz',
@@ -276,7 +286,7 @@ function StudentCard(props) {
       {
         type: 'code',
         title: 'Props (The Modern Way: Destructuring)',
-        body: 'Writing `props.` over and over gets repetitive. Modern React developers use standard JavaScript **Object Destructuring** right inside the function parameters to pull out exactly what they need instantly.',
+        body: 'Writing `props.` over and over gets repetitive. Modern React developers use standard JavaScript **Object Destructuring** right inside the function parameters to pull out exactly what they need instantly. If you have not seen this before — destructuring is a JavaScript trick that unpacks values from an object directly into named variables, so you can use them without writing `props.name` every time.',
         code: `// We pull 'name' and 'grade' directly out of the hidden props object!
 function StudentCard({ name, grade }) {
   return (
@@ -365,10 +375,19 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: The E-Commerce Product Grid',
+        timeEstimate: '45–60 min',
         body: 'Time to prove you understand props and files! Your task is to build a reusable `<Product />` component and display 3 different items on the screen.\n\n**Requirements:**\n1. Create a new file named `Product.jsx` inside your `src/` folder.\n2. In that file, build and `export default` a `Product` component that accepts three props: `title`, `price`, and `isOnSale`.\n3. Render the `title` and `price` inside the component using `{}`.\n4. Use a ternary operator (`? :`) to display a "SALE!" badge only if `isOnSale` is true.\n5. Open your `App.jsx`, import your new `Product` component, and render three of them with different data. Make sure at least one is on sale, and one is not.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
         boxBody: '✓ Did you <code>export default</code> the Product component and <code>import</code> it into App.jsx? <br/>✓ Did you use curly braces <code>{ title, price }</code> in the parameters? <br/>✓ Did you pass strings in quotes (<code>title="Shoes"</code>) but booleans/numbers in curly braces (<code>price={50} isOnSale={true}</code>)?'
+      },
+      {
+        type: 'homework',
+        title: 'The Social Media Profile Grid',
+        timeEstimate: '60–75 min',
+        body: 'You built a roster using individual `<ProfileCard>` tags. Now challenge yourself to do it the smart way — using an array and `.map()`.\n\n**Requirements:**\n1. In your `App.jsx`, create a `const teamMembers` array with at least 5 objects. Each object should have `name`, `role`, and `isLead` properties.\n2. Instead of writing 5 individual `<ProfileCard>` tags, use `{teamMembers.map(member => <ProfileCard key={member.name} name={member.name} role={member.role} isLead={member.isLead} />)}` inside your JSX.\n3. The result on screen should look identical — the only difference is how you wrote the code.\n\n**Hint:** The `.map()` method loops over every item in an array and returns a new array — in our case, an array of JSX elements. React knows how to render this automatically!',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Is your <code>teamMembers</code> array defined outside the return statement? <br/>✓ Did you use <code>.map()</code> to loop over the array? <br/>✓ Did each rendered item get a unique <code>key</code> prop (e.g. <code>key={member.name}</code>)? <br/>✓ <strong>Bonus:</strong> Sort the array so Team Leads always appear first — use <code>.sort()</code> before <code>.map()</code>.'
       },
      {
         type: 'quiz',
@@ -471,7 +490,7 @@ export default function Counter() {
       {
         type: 'code',
         title: '⚠️ The Golden Rule: Never Mutate State',
-        body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**.',
+        body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**. The three dots (`...`) you will see below are the **Spread Operator** — they unpack all the existing items from the old array into a brand new one, then we add the new item at the end.',
         code: `import { useState } from "react";
 
 export default function ShoppingCart() {
@@ -542,10 +561,27 @@ export default function LikeButton() {
       {
         type: 'text',
         title: 'Unguided Task: The Habit Tracker',
+        timeEstimate: '45 min',
         body: 'Time to build your own stateful component from scratch! \n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create a component that tracks how many glasses of water you drank today.\n3. You need one `useState` variable starting at `0`.\n4. Create an "Add Water" button that increases the count by 1.\n5. Create a "Reset" button that sets the count back to 0.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
         boxBody: '✓ Did you <code>import { useState } from "react";</code> at the very top? <br/>✓ Did you use the setter function (e.g., <code>setWater(water + 1)</code>) instead of <code>water++</code>? <br/>✓ Did you pass a function to onClick like <code>onClick={() => setWater(0)}</code>?'
+      },
+      {
+        type: 'homework',
+        title: 'The Mood Tracker',
+        timeEstimate: '45–60 min',
+        body: 'Build a component that tracks your mood for the day using State.\n\n**Requirements:**\n1. Create a file named `MoodTracker.jsx`.\n2. Create two state variables: `mood` (a string, starting as `"Neutral"`) and `moodEmoji` (a string, starting as `"😐"`).\n3. Render 3 buttons: "😄 Happy", "😐 Neutral", and "😢 Sad".\n4. Clicking each button must update BOTH state variables — e.g. clicking Happy sets `mood` to `"Happy"` and `moodEmoji` to `"😄"`.\n5. Display a line like: "Today I am feeling: 😄 Happy" that updates live as buttons are clicked.\n6. Use a conditional className to change the background colour of the card based on mood (green for Happy, grey for Neutral, blue for Sad).',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Do both <code>mood</code> and <code>moodEmoji</code> update when a button is clicked? <br/>✓ Is the displayed text reactive — does it change without a page reload? <br/>✓ Did you use a dynamic <code>className</code> to change the card colour? <br/>✓ <strong>Bonus:</strong> Add a timestamp that shows "Last updated at HH:MM" using <code>new Date().toLocaleTimeString()</code> whenever a mood is selected.'
+      },
+      {
+        type: 'text',
+        title: '🔭 Coming Up in Week 2',
+        body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Lists & .map()** (Day 4–5): How to render dynamic lists of data from arrays — the skill behind every feed, product grid, and todo list you have ever seen.\n2. **Events & Forms** (Day 4–5): How to capture user input, validate it, and respond to it in real time.\n3. **useEffect** (Day 6): How to run code automatically — like fetching data from an API when a page loads. This is the Hook that connects your React app to the outside world.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
+        boxType: 'tip',
+        boxTitle: 'Tip: Keep Building Between Classes',
+        boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting — breaking things and fixing them — is worth more than re-reading the notes.'
       },
       {
         type: 'exam', // Notice the new type!
@@ -604,4 +640,178 @@ export default function LikeButton() {
       }
     ]
   },
+  // --- DAY 4 ---
+  {
+    dayNumber: 4, week: 2,
+    title: 'Events & Conditional Rendering',
+    subtitle: 'Making your app react to the user',
+    topics: ['onClick & onChange', 'Passing vs Calling', 'Ternary (? :)', 'Logical AND (&&)', 'Knowledge Check'],
+    milestone: { icon: '🎯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'Event Handling in React',
+        body: 'React handles events similarly to standard HTML, but with a few very important differences:\n\n1. **CamelCase:** In HTML you write `onclick`. In React, you must write `onClick`.\n2. **Pass, Don\'t Call:** You pass a function to the event, you don\'t call it as a string. \n3. **The Event Object (e):** Just like vanilla JS, React gives you an event object containing details about the action (like what the user typed).',
+        boxType: 'danger',
+        boxTitle: 'The Infinite Loop Crash (⚠️ CRITICAL)',
+        boxBody: 'If you write <code>onClick={calculateScore()}</code> with parentheses, the function runs <strong>immediately</strong> when the page loads. If that function updates State, it forces a reload, which runs the function again, causing an Infinite Loop that crashes the browser! <br><br><strong>Always pass the function name without parentheses:</strong> <code>onClick={calculateScore}</code> or use an arrow function: <code>onClick={() => calculateScore(5)}</code>.'
+      },
+      {
+        type: 'code',
+        title: 'Common Events in Action',
+        body: 'Here are the two most common events you will use: Clicks on buttons, and Changes in text inputs.',
+        code: `import { useState } from "react";
+
+export default function EventExamples() {
+  const [text, setText] = useState("");
+
+  // A helper function for the click event
+  const handleClick = () => {
+    alert("You clicked the button!");
+  };
+
+  // A helper function for the typing event
+  // 'e' is the event object. 'e.target.value' gets the text!
+  const handleTyping = (e) => {
+    setText(e.target.value);
+  };
+
+  return (
+    <div className="card">
+      {/* 1. Button Click */}
+      <button onClick={handleClick}>Click Me</button>
+
+      {/* 2. Input Change */}
+      <input 
+        type="text" 
+        placeholder="Type here..." 
+        onChange={handleTyping} 
+      />
+      <p>You are typing: {text}</p>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Conditional Rendering (Showing and Hiding)',
+        body: 'Often, you want to show a button *only* if a user is logged in, or show an error message *only* if a form is broken. We do this using JavaScript logic directly inside our JSX.\n\nThere are two main tools we use:\n1. **The Ternary Operator (`condition ? true : false`)**: Use this when you have TWO options (an IF and an ELSE).\n2. **The Logical AND (`condition && true`)**: Use this when you only have ONE option (an IF, but no ELSE).',
+        boxType: 'tip',
+        boxTitle: 'Read it like English',
+        boxBody: 'For Ternaries: "Is it raining <strong>?</strong> Take an umbrella <strong>:</strong> Wear sunglasses." <br>For ANDs: "Is it raining <strong>&&</strong> Take an umbrella."'
+      },
+      {
+        type: 'code',
+        title: 'Guided Project: The Login Gate',
+        body: 'Create a file named `Dashboard.jsx`. We will use a Ternary to show a Login button OR a Logout button, and an `&&` to show a secret message ONLY if they are logged in.',
+        code: `// src/Dashboard.jsx
+import { useState } from "react";
+
+export default function Dashboard() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // We can write one function to toggle the boolean!
+  const toggleLogin = () => {
+    setIsLoggedIn(!isLoggedIn); // Sets it to the opposite of what it is
+  };
+
+  return (
+    <div className="card">
+      <h2>Welcome to the Portal</h2>
+
+      {/* TERNARY (? :) -> If true show Logout, else show Login */}
+      {isLoggedIn ? (
+        <button onClick={toggleLogin}>Log Out</button>
+      ) : (
+        <button onClick={toggleLogin}>Log In</button>
+      )}
+
+      {/* LOGICAL AND (&&) -> Only show this div if isLoggedIn is true! */}
+      {isLoggedIn && (
+        <div className="secret-content">
+          <h3>🤫 Secret Dashboard Data</h3>
+          <p>Your bank balance is $1,000,000.</p>
+        </div>
+      )}
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The FAQ Accordion',
+        timeEstimate: '30–40 min',
+        body: 'Time to practice! Your task is to build a frequently asked question (FAQ) component that expands when clicked.\n\n**Requirements:**\n1. Create a file named `FaqBox.jsx`.\n2. Create a state variable called `isOpen` that starts as `false`.\n3. Create a `<div className="faq-card">` that holds an `<h3>` with a question (e.g., "What is React?").\n4. Add an `onClick` event to the `<h3>` or a button that toggles `isOpen` to true/false.\n5. Use the `&&` operator to display a `<p>` tag with the answer *only* when `isOpen` is true.\n6. Import and render it in your `App.jsx`.\n\n💡 **Hint:** To toggle a boolean, use `setIsOpen(!isOpen)` — the `!` operator flips `true` to `false` and `false` to `true`.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you use camelCase for <code>onClick</code>? <br/>✓ Did you pass a function to onClick without instantly calling it? <br/>✓ Did you use <code>isOpen && &lt;p&gt;Answer&lt;/p&gt;</code> to hide the text?'
+      },
+      {
+        type: 'homework',
+        title: 'The Dark / Light Mode Toggle',
+        timeEstimate: '45–60 min',
+        body: 'Build a Dark / Light mode theme switcher — a feature used in virtually every professional app.\n\n**Requirements:**\n1. Create a file named `ThemeSwitcher.jsx`.\n2. Create a state variable `isDark` that starts as `true` (dark mode on by default).\n3. Render a button that says "☀️ Switch to Light Mode" when dark, and "🌙 Switch to Dark Mode" when light. Use a **ternary operator** for this.\n4. Use `isDark` with a **conditional className** to apply a `.dark-card` or `.light-card` class to the outer div, giving it different background and text colours.\n5. Add a toggle function that calls `setIsDark(!isDark)` when the button is clicked.\n6. Import and display it in `App.jsx`.',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Does the button text change based on the current theme state? <br/>✓ Does the card background colour change when you click? <br/>✓ Did you use a ternary operator for the button label and a conditional className for the styles? <br/>✓ <strong>Bonus:</strong> Save the theme to <code>localStorage</code> so it remembers the user’s preference after a page refresh — use <code>localStorage.setItem("theme", isDark ? "dark" : "light")</code>.'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'What is the correct way to write a click event in React?',
+            options: [
+              'onclick={handleClick}',
+              'onClick={handleClick}',
+              'on-click="handleClick"',
+              'click={handleClick}'
+            ],
+            correct: 1
+          },
+          {
+            question: 'Why is <button onClick={calculateScore()}> DANGEROUS in React?',
+            options: [
+              'It creates a syntax error.',
+              'Parentheses are not allowed in JSX.',
+              'It calls the function immediately on load, which can cause an infinite loop if it updates state.',
+              'It will only run once and then permanently break the button.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you want to pass a value to a function inside an onClick, what is the safe way to do it?',
+            options: [
+              'onClick={updateScore(5)}',
+              'onClick={() => updateScore(5)}',
+              'onClick="updateScore(5)"',
+              'onClick={function: updateScore(5)}'
+            ],
+            correct: 1
+          },
+          {
+            question: 'You want to show an "Error" banner ONLY if hasError is true, and show NOTHING otherwise. Which is the best tool?',
+            options: [
+              'The Ternary Operator (? :)',
+              'The Logical AND (&&)',
+              'A standard JavaScript if/else block inside the return statement.',
+              'A switch statement.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'How do you extract the text a user just typed into an <input> field?',
+            options: [
+              'e.value',
+              'e.target.text',
+              'e.target.value',
+              'input.getValue()'
+            ],
+            correct: 2
+          }
+        ]
+      }
+    ]
+  }
 ];

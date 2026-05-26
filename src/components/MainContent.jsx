@@ -47,6 +47,12 @@ function CheckpointExam({ questions, onPass }) {
     if (!submitted) setAnswers({ ...answers, [qIndex]: optIndex });
   };
 
+  const handleReset = () => {
+    setAnswers({});
+    setScore(0);
+    setSubmitted(false);
+  };
+
   const handleSubmit = () => {
     let totalScore = 0;
     questions.forEach((q, i) => {
@@ -96,9 +102,31 @@ function CheckpointExam({ questions, onPass }) {
             You scored {score} / {questions.length}
           </h3>
           {score >= (questions.length * 0.8) ? (
-            <p>Amazing job! You have mastered Week 1. Week 2 is now unlocked!</p>
+            <p>Amazing job! You have mastered Week 1. Week 2 is now unlocked! 🎉</p>
           ) : (
-            <p>You need a few more correct to pass. Refresh the page to try again!</p>
+            <>
+              <p style={{ color: 'var(--muted)', marginBottom: '1.2rem' }}>
+                You need at least {Math.ceil(questions.length * 0.8)} correct to pass. Review the lessons and give it another shot!
+              </p>
+              <button
+                onClick={handleReset}
+                style={{
+                  background: 'linear-gradient(135deg, #a371f7, #7c3aed)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '0.8rem 2rem',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'opacity 0.2s',
+                }}
+                onMouseOver={e => e.currentTarget.style.opacity = '0.85'}
+                onMouseOut={e => e.currentTarget.style.opacity = '1'}
+              >
+                🔄 Try Again
+              </button>
+            </>
           )}
         </div>
       )}
@@ -106,7 +134,7 @@ function CheckpointExam({ questions, onPass }) {
   );
 }
 
-export default function MainContent({ dayData }) {
+export default function MainContent({ dayData, onPassCheckpoint }) {
 
   // Add this safety check:
   if (!dayData) {
@@ -116,12 +144,8 @@ export default function MainContent({ dayData }) {
       </main>
     );
   }
-  
-  const wc = WEEK_COLORS[dayData.week];
 
-  const onPassCheckpoint = () => {
-    console.log('✅ Week 1 Exam passed!');
-  };
+  const wc = WEEK_COLORS[dayData.week];
 
   const renderTree = (treeString) => {
     return treeString.split('\n').map((line, i) => {
@@ -167,6 +191,11 @@ export default function MainContent({ dayData }) {
       {dayData.sections.map((sec, idx) => (
         <div key={idx} className="section">
           {sec.title && <div className="section-title">{sec.title}</div>}
+          {sec.timeEstimate && (
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', background: 'rgba(247,183,49,0.12)', color: '#f7b731', border: '1px solid rgba(247,183,49,0.3)', borderRadius: '20px', padding: '0.2rem 0.75rem', fontSize: '0.75rem', fontWeight: '600', marginBottom: '0.75rem' }}>
+              ⏱ {sec.timeEstimate}
+            </div>
+          )}
           {sec.body && <p className="section-body">{sec.body}</p>}
           
           {sec.type === 'filetree' && <div className="file-tree">{renderTree(sec.tree)}</div>}
@@ -204,6 +233,33 @@ export default function MainContent({ dayData }) {
           {/* Render the BOSS FIGHT EXAM */}
           {sec.type === 'exam' && (
             <CheckpointExam questions={sec.questions} onPass={onPassCheckpoint} />
+          )}
+
+          {/* Render PRACTICE AT HOME homework card */}
+          {sec.type === 'homework' && (
+            <div style={{
+              background: 'rgba(247, 183, 49, 0.06)',
+              border: '2px solid rgba(247, 183, 49, 0.4)',
+              borderRadius: '12px',
+              padding: '1.75rem',
+              marginTop: '0.5rem',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '1.3rem' }}>🏠</span>
+                <span style={{ color: '#f7b731', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Practice at Home</span>
+                {sec.timeEstimate && (
+                  <span style={{ marginLeft: 'auto', background: 'rgba(247,183,49,0.15)', color: '#f7b731', border: '1px solid rgba(247,183,49,0.35)', borderRadius: '20px', padding: '0.2rem 0.75rem', fontSize: '0.72rem', fontWeight: '600' }}>⏱ {sec.timeEstimate}</span>
+                )}
+              </div>
+              <div style={{ color: '#f7b731', fontWeight: '600', fontSize: '1.05rem', marginBottom: '0.75rem' }}>{sec.title}</div>
+              {sec.body && <p className="section-body" style={{ marginTop: 0 }}>{sec.body}</p>}
+              {sec.boxTitle && (
+                <div className="info-box rule" style={{ marginTop: '1rem' }}>
+                  <div className="info-box-title">{sec.boxTitle}</div>
+                  <div dangerouslySetInnerHTML={{ __html: sec.boxBody }} />
+                </div>
+              )}
+            </div>
           )}
 
         </div>
