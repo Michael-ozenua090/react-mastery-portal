@@ -119,6 +119,10 @@ export default function MainContent({ dayData }) {
   
   const wc = WEEK_COLORS[dayData.week];
 
+  const onPassCheckpoint = () => {
+    console.log('✅ Week 1 Exam passed!');
+  };
+
   const renderTree = (treeString) => {
     return treeString.split('\n').map((line, i) => {
       let color = '#e6edf3';
@@ -162,7 +166,7 @@ export default function MainContent({ dayData }) {
 
       {dayData.sections.map((sec, idx) => (
         <div key={idx} className="section">
-          <div className="section-title">{sec.title}</div>
+          {sec.title && <div className="section-title">{sec.title}</div>}
           {sec.body && <p className="section-body">{sec.body}</p>}
           
           {sec.type === 'filetree' && <div className="file-tree">{renderTree(sec.tree)}</div>}

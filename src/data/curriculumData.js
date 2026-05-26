@@ -548,57 +548,56 @@ export default function LikeButton() {
         boxBody: '✓ Did you <code>import { useState } from "react";</code> at the very top? <br/>✓ Did you use the setter function (e.g., <code>setWater(water + 1)</code>) instead of <code>water++</code>? <br/>✓ Did you pass a function to onClick like <code>onClick={() => setWater(0)}</code>?'
       },
       {
-        type: 'quiz',
-        title: 'Knowledge Check',
+        type: 'exam', // Notice the new type!
         questions: [
           {
-            question: 'Why do we use useState instead of a regular variable like `let count = 0`?',
-            options: [
-              'Regular variables are too slow in JavaScript.',
-              'Because useState automatically saves the data to a database.',
-              'When State changes, it tells React to re-render the screen. Regular variables do not.',
-              'It is just a newer syntax for regular variables.'
-            ],
-            correct: 2
-          },
-          {
-            question: 'Which of the following is the CORRECT syntax to create a state variable?',
-            options: [
-              'const [score, setScore] = useState(0);',
-              'const {score, setScore} = useState(0);',
-              'let score = useState(0);',
-              'const [score] = useState(0);'
-            ],
-            correct: 0
-          },
-          {
-            question: 'You have a state array: `const [cars, setCars] = useState(["Toyota"])`. How do you correctly add "Honda"?',
-            options: [
-              'cars.push("Honda");',
-              'setCars(["Honda"]);',
-              'setCars(cars + "Honda");',
-              'setCars([...cars, "Honda"]);'
-            ],
-            correct: 3
-          },
-          {
-            question: 'What is the Golden Rule of React State?',
-            options: [
-              'Always use strings, never arrays.',
-              'Never mutate (change) state directly. Always use the setter function.',
-              'State can only be used in App.jsx.',
-              'State must be passed down from Parent to Child.'
-            ],
+            question: 'What is the primary command used to start a new React project rapidly?',
+            options: ['npm create react-app', 'npm create vite@latest', 'npm start react', 'node build react'],
             correct: 1
           },
           {
-            question: 'If you want a button to reset a score to 0, how should you write the onClick event?',
-            options: [
-              '<button onClick={setScore(0)}>',
-              '<button onClick="setScore(0)">',
-              '<button onClick={() => setScore(0)}>',
-              '<button onClick={score = 0}>'
-            ],
+            question: 'Which of the following is a strict rule of writing JSX?',
+            options: ['Every file must have CSS.', 'You must use "class" instead of "className".', 'You must wrap multiple elements in a single parent element like <div> or <>.', 'Tags do not need to be closed.'],
+            correct: 2
+          },
+          {
+            question: 'Where should you place static images (like a logo) so they load correctly in a Vite React app?',
+            options: ['Inside the src/ folder', 'Inside the node_modules/ folder', 'Inside the public/ folder', 'Inside the package.json file'],
+            correct: 2
+          },
+          {
+            question: 'How does React know that a JavaScript function is a Component and not a standard HTML tag?',
+            options: ['It is placed in the src folder.', 'The function name starts with a Capital letter.', 'It uses the word "Component" in the name.', 'React just guesses based on the code.'],
+            correct: 1
+          },
+          {
+            question: 'If you create a Profile.jsx component, what is the "Island Rule" to use it inside App.jsx?',
+            options: ['You must export default in Profile.jsx and import it in App.jsx.', 'React will link them automatically.', 'You have to copy and paste the code.', 'You link it in the index.html file.'],
+            correct: 0
+          },
+          {
+            question: 'What is the best definition of "Props" in React?',
+            options: ['State that can be changed by a child component.', 'Custom HTML-like attributes used to pass data from a Parent down to a Child.', 'A way to link CSS files.', 'Variables that hold the color scheme.'],
+            correct: 1
+          },
+          {
+            question: 'What is the correct way to pass a number as a prop?',
+            options: ['<Card price="50" />', '<Card price=50 />', '<Card price={50} />', '<Card {price=50} />'],
+            correct: 2
+          },
+          {
+            question: 'Why do we use the useState Hook instead of standard variables (let count = 0)?',
+            options: ['State variables are stored in the database.', 'State variables trigger React to re-render the screen when they change.', 'Standard variables are deprecated in modern JS.', 'State makes the code run faster.'],
+            correct: 1
+          },
+          {
+            question: 'What is the Golden Rule of updating State arrays or objects?',
+            options: ['Never mutate them directly. Create a new copy using the spread operator (...).', 'Always use the .push() method.', 'Delete the old state before making a new one.', 'Arrays cannot be saved in State.'],
+            correct: 0
+          },
+          {
+            question: 'Which is the CORRECT way to write an onClick function that changes state?',
+            options: ['onClick={setScore(0)}', 'onClick="setScore(0)"', 'onClick={() => setScore(0)}', 'onClick={score = 0}'],
             correct: 2
           }
         ]
