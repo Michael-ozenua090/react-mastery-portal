@@ -400,7 +400,7 @@ export default App;`,
       },
       {
         type: 'code',
-        title: 'Step 3: The Styling',
+        title: 'Step 3: The Styling (App.css)',
         body: 'Because we imported `App.css` in our parent file, those styles are global! Paste this into `App.css` to make the team roster look great.',
         code: `/* App.css */
 .team-container { padding: 2rem; background-color: #0d1117; color: white; min-height: 100vh; }
@@ -506,7 +506,7 @@ export default App;`,
     dayNumber: 3, week: 1,
     title: 'State with useState',
     subtitle: 'Making components remember and react to change',
-    topics: ['What is State', 'useState Hook', 'State Updates', 'Never Mutate State', 'Knowledge Check'],
+    topics: ['What is State', 'useState Hook', 'State Updates', 'Never Mutate State', 'Certification Exam'],
     milestone: { icon: '⚡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
     sections: [
       {
