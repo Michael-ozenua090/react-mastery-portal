@@ -96,8 +96,13 @@ export const curriculum = [
         lang: 'jsx'
       },
       {
-        type: 'code',
+        type: 'text',
         title: 'Guided Project: The Digital Business Card',
+        body: "Let's build our first real React page. We will create a professional digital ID card that uses JSX expressions and className styling — exactly how a real developer would build it."
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Edit App.jsx',
         body: "Delete the default code in your App.jsx and build this digital ID. Notice how we use `{}` to inject our data.",
         code: `import './App.css';
 
@@ -124,7 +129,7 @@ export default App;`,
       },
       {
         type: 'code',
-        title: 'The CSS Styling (App.css)',
+        title: 'Step 2: The CSS Styling (App.css)',
         body: "Paste this into your App.css file to style the business card:",
         code: `/* App.css - Clean, Modern Tech Aesthetic */
 .app-container { 
@@ -228,6 +233,26 @@ export default App;`,
               'Inside the src/ folder',
               'Inside the public/ folder',
               'Inside the package.json file'
+            ],
+            correct: 2
+          },
+          {
+            question: 'In JSX, if your component needs to return two sibling elements side by side, what must you wrap them in?',
+            options: [
+              'A <body> tag',
+              'A <html> tag',
+              'A Fragment (<>) or a single parent <div>',
+              'Nothing — JSX allows multiple root elements by default'
+            ],
+            correct: 2
+          },
+          {
+            question: 'Which folder in a Vite project should you NEVER manually edit or delete?',
+            options: [
+              'src/',
+              'public/',
+              'node_modules/',
+              'The project root folder'
             ],
             correct: 2
           }
@@ -394,7 +419,7 @@ export default App;`,
         boxTitle: 'Homework Checklist',
         boxBody: '✓ Is your <code>teamMembers</code> array defined outside the return statement? <br/>✓ Did you use <code>.map()</code> to loop over the array? <br/>✓ Did each rendered item get a unique <code>key</code> prop (e.g. <code>key={member.name}</code>)? <br/>✓ <strong>Bonus:</strong> Sort the array so Team Leads always appear first — use <code>.sort()</code> before <code>.map()</code>.'
       },
-     {
+      {
         type: 'quiz',
         title: 'Knowledge Check',
         questions: [
@@ -525,12 +550,16 @@ export default function ShoppingCart() {
         boxBody: 'Never do <code>items.push()</code>, <code>array[0] = value</code>, or <code>count = count + 1</code>. Always pass a brand new value into the setter function!'
       },
       {
-        type: 'code',
+        type: 'text',
         title: 'Guided Project: The Speta Like Button',
-        body: 'Let\'s build something you see every day on social media. Create a new file called `LikeButton.jsx` in your `src/` folder and paste this code. Notice how we use a boolean (true/false) state!',
+        body: 'Let\'s build something you see every day on social media: an interactive Like button. We will use TWO state variables together — a boolean to track if something is liked, and a number to track the total count.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create LikeButton.jsx',
+        body: 'Create a new file called `LikeButton.jsx` in your `src/` folder and paste this code:',
         code: `// src/LikeButton.jsx
 import { useState } from "react";
-import './App.css'; // Let's assume we put styles here
 
 export default function LikeButton() {
   // State 1: Is it liked? (Boolean)
@@ -549,11 +578,10 @@ export default function LikeButton() {
   };
 
   return (
-    <div className="card">
+    <div className="like-card">
       <p>Do you like this course?</p>
-      <button 
-        // We use a dynamic className to change colors if it is liked!
-        className={\`btn \${isLiked ? 'liked' : 'default'}\`} 
+      <button
+        className={\`btn \${isLiked ? 'liked' : 'default'}\`}
         onClick={handleLikeClick}
       >
         {isLiked ? '❤️ Liked' : '🤍 Like'} ({likeCount})
@@ -562,6 +590,62 @@ export default function LikeButton() {
   );
 }`,
         lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Update App.jsx',
+        body: 'Now bridge your new component into your main application file. The Island Rule from Day 2 in action — import at the top, render in the return!',
+        code: `// src/App.jsx
+import './App.css';
+import LikeButton from './LikeButton'; // Import the new component
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Day 3: State with useState</h1>
+      <LikeButton />
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Add this to your `App.css`. Notice how the `.liked` class applies a red glow — this is the conditional className pattern you will use throughout the course!',
+        code: `/* Add to App.css */
+.like-card {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #334155;
+  width: 300px;
+  margin: 2rem auto;
+}
+
+.like-card p { color: #94a3b8; margin-bottom: 1rem; }
+
+.btn {
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.btn:active { transform: scale(0.96); }
+.btn.default { background: #334155; color: #94a3b8; }
+.btn.liked {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}`,
+        lang: 'css'
       },
       {
         type: 'text',
@@ -589,7 +673,8 @@ export default function LikeButton() {
         boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting — breaking things and fixing them — is worth more than re-reading the notes.'
       },
       {
-        type: 'exam', // Notice the new type!
+        type: 'exam',
+        title: 'Week 1 Certification Exam',
         questions: [
           {
             question: 'What is the primary command used to start a new React project rapidly?',
@@ -650,7 +735,7 @@ export default function LikeButton() {
     dayNumber: 4, week: 2,
     title: 'Events & Conditional Rendering',
     subtitle: 'Making your app react to the user',
-    topics: ['onClick & onChange', 'Passing vs Calling', 'Ternary (? :)', 'Logical AND (&&)', 'Knowledge Check'],
+    topics: ['onClick & onChange', 'Pass, Don\'t Call', 'Ternary (? :)', 'Logical AND (&&)', 'Knowledge Check'],
     milestone: { icon: '🎯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
     sections: [
       {

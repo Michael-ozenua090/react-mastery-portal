@@ -254,7 +254,7 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
               <div style={{ color: '#f7b731', fontWeight: '600', fontSize: '1.05rem', marginBottom: '0.75rem' }}>{sec.title}</div>
               {sec.body && <p className="section-body" style={{ marginTop: 0 }}>{sec.body}</p>}
               {sec.boxTitle && (
-                <div className="info-box rule" style={{ marginTop: '1rem' }}>
+                <div className={`info-box ${sec.boxType || 'rule'}`} style={{ marginTop: '1rem' }}>
                   <div className="info-box-title">{sec.boxTitle}</div>
                   <div dangerouslySetInnerHTML={{ __html: sec.boxBody }} />
                 </div>
