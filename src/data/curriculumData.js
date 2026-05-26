@@ -29,14 +29,33 @@ export const curriculum = [
         body: 'React is a declarative JavaScript library for building user interfaces. Instead of manually manipulating the DOM (like writing document.getElementById), you describe what the UI should look like, and React handles the rest efficiently.\n\nReact uses a "Virtual DOM" (a lightweight, invisible copy of the actual web page). When your data changes, React updates the Virtual DOM first, compares it to the real page, and only updates the exact tiny piece that changed instead of reloading the whole page.',
         boxType: 'tip',
         boxTitle: 'Why React over plain JS?',
-        boxBody: 'Vanilla JS gets messy fast when your UI has lots of moving parts. React keeps everything organised into small, reusable pieces called components.'
+        boxBody: 'Vanilla JS gets messy fast when your UI has lots of moving parts. React keeps everything organised into small, reusable pieces called components. <br/><br/><strong>The Virtual DOM in plain English:</strong> Imagine you have a printed recipe book (the real DOM) and a rough notepad (the Virtual DOM). When a recipe changes, you scribble the edit on the notepad first, compare it to the book, then only erase and rewrite the exact sentence that changed — instead of reprinting the whole book. That is how React updates the screen so fast.'
       },
       {
         type: 'setup',
         title: 'Setting Up Your Project with Vite',
         body: 'We use Vite to create React apps. It is blazing fast because it only updates the exact file you change in milliseconds.',
         code: `npm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm run dev`,
-        lang: 'bash'
+        lang: 'bash',
+        boxType: 'danger',
+        boxTitle: 'Step 0: Clear the default App.css first!',
+        boxBody: 'Vite generates a default <code>App.css</code> file pre-filled with styles like <code>.hero</code>, <code>.counter</code>, and <code>.card</code>. These will conflict with your own styles and cause confusing visual bugs that are hard to trace. <strong>Before writing any code, open <code>src/App.css</code> and delete everything inside it.</strong> Start every project with a completely blank CSS file.'
+      },
+      {
+        type: 'text',
+        title: '🔧 Install React DevTools (Do This Now!)',
+        body: 'React DevTools is a free browser extension that gives you superpowers. Without it, when your code breaks you are essentially debugging blindfolded. With it, you can see exactly what data is inside every component in real time.\n\n**Install it in 30 seconds:**\n1. Open Chrome (or Firefox) and search for **"React Developer Tools extension"**.\n2. Click "Add to Chrome" → "Add extension".\n3. A small React icon will appear in your browser toolbar.\n4. Once your Vite app is running, click the icon — it turns from grey to coloured. You will see two new tabs in Chrome DevTools (F12): **"⚛ Components"** and **"⚛ Profiler"**.',
+        boxType: 'tip',
+        boxTitle: 'What does it actually show me?',
+        boxBody: 'The <strong>Components</strong> tab shows your entire component tree — every component on the page, its current props, and its current state. When you click a button and the count changes, you can <em>watch the state update live</em> in the panel. This is the single most important debugging tool you will use throughout this course.'
+      },
+      {
+        type: 'text',
+        title: '〰️ Those Squiggly Lines in VS Code — What Do They Mean?',
+        body: 'When you first open your project in VS Code, you will see coloured underlines beneath some of your code. These come from a tool called **ESLint** — a built-in code spell-checker that catches common mistakes before you even run the app.\n\n- **Red squiggles:** A syntax error — your code will not run until you fix it.\n- **Yellow squiggles:** A warning — the code will run, but you are doing something React considers risky (like a missing `key` prop in a list).\n- **Blue squiggles:** An informational hint.\n\nYour first instinct should be to hover over the squiggle — VS Code shows you exactly what is wrong and often suggests a fix.',
+        boxType: 'info',
+        boxTitle: 'ESLint is on your side',
+        boxBody: 'Think of ESLint as a senior developer sitting next to you, pointing out things before they become bugs. Do not dismiss the warnings — they are almost always right. When you are stuck and the app is not behaving as expected, look at the squiggly lines first.'
       },
       {
         type: 'filetree',
@@ -93,7 +112,10 @@ export const curriculum = [
     </div>
   );
 }`,
-        lang: 'jsx'
+        lang: 'jsx',
+        boxType: 'info',
+        boxTitle: '⚡ What are those backticks (`)?',
+        boxBody: 'Look at line 3 in the code: <code>{`card theme-${user}`}</code>. Those backtick quotes (<code>`</code>) are called a <strong>Template Literal</strong> — a special type of JavaScript string that lets you embed variables directly using <code>${}</code>. Compare: <br/><strong>Old way:</strong> <code>"card theme-" + user</code> <br/><strong>Template literal:</strong> <code>`card theme-${user}`</code> <br/>They do the same thing — template literals are just cleaner to read. You will see them throughout this course whenever we need to mix a variable into a string.'
       },
       {
         type: 'text',
@@ -196,11 +218,11 @@ export default App;`,
       },
       {
         type: 'homework',
-        title: 'The Retweet Counter',
-        timeEstimate: '45–60 min',
-        body: 'You built a static Tweet Card in class. Now make it come alive! Your job is to add an interactive Retweet counter to your Tweet Card.\n\n**Requirements:**\n1. Add a `const [retweetCount, setRetweetCount]` state variable starting at `0` — you will need to import `{ useState }` from `"react"`.\n2. Add a 🔁 Retweet button below the tweet body.\n3. Clicking the button must increase `retweetCount` by 1 and display the current count next to the button.\n4. Style the button so it turns green after being clicked (use a second boolean state variable like `isRetweeted`).',
+        title: 'Customise Your Business Card',
+        timeEstimate: '30–45 min',
+        body: 'You built a Digital Business Card in class using JSX variables and className. Now extend it using **only what you have learned today** — no new concepts needed!\n\n**Requirements:**\n1. Add two new `const` variables inside your `App` function: `const location = "Lagos, Nigeria"` and `const skills = "HTML · CSS · JavaScript"`.\n2. Render both variables on your card inside their own `<p>` tags, each with a unique `className`.\n3. Style the new elements in `App.css` — pick your own font size and colour.\n4. Change the entire colour scheme of the card — try a purple theme (`#7c3aed`) or a warm amber theme (`#f97316`).\n5. **Bonus:** Add a second `<div className="profile-card">` below the first with completely different variable values — a fictional second person.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you import <code>useState</code> at the top of the file? <br/>✓ Does clicking Retweet increase the count each time? <br/>✓ Did you use the setter function <code>setRetweetCount(retweetCount + 1)</code> and not <code>retweetCount++</code>? <br/>✓ <strong>Bonus:</strong> Can you make it toggle — so clicking again un-retweets and decreases the count?'
+        boxBody: '✓ Did you declare your new variables at the <strong>top</strong> of the function, before the <code>return</code>? <br/>✓ Did you use curly braces <code>{location}</code> and <code>{skills}</code> to inject them into the JSX? <br/>✓ Did you use <code>className</code> (not <code>class</code>) on every element you styled? <br/>✓ <strong>Bonus:</strong> Does the second card show completely different data and a different colour scheme?'
       },
       {
         type: 'quiz',
@@ -321,7 +343,10 @@ function StudentCard({ name, grade }) {
     </div>
   );
 }`,
-        lang: 'jsx'
+        lang: 'jsx',
+        boxType: 'info',
+        boxTitle: '⚡ Quick JS Refresher: What is Destructuring?',
+        boxBody: 'Destructuring is a standard JavaScript shortcut — it is not React-specific. It unpacks values from an object into separate variables in one line. <br/><strong>Without destructuring:</strong> <code>const name = props.name; const grade = props.grade;</code> <br/><strong>With destructuring:</strong> <code>const { name, grade } = props;</code> <br/>React lets us do this shortcut right inside the function parentheses: <code>function StudentCard({ name, grade })</code>. Same result, cleaner code.'
       },
       {
         type: 'text',
@@ -413,11 +438,11 @@ export default App;`,
       },
       {
         type: 'homework',
-        title: 'The Social Media Profile Grid',
-        timeEstimate: '60–75 min',
-        body: 'You built a roster using individual `<ProfileCard>` tags. Now challenge yourself to do it the smart way — using an array and `.map()`.\n\n**Requirements:**\n1. In your `App.jsx`, create a `const teamMembers` array with at least 5 objects. Each object should have `name`, `role`, and `isLead` properties.\n2. Instead of writing 5 individual `<ProfileCard>` tags, use `{teamMembers.map(member => <ProfileCard key={member.name} name={member.name} role={member.role} isLead={member.isLead} />)}` inside your JSX.\n3. The result on screen should look identical — the only difference is how you wrote the code.\n\n**Hint:** The `.map()` method loops over every item in an array and returns a new array — in our case, an array of JSX elements. React knows how to render this automatically!',
+        title: 'Expand the ProfileCard',
+        timeEstimate: '45–60 min',
+        body: 'Your `ProfileCard` currently shows `name`, `role`, and a Team Lead badge. Now make it richer by adding two brand-new props — using only what you know: props and destructuring.\n\n**Requirements:**\n1. Open `ProfileCard.jsx` and add `avatar` and `skills` to the destructured parameters: `{ name, role, isLead, avatar, skills }`.\n2. Render `avatar` (an emoji string like `"👨\u200d💻"`) inside a `<span className="team-avatar">` at the top of the card.\n3. Render `skills` (a comma-separated string like `"React, Node, Python"`) inside a `<p className="team-skills">` below the role.\n4. Open `App.jsx` and update all three `<ProfileCard>` instances to pass the new `avatar` and `skills` props with different values for each person.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Is your <code>teamMembers</code> array defined outside the return statement? <br/>✓ Did you use <code>.map()</code> to loop over the array? <br/>✓ Did each rendered item get a unique <code>key</code> prop (e.g. <code>key={member.name}</code>)? <br/>✓ <strong>Bonus:</strong> Sort the array so Team Leads always appear first — use <code>.sort()</code> before <code>.map()</code>.'
+        boxBody: '✓ Did you add <code>avatar</code> and <code>skills</code> to the destructured parameters <code>{ name, role, isLead, avatar, skills }</code>? <br/>✓ Did you render both new props inside the JSX with <code>{}</code> curly braces? <br/>✓ Did you pass strings using quotes (<code>avatar="👩‍💻"</code>) from <code>App.jsx</code>? <br/>✓ <strong>Bonus:</strong> Add a <code>yearsExp</code> number prop and display it as "X years experience" below the skills — pass it as <code>yearsExp={3}</code> (curly braces for numbers!).'
       },
       {
         type: 'quiz',
@@ -515,7 +540,10 @@ export default function Counter() {
     </div>
   );
 }`,
-        lang: 'jsx'
+        lang: 'jsx',
+        boxType: 'tip',
+        boxTitle: '💡 Pro Tip: The Safe Way to Update From Previous State',
+        boxBody: 'In the example above we write <code>setCount(count + 1)</code>. This works for simple cases, but there is a safer pattern you will see in real codebases: <code>setCount(prev => prev + 1)</code>. <br/><br/>The <code>prev</code> version passes a function to the setter. React guarantees that <code>prev</code> is always the most up-to-date value — important when multiple updates happen at the same time. <strong>Rule of thumb:</strong> if your new state depends on the old state, use <code>prev =&gt;</code>.'
       },
       {
         type: 'code',

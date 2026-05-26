@@ -3,6 +3,50 @@ import { useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { WEEK_COLORS } from '../data/curriculumData';
 
+// --- Safe HTML renderer (replaces dangerouslySetInnerHTML) ---
+// Handles the limited HTML subset used in box bodies:
+// <code>, <strong>, <em>, <br/>, and HTML entities like &lt; &gt;
+function decodeEntities(str) {
+  return str
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function SafeHtml({ html }) {
+  if (!html) return null;
+  const lines = html.split(/<br\s*\/?>/ );
+  return (
+    <>
+      {lines.map((line, lineIdx) => {
+        const segments = [];
+        const tagRegex = /<(code|strong|em)>([\s\S]*?)<\/\1>/g;
+        let lastIdx = 0;
+        let m;
+        while ((m = tagRegex.exec(line)) !== null) {
+          if (m.index > lastIdx) {
+            segments.push(<span key={`t${lastIdx}`}>{decodeEntities(line.slice(lastIdx, m.index))}</span>);
+          }
+          const Tag = m[1];
+          segments.push(<Tag key={m.index}>{decodeEntities(m[2])}</Tag>);
+          lastIdx = tagRegex.lastIndex;
+        }
+        if (lastIdx < line.length) {
+          segments.push(<span key={`t${lastIdx}`}>{decodeEntities(line.slice(lastIdx))}</span>);
+        }
+        return (
+          <span key={lineIdx}>
+            {lineIdx > 0 && <br />}
+            {segments}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
 // --- Interactive Auditing Tool ---
 function QuizWidget({ questionData, index }) {
   const [selectedOpt, setSelectedOpt] = useState(null);
@@ -217,7 +261,7 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
           {sec.boxType && (
             <div className={`info-box ${sec.boxType}`}>
               <div className="info-box-title">{sec.boxTitle}</div>
-              <div dangerouslySetInnerHTML={{ __html: sec.boxBody }} />
+              <SafeHtml html={sec.boxBody} />
             </div>
           )}
 
@@ -256,7 +300,7 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
               {sec.boxTitle && (
                 <div className={`info-box ${sec.boxType || 'rule'}`} style={{ marginTop: '1rem' }}>
                   <div className="info-box-title">{sec.boxTitle}</div>
-                  <div dangerouslySetInnerHTML={{ __html: sec.boxBody }} />
+                  <SafeHtml html={sec.boxBody} />
                 </div>
               )}
             </div>
