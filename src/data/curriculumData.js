@@ -299,9 +299,14 @@ function StudentCard({ name, grade }) {
         lang: 'jsx'
       },
       {
-        type: 'code',
+        type: 'text',
         title: 'Guided Project: Tech Team Roster',
-        body: 'Let\'s build a reusable component. Instead of putting all our code in one file, we are going to create a brand new file for our component. Inside your `src/` folder, create a brand new file named `ProfileCard.jsx`. Paste this code inside it:',
+        body: 'Let\'s build a reusable component. Instead of putting all our code in one file, we are going to create a brand new file for our component. This is how real React apps are built!'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create ProfileCard.jsx',
+        body: 'Inside your `src/` folder, create a brand new file named `ProfileCard.jsx`. Paste this code inside it:',
         code: `// src/ProfileCard.jsx
 
 export default function ProfileCard({ name, role, isLead }) {
