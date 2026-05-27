@@ -1030,6 +1030,14 @@ export default App;`,
       },
       {
         type: 'text',
+        title: 'Beginner Trap: The Blank Screen of Death',
+        body: 'When writing your `.map()` arrow functions, pay extremely close attention to the brackets you use after the arrow `=>`. If you use the wrong ones, your list will not render and React will not give you an error!',
+        boxType: 'danger',
+        boxTitle: 'Parentheses ( ) vs Curly Braces { }',
+        boxBody: 'If you use <strong>curly braces</strong>, you MUST write the word <code>return</code>:<br/><code>skills.map(skill => { return &lt;li&gt;{skill}&lt;/li&gt; })</code><br/><br/>If you use <strong>parentheses</strong> (or no brackets), the return is automatic (implicit):<br/><code>skills.map(skill => ( &lt;li&gt;{skill}&lt;/li&gt; ))</code><br/><br/>If you write <code>skills.map(skill => { &lt;li&gt;...&lt;/li&gt; })</code> without the word <code>return</code>, you will just get a blank screen!'
+      },
+      {
+        type: 'text',
         title: '🔑 The Danger Zone: The Key Prop',
         body: 'Did you notice the `key={skill}` in the code above? **This is mandatory.**\n\nWhenever you map over a list in React, the outermost element you return MUST have a unique `key` prop. If you forget it, React will scream at you in the console with a red warning.',
         boxType: 'danger',
