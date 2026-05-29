@@ -15,10 +15,21 @@ function App() {
 
   const currentDayData = curriculum[selectedDayIndex];
 
-  // Function to unlock the next week
+  // Function to unlock the next week based on which exam was passed
   const unlockNextWeek = () => {
-    setMaxUnlockedDay(11); // Unlocks the rest of the course! (Index 11 is Day 12)
-    alert("🎉 Congratulations! Week 2 is now unlocked! 🎉");
+    if (selectedDayIndex === 2) {
+      // If passed Day 3 (index 2), unlock Week 2 (up to Day 6, index 5)
+      setMaxUnlockedDay(5);
+      alert("🎉 Congratulations! Week 2 is now unlocked! 🎉");
+    } else if (selectedDayIndex === 5) {
+      // If passed Day 6 (index 5), unlock Week 3 (up to Day 9, index 8)
+      setMaxUnlockedDay(8);
+      alert("🎉 Congratulations! Week 3 is now unlocked! 🎉");
+    } else {
+      // Unlocks the rest of the course
+      setMaxUnlockedDay(11);
+      alert("🎉 Congratulations! New content unlocked! 🎉");
+    }
   };
 
   return (

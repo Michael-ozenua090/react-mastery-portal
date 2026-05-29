@@ -695,7 +695,7 @@ export default App;`,
       {
         type: 'text',
         title: '🔭 Coming Up in Week 2',
-        body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Lists & .map()** (Day 4–5): How to render dynamic lists of data from arrays — the skill behind every feed, product grid, and todo list you have ever seen.\n2. **Events & Forms** (Day 4–5): How to capture user input, validate it, and respond to it in real time.\n3. **useEffect** (Day 6): How to run code automatically — like fetching data from an API when a page loads. This is the Hook that connects your React app to the outside world.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
+        body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Events & Conditional Rendering (Day 4):** How to react to user actions like clicks and typing — and how to show or hide UI based on conditions using the Ternary operator and `&&`.\n2. **Lists & .map() (Day 5):** How to render dynamic lists of data from arrays — the skill behind every feed, product grid, and todo list you have ever seen.\n3. **Forms & User Input (Day 6):** How to capture user input safely with controlled components, prevent page reloads, and combine everything you have learned to build a working To-Do List.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
         boxType: 'tip',
         boxTitle: 'Tip: Keep Building Between Classes',
         boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting — breaking things and fixing them — is worth more than re-reading the notes.'
@@ -1211,6 +1211,228 @@ export default App;`,
               'users.forEach(u => <UserCard />)'
             ],
             correct: 0
+          }
+        ]
+      }
+    ]
+  },
+  // --- DAY 6 ---
+  {
+    dayNumber: 6, week: 2,
+    title: 'Forms & User Input',
+    subtitle: 'Controlled components and submitting data',
+    topics: ['Controlled Inputs', 'onSubmit', 'e.preventDefault()', 'Clearing Forms', 'Certification Exam'],
+    milestone: { icon: '📝', title: 'Two-Way Communication', text: 'Today you learn how to safely capture user data, prevent page reloads, and use forms to build truly interactive applications.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'The "Controlled Component" Pattern',
+        body: 'In standard HTML, input fields (`<input>`, `<textarea>`) manage their own state. You type, and the browser remembers what you typed. \n\nIn React, we do not let the browser manage data — we want React to be the single source of truth. We do this by "controlling" the input. \n\nTo control an input, you must do TWO things:\n1. Tie the `value` attribute to a state variable.\n2. Tie the `onChange` event to a state setter function.',
+        boxType: 'tip',
+        boxTitle: 'The Input Loop',
+        boxBody: 'When a user types "A", the <code>onChange</code> function fires and updates the state. React then re-renders the component, passing the new state back into the input\'s <code>value</code> attribute. It happens so fast the user cannot tell, but React is entirely in control.'
+      },
+      {
+        type: 'text',
+        title: '⚠️ The Page Refresh Killer',
+        body: 'HTML forms have a built-in behavior from the 1990s: when you click a `<button type="submit">`, the browser attempts to send the data to a server and **refreshes the page**. \n\nIn a Single Page Application like React, a page refresh destroys all your state! You lose everything.',
+        boxType: 'danger',
+        boxTitle: 'e.preventDefault() is Mandatory',
+        boxBody: 'Whenever you write an <code>onSubmit</code> function for a form, the very first line of code inside that function MUST be <code>e.preventDefault();</code>. This stops the browser from refreshing the page, allowing React to handle the data silently in the background.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The Speta Newsletter',
+        body: 'Let\'s build a clean, controlled newsletter signup form. We will capture an email address, prevent the page refresh, and clear the input field after the user submits.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create Newsletter.jsx',
+        body: 'Create a new file named `Newsletter.jsx`. Notice how we attach `onSubmit` to the `<form>` tag, not the button!',
+        code: `// src/Newsletter.jsx
+import { useState } from "react";
+
+export default function Newsletter() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    // 1. STOP THE PAGE REFRESH!
+    e.preventDefault(); 
+    
+    // 2. Do something with the data
+    alert(\`Success! \${email} has been added to the Speta mailing list.\`);
+    
+    // 3. Clear the form by resetting the state to an empty string
+    setEmail(""); 
+  };
+
+  return (
+    <div className="form-card">
+      <h2>Join the Tech Newsletter</h2>
+      <p>Get the latest AI and React insights delivered weekly.</p>
+      
+      {/* Attach onSubmit to the FORM, not the button */}
+      <form onSubmit={handleSubmit} className="newsletter-form">
+        <input 
+          type="email" 
+          placeholder="Enter your email..." 
+          value={email} /* 1. Controlled Value */
+          onChange={(e) => setEmail(e.target.value)} /* 2. Controlled Setter */
+          required
+        />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Update App.jsx',
+        body: 'Import and render your new form component.',
+        code: `// src/App.jsx
+import './App.css';
+import Newsletter from './Newsletter';
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Week 2: Forms & User Input</h1>
+      <Newsletter />
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Paste this into `App.css` to give the form a clean, modern tech aesthetic.',
+        code: `/* Add to App.css */
+.form-card {
+  background: #1e293b;
+  padding: 2.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #334155;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.form-card h2 { color: #f8fafc; margin-top: 0; }
+.form-card p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.newsletter-form input {
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background: #0f172a;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+}
+
+.newsletter-form input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.newsletter-form button {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover { background: #0ea5e9; }`,
+        lang: 'css'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The Contact Form',
+        timeEstimate: '30–45 min',
+        body: 'Time to handle multiple inputs! Your task is to build a contact form for a portfolio website.\n\n**Requirements:**\n1. Create a file named `ContactForm.jsx`.\n2. Create TWO separate state variables: `name` and `message`.\n3. Build a `<form>` containing an `<input type="text">` for the name and a `<textarea>` for the message.\n4. Make sure both are "controlled" (tie their `value` and `onChange` to your state variables).\n5. Create a `handleSubmit` function that prevents the page refresh, alerts "Message sent by [Name]!", and clears both fields.\n6. Import and render it in `App.jsx`.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you use <code>e.preventDefault()</code> inside your submit function? <br/>✓ Did you attach your submit function to the <code>&lt;form onSubmit={...}&gt;</code> rather than the button? <br/>✓ Did both input fields reset to empty strings after the alert?'
+      },
+      {
+        type: 'homework',
+        title: 'The Ultimate Test: The Task Manager',
+        timeEstimate: '60+ min',
+        body: 'This is where Week 2 comes together. You will combine what you learned on Day 5 (Mapping Arrays) with what you learned today (Forms) to build a working To-Do List.\n\n**Requirements:**\n1. Create `TaskManager.jsx`.\n2. Create a state variable for your list of tasks: `const [tasks, setTasks] = useState(["Learn React", "Read Comics"])`.\n3. Create a state variable for the new task input: `const [newTask, setNewTask] = useState("")`.\n4. Build a form with an input and a submit button. Tie the input to the `newTask` state.\n5. On submit, prevent the default refresh, and use the spread operator to add the new task to the array: `setTasks([...tasks, newTask])`. Then clear the input.\n6. Below the form, map over the `tasks` array and render a `<div className="task">` for each one.\n\n*Hint: If you get stuck, look at the "Never Mutate State" section from Day 3 to remember how the Spread Operator works!*',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you create two separate state variables (one array, one string)? <br/>✓ Does typing in the input work without crashing? <br/>✓ When you submit, does the new task appear at the bottom of the list instantly? <br/>✓ Did you remember the <code>key</code> prop in your <code>.map()</code> function?'
+      },
+      {
+        type: 'exam',
+        title: 'Week 2 Final Certification Exam',
+        questions: [
+          {
+            question: 'What is the correct way to attach a click event to a button in React?',
+            options: ['onclick={handleClick}', 'onClick={handleClick}', 'onClick={handleClick()}', 'click="handleClick"'],
+            correct: 1
+          },
+          {
+            question: 'Why is writing onClick={myFunction()} with parentheses dangerous?',
+            options: ['Parentheses are not allowed in JSX.', 'It calls the function immediately when the component loads, which can cause an infinite loop.', 'It prevents the button from being clicked.', 'It causes a CSS error.'],
+            correct: 1
+          },
+          {
+            question: 'Which tool is best used when you want to show a component IF a condition is true, and show NOTHING if it is false?',
+            options: ['The Ternary Operator (? :)', 'A standard if/else block', 'The Logical AND operator (&&)', 'A Switch statement'],
+            correct: 2
+          },
+          {
+            question: 'Which JavaScript array method is exclusively used to loop over data and generate lists of UI elements in React?',
+            options: ['.forEach()', '.map()', '.filter()', '.reduce()'],
+            correct: 1
+          },
+          {
+            question: 'Why does React require a "key" prop when rendering a list of items?',
+            options: ['To apply unique styles.', 'To help the Virtual DOM track which specific items changed, were added, or removed.', 'Because JavaScript arrays require keys.', 'To securely encrypt the data.'],
+            correct: 1
+          },
+          {
+            question: 'Where MUST the "key" prop be placed when mapping an array?',
+            options: ['On the parent container outside the map.', 'On every single HTML tag inside the map.', 'On the outermost element or component returned inside the .map() callback.', 'Inside the App.jsx file.'],
+            correct: 2
+          },
+          {
+            question: 'What makes an input field a "Controlled Component" in React?',
+            options: ['The input is styled with CSS.', 'The browser handles the memory of the input.', 'The input value is tied to a State variable, and onChange updates that State.', 'The input is inside a <form> tag.'],
+            correct: 2
+          },
+          {
+            question: 'What happens to a React app if you forget to use e.preventDefault() in a form submission?',
+            options: ['The button breaks.', 'React throws a syntax error.', 'The browser refreshes the page, destroying all your React State.', 'The form cannot be cleared.'],
+            correct: 2
+          },
+          {
+            question: 'Where is the correct place to attach your form submission function?',
+            options: ['<button onSubmit={handleSubmit}>', '<form onSubmit={handleSubmit}>', '<input onSubmit={handleSubmit}>', '<div onSubmit={handleSubmit}>'],
+            correct: 1
+          },
+          {
+            question: 'How do you clear a controlled input field after the user clicks submit?',
+            options: ['document.getElementById("input").value = "";', 'e.target.reset();', 'Call e.preventDefault() again.', 'Set the State variable tied to that input back to an empty string (e.g., setText("")).'],
+            correct: 3
           }
         ]
       }

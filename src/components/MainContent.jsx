@@ -3,6 +3,38 @@ import { useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { WEEK_COLORS } from '../data/curriculumData';
 
+// --- Markdown renderer for sec.body text ---
+// Handles: **bold**, `inline code`, and \n newlines
+function renderMarkdown(text) {
+  if (!text) return null;
+  // Split on **bold** and `code` tokens
+  const tokenRegex = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+  const paragraphs = text.split('\n');
+  return paragraphs.map((para, pIdx) => {
+    if (!para.trim()) return null;
+    const parts = [];
+    let lastIdx = 0;
+    let m;
+    tokenRegex.lastIndex = 0;
+    while ((m = tokenRegex.exec(para)) !== null) {
+      if (m.index > lastIdx) {
+        parts.push(<span key={`t${pIdx}-${lastIdx}`}>{para.slice(lastIdx, m.index)}</span>);
+      }
+      const token = m[0];
+      if (token.startsWith('**')) {
+        parts.push(<strong key={`b${pIdx}-${m.index}`}>{token.slice(2, -2)}</strong>);
+      } else {
+        parts.push(<code key={`c${pIdx}-${m.index}`}>{token.slice(1, -1)}</code>);
+      }
+      lastIdx = tokenRegex.lastIndex;
+    }
+    if (lastIdx < para.length) {
+      parts.push(<span key={`t${pIdx}-${lastIdx}`}>{para.slice(lastIdx)}</span>);
+    }
+    return <p key={pIdx} style={{ margin: '0 0 0.6em 0' }}>{parts}</p>;
+  });
+}
+
 // --- Safe HTML renderer (replaces dangerouslySetInnerHTML) ---
 // Handles the limited HTML subset used in box bodies:
 // <code>, <strong>, <em>, <br/>, and HTML entities like &lt; &gt;
@@ -81,23 +113,38 @@ function QuizWidget({ questionData, index }) {
   );
 }
 
-// --- WEEK 1 FINAL EXAM COMPONENT ---
-function CheckpointExam({ questions, onPass }) {
+// --- DYNAMIC CHECKPOINT EXAM COMPONENT ---
+function CheckpointExam({ questions, onPass, title, week }) {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [showWarning, setShowWarning] = useState(false);
 
   const handleSelect = (qIndex, optIndex) => {
-    if (!submitted) setAnswers({ ...answers, [qIndex]: optIndex });
+    if (!submitted) {
+      const updated = { ...answers, [qIndex]: optIndex };
+      setAnswers(updated);
+      // Hide warning as soon as all questions are answered
+      if (Object.keys(updated).length === questions.length) {
+        setShowWarning(false);
+      }
+    }
   };
 
   const handleReset = () => {
     setAnswers({});
     setScore(0);
     setSubmitted(false);
+    setShowWarning(false);
   };
 
   const handleSubmit = () => {
+    const answeredCount = Object.keys(answers).length;
+    if (answeredCount < questions.length) {
+      setShowWarning(true);
+      return; // Block submission
+    }
+    setShowWarning(false);
     let totalScore = 0;
     questions.forEach((q, i) => {
       if (answers[i] === q.correct) totalScore += 1;
@@ -107,14 +154,14 @@ function CheckpointExam({ questions, onPass }) {
 
     // 80% to pass (8 out of 10)
     if (totalScore >= (questions.length * 0.8)) {
-      onPass(); 
+      onPass();
     }
   };
 
   return (
     <div style={{ background: 'rgba(163, 113, 247, 0.05)', padding: '2rem', borderRadius: '12px', border: '2px solid #a371f7' }}>
-      <h2 style={{ color: '#a371f7', marginTop: 0 }}>🏆 Week 1 Certification Exam</h2>
-      <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>You must score at least 80% to unlock Week 2.</p>
+      <h2 style={{ color: '#a371f7', marginTop: 0 }}>🏆 {title || `Week ${week} Certification Exam`}</h2>
+      <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>You must score at least 80% to unlock Week {week + 1}.</p>
 
       {questions.map((q, i) => {
         const isCorrect = answers[i] === q.correct;
@@ -137,16 +184,35 @@ function CheckpointExam({ questions, onPass }) {
       })}
 
       {!submitted ? (
-        <button className="quiz-submit" style={{ width: '100%', padding: '1rem', fontSize: '1.1rem' }} onClick={handleSubmit}>
-          Submit Exam
-        </button>
+        <>
+          {showWarning && (
+            <div style={{
+              background: 'rgba(247, 129, 102, 0.1)',
+              border: '1px solid rgba(247, 129, 102, 0.5)',
+              borderRadius: '8px',
+              padding: '0.85rem 1.2rem',
+              marginBottom: '1rem',
+              color: '#ffab91',
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}>
+              ⚠️ Please answer all questions before submitting. You have {questions.length - Object.keys(answers).length} question{questions.length - Object.keys(answers).length !== 1 ? 's' : ''} left.
+            </div>
+          )}
+          <button className="quiz-submit" style={{ width: '100%', padding: '1rem', fontSize: '1.1rem' }} onClick={handleSubmit}>
+            Submit Exam
+          </button>
+        </>
       ) : (
         <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1.5rem', background: 'var(--card)', borderRadius: '8px' }}>
           <h3 style={{ margin: 0, color: score >= (questions.length * 0.8) ? '#7ee787' : '#ff7b72' }}>
             You scored {score} / {questions.length}
           </h3>
           {score >= (questions.length * 0.8) ? (
-            <p>Amazing job! You have mastered Week 1. Week 2 is now unlocked! 🎉</p>
+            <p>Amazing job! You have mastered Week {week}. Week {week + 1} is now unlocked! 🎉</p>
           ) : (
             <>
               <p style={{ color: 'var(--muted)', marginBottom: '1.2rem' }}>
@@ -214,6 +280,27 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
           {dayData.topics.map(t => <span key={t} className="topic-tag">{t}</span>)}
         </div>
 
+        {/* --- MILESTONE CARD --- */}
+        {dayData.milestone && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '1rem',
+            background: `linear-gradient(135deg, ${wc.color}14, ${wc.color}08)`,
+            border: `1px solid ${wc.color}40`,
+            borderRadius: '12px',
+            padding: '1.1rem 1.4rem',
+            marginTop: '1.2rem',
+          }}>
+            <span style={{ fontSize: '1.8rem', lineHeight: 1, flexShrink: 0 }}>{dayData.milestone.icon}</span>
+            <div>
+              <div style={{ color: wc.color, fontWeight: '700', fontSize: '0.95rem', marginBottom: '0.25rem' }}>{dayData.milestone.title}</div>
+              <div style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.5 }}>{dayData.milestone.text}</div>
+            </div>
+          </div>
+        )}
+        {/* ----------------------- */}
+
         {/* --- DYNAMIC PROGRESS BAR --- */}
         <div className="progress-wrap" style={{ marginTop: '1.5rem' }}>
           <div style={{ fontSize: '0.7rem', color: 'var(--muted)', marginBottom: '0.4rem', display: 'flex', justifyContent: 'space-between' }}>
@@ -240,7 +327,7 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
               ⏱ {sec.timeEstimate}
             </div>
           )}
-          {sec.type !== 'homework' && sec.body && <p className="section-body">{sec.body}</p>}
+          {sec.type !== 'homework' && sec.body && <div className="section-body">{renderMarkdown(sec.body)}</div>}
           
           {sec.type === 'filetree' && <div className="file-tree">{renderTree(sec.tree)}</div>}
 
@@ -276,7 +363,12 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
 
           {/* Render the BOSS FIGHT EXAM */}
           {sec.type === 'exam' && (
-            <CheckpointExam questions={sec.questions} onPass={onPassCheckpoint} />
+            <CheckpointExam 
+              questions={sec.questions} 
+              onPass={onPassCheckpoint} 
+              title={sec.title} 
+              week={dayData.week} 
+            />
           )}
 
           {/* Render PRACTICE AT HOME homework card */}
@@ -296,7 +388,7 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
                 )}
               </div>
               <div style={{ color: '#f7b731', fontWeight: '600', fontSize: '1.05rem', marginBottom: '0.75rem' }}>{sec.title}</div>
-              {sec.body && <p className="section-body" style={{ marginTop: 0 }}>{sec.body}</p>}
+              {sec.body && <div className="section-body" style={{ marginTop: 0 }}>{renderMarkdown(sec.body)}</div>}
               {sec.boxTitle && (
                 <div className={`info-box ${sec.boxType || 'rule'}`} style={{ marginTop: '1rem' }}>
                   <div className="info-box-title">{sec.boxTitle}</div>
