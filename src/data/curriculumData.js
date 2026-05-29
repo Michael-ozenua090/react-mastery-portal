@@ -1437,5 +1437,187 @@ export default App;`,
         ]
       }
     ]
+  },
+// --- DAY 7 ---
+  {
+    dayNumber: 7, week: 3,
+    title: 'The useEffect Hook',
+    subtitle: 'Connecting your app to the outside world',
+    topics: ['What is a Side Effect?', 'useEffect Syntax', 'The Dependency Array', 'Cleanup Functions', 'Knowledge Check'],
+    milestone: { icon: '🌐', title: 'Welcome to Week 3!', text: 'Your apps are about to get real. Today, you learn how to reach outside of React to fetch data from the internet, control the browser, and manage timers.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'What is a Side Effect?',
+        body: 'React components are supposed to be "pure" — they take in data (Props/State) and return UI (JSX). \n\nBut sometimes, your component needs to do things that fall *outside* of simply drawing UI. We call these **Side Effects**. Common side effects include:\n1. Fetching data from an API or database.\n2. Setting a timer or interval (`setTimeout`).\n3. Directly changing the browser (like updating `document.title`).\n\nTo handle these safely without breaking React\'s rendering process, we use the **`useEffect`** Hook.',
+        boxType: 'info',
+        boxTitle: 'The Component Lifecycle',
+        boxBody: 'Think of a component like a person. It is <strong>born</strong> (Mounts onto the screen), it <strong>grows</strong> (Updates when state changes), and it <strong>dies</strong> (Unmounts/disappears from the screen). <code>useEffect</code> lets you run specific code at these exact moments.'
+      },
+      {
+        type: 'text',
+        title: '⚠️ The Dependency Array (The Infinite Loop Killer)',
+        body: 'The `useEffect` hook takes two arguments: a function, and an array.\n`useEffect(() => { /* your code */ }, [dependencies]);`\n\nThe second argument (the array) tells React exactly *when* to run the effect. If you mess this up, you will crash your browser.',
+        boxType: 'danger',
+        boxTitle: 'The 3 Rules of the Dependency Array',
+        boxBody: '<strong>1. No Array:</strong> <code>useEffect(() => {...})</code><br/>Runs on EVERY single render. DANGEROUS! Never do this when fetching data.<br><br><strong>2. Empty Array:</strong> <code>useEffect(() => {...}, [])</code><br/>Runs exactly ONCE when the component first loads. Perfect for initial data fetching.<br><br><strong>3. Array with variables:</strong> <code>useEffect(() => {...}, [score])</code><br/>Runs on load, and then runs again ONLY if the `score` variable changes.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The Random Quote API',
+        body: 'Let\'s build a component that reaches out to a real, live public API on the internet and fetches a random piece of advice the moment the page loads.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create QuoteGenerator.jsx',
+        body: 'Create a new file named `QuoteGenerator.jsx`. Notice how we use the empty dependency array `[]` so we only fetch the quote ONE time when the component mounts.',
+        code: `// src/QuoteGenerator.jsx
+import { useState, useEffect } from "react";
+
+export default function QuoteGenerator() {
+  const [advice, setAdvice] = useState("Loading advice...");
+
+  // The useEffect hook runs automatically!
+  useEffect(() => {
+    // 1. Define the async fetch function
+    const fetchAdvice = async () => {
+      const response = await fetch("https://api.adviceslip.com/advice");
+      const data = await response.json();
+      
+      // 2. Update our state with the fetched data
+      setAdvice(data.slip.advice);
+    };
+
+    // 3. Call the function
+    fetchAdvice();
+    
+  }, []); // <-- EMPTY ARRAY: Run only ONCE on load!
+
+  return (
+    <div className="quote-card">
+      <h2>Daily Advice</h2>
+      <p>"{advice}"</p>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Update App.jsx',
+        body: 'Import and render your new component so we can see it on the screen.',
+        code: `// src/App.jsx
+import './App.css';
+import QuoteGenerator from './QuoteGenerator';
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Week 3: APIs and Side Effects</h1>
+      <QuoteGenerator />
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Paste this into `App.css` to make our quote card look elegant.',
+        code: `/* Add to App.css */
+.quote-card {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  padding: 2.5rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #38bdf8;
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;
+  box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.2);
+}
+
+.quote-card h2 { color: #38bdf8; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1rem; }
+.quote-card p { color: white; font-size: 1.5rem; font-style: italic; line-height: 1.4; margin: 0; }
+.quote-card p::before { content: open-quote; color: #38bdf8; font-size: 2rem; }
+.quote-card p::after { content: close-quote; color: #38bdf8; font-size: 2rem; }`,
+        lang: 'css'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The Tab Title Sync',
+        timeEstimate: '20 min',
+        body: 'Side effects aren\'t just for APIs! Let\'s control the browser itself.\n\n**Requirements:**\n1. Create a file named `TitleUpdater.jsx`.\n2. Create a state variable called `notificationCount` (start at 0).\n3. Create a button that increases `notificationCount` by 1 when clicked.\n4. Write a `useEffect` hook. Inside it, write: `document.title = "You have " + notificationCount + " notifications";`\n5. **Crucial:** You want this effect to run every time `notificationCount` changes. What should you put in the dependency array?\n6. Render it in `App.jsx` and watch the browser tab name change when you click!',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you import <code>useEffect</code> at the top? <br/>✓ Did you put <code>[notificationCount]</code> in your dependency array? <br/>✓ Does clicking the button immediately change the text at the top of your web browser tab?'
+      },
+      {
+        type: 'homework',
+        title: 'The Cleanup Function (Stopwatch Timer)',
+        timeEstimate: '45 min',
+        body: 'If you start a timer in a component, and that component is deleted from the screen, the timer will keep running in the background forever and cause a memory leak! You must clean it up.\n\n**Requirements:**\n1. Create `Timer.jsx` with a `seconds` state (starting at 0).\n2. Write a `useEffect` with an empty array `[]`.\n3. Inside the effect, start a timer: `const interval = setInterval(() => { setSeconds(s => s + 1) }, 1000);`\n4. At the very end of your effect, **return a function** that clears the interval: `return () => clearInterval(interval);`\n5. Render the seconds on the screen.',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you use <code>setSeconds(s =&gt; s + 1)</code> instead of <code>seconds + 1</code> to get the most recent state? <br/>✓ Did you <code>return</code> an arrow function inside your useEffect to clean up the interval?'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'Which of the following is considered a "Side Effect" in React?',
+            options: [
+              'Mapping an array into a list of <li> elements.',
+              'Passing Props from a parent to a child component.',
+              'Fetching data from an external database API.',
+              'Using a ternary operator for conditional rendering.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'What happens if you use useEffect WITHOUT a dependency array at all?',
+            options: [
+              'The effect will never run.',
+              'The effect will only run once when the component first mounts.',
+              'The effect will run on every single re-render, potentially causing an infinite loop.',
+              'React will throw a syntax error.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you only want an API to be called EXACTLY ONCE when the page loads, what should you pass as the dependency array?',
+            options: [
+              'Nothing',
+              'An empty array: []',
+              'An array with the word "mount": ["mount"]',
+              'An empty object: {}'
+            ],
+            correct: 1
+          },
+          {
+            question: 'Why do we sometimes need to return a "Cleanup Function" inside a useEffect?',
+            options: [
+              'To delete the component from the screen.',
+              'To reset all state variables to zero.',
+              'To stop background processes like timers or event listeners from continuing to run after the component unmounts.',
+              'To wipe the database clear.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'You want an effect to run only when the "userId" state variable changes. How should your dependency array look?',
+            options: [
+              'useEffect(() => {...}, [])',
+              'useEffect(() => {...}, [userId])',
+              'useEffect(() => {...}, [change(userId)])',
+              'useEffect(() => {...}).onChange(userId)'
+            ],
+            correct: 1
+          }
+        ]
+      }
+    ]
   }
 ];
