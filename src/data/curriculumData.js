@@ -34,7 +34,7 @@ export const curriculum = [
       {
         type: 'setup',
         title: 'Setting Up Your Project with Vite',
-        body: 'We use Vite to create React apps. It is blazing fast because it only updates the exact file you change in milliseconds.',
+        body: 'We use Vite to create React apps. It is blazing fast because it only updates the exact file you change in milliseconds. When you want to stop the server at any time, press **Ctrl+C** in the terminal.',
         code: `npm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm run dev`,
         lang: 'bash',
         boxType: 'danger',
@@ -349,6 +349,27 @@ function StudentCard({ name, grade }) {
         boxBody: 'Destructuring is a standard JavaScript shortcut — it is not React-specific. It unpacks values from an object into separate variables in one line. <br/><strong>Without destructuring:</strong> <code>const name = props.name; const grade = props.grade;</code> <br/><strong>With destructuring:</strong> <code>const { name, grade } = props;</code> <br/>React lets us do this shortcut right inside the function parentheses: <code>function StudentCard({ name, grade })</code>. Same result, cleaner code.'
       },
       {
+        type: 'code',
+        title: 'Bonus Skill: Default Prop Values',
+        body: 'What happens if a parent forgets to pass a required prop? By default, you get `undefined` — which can cause blank text or broken layouts. The fix is simple: add a default value directly inside the destructuring parameters.',
+        code: `// If 'name' is not passed, it falls back to "Guest" automatically
+function Greeting({ name = "Guest", role = "Member" }) {
+  return (
+    <div>
+      <h2>Hello, {name}!</h2>
+      <p>Role: {role}</p>
+    </div>
+  );
+}
+
+// This works perfectly — 'role' will show "Member" by default
+<Greeting name="Precious" />`,
+        lang: 'jsx',
+        boxType: 'tip',
+        boxTitle: '💡 Default Props in the Real World',
+        boxBody: 'You will use default props constantly for optional data — things like avatar images, placeholder text, or fallback labels. The pattern <code>{ propName = defaultValue }</code> is just standard JavaScript destructuring with a default assignment. It is not a React-specific feature.'
+      },
+      {
         type: 'text',
         title: 'Guided Project: Tech Team Roster',
         body: 'Let\'s build a reusable component. Instead of putting all our code in one file, we are going to create a brand new file for our component. This is how real React apps are built!'
@@ -489,12 +510,12 @@ export default App;`,
             correct: 2
           },
           {
-            question: 'What is the modern, cleanest way to extract "title" and "price" directly from props inside the component parameters?',
+            question: 'A component is defined as `function Greeting({ name = "Guest" })`. What happens if you render `<Greeting />` without passing the `name` prop?',
             options: [
-              'function Product(props.title, props.price)',
-              'function Product({ title, price })',
-              'function Product([title, price])',
-              'function Product(props => title, price)'
+              'The component crashes with an undefined error.',
+              'The `name` variable will automatically be the string "Guest".',
+              'React throws a warning in the console and renders nothing.',
+              'The `name` variable will be `null`.'
             ],
             correct: 1
           }
@@ -543,7 +564,7 @@ export default function Counter() {
         lang: 'jsx',
         boxType: 'tip',
         boxTitle: '💡 Pro Tip: The Safe Way to Update From Previous State',
-        boxBody: 'In the example above we write <code>setCount(count + 1)</code>. This works for simple cases, but there is a safer pattern you will see in real codebases: <code>setCount(prev => prev + 1)</code>. <br/><br/>The <code>prev</code> version passes a function to the setter. React guarantees that <code>prev</code> is always the most up-to-date value — important when multiple updates happen at the same time. <strong>Rule of thumb:</strong> if your new state depends on the old state, use <code>prev =&gt;</code>.'
+        boxBody: 'In the example above we write <code>setCount(count + 1)</code>. This works for simple cases, but there is a safer pattern you will see in real codebases: <code>setCount(prev => prev + 1)</code>. <br/><br/>The <code>prev</code> version passes a function to the setter. React guarantees that <code>prev</code> is always the most up-to-date value — important when multiple updates happen at the same time. <strong>Rule of thumb:</strong> if your new state depends on the old state, use <code>prev =&gt;</code>. <br/><br/><strong>One more key insight:</strong> Each component instance has its own completely separate state. If you render <code>&lt;Counter /&gt;&lt;Counter /&gt;</code> twice, each counter is totally independent — clicking one has zero effect on the other.'
       },
       {
         type: 'code',
@@ -576,6 +597,36 @@ export default function ShoppingCart() {
         boxType: 'danger',
         boxTitle: 'Mutation leads to bugs',
         boxBody: 'Never do <code>items.push()</code>, <code>array[0] = value</code>, or <code>count = count + 1</code>. Always pass a brand new value into the setter function!'
+      },
+      {
+        type: 'code',
+        title: 'Updating Object State',
+        body: 'Just like arrays, you cannot mutate an object in state directly. Instead, use the spread operator `...` to copy all the existing fields, then override only the field you want to change. This is one of the most common patterns in real React apps.',
+        code: `import { useState } from "react";
+
+export default function UserProfile() {
+  const [user, setUser] = useState({ name: "David", age: 25, city: "Lagos" });
+
+  const changeName = () => {
+    // ❌ WRONG: Mutating the object directly
+    // user.name = "Michael"; ← React won't notice this!
+
+    // ✅ CORRECT: Spread the old fields, override only 'name'
+    setUser({ ...user, name: "Michael" });
+    // Result: { name: "Michael", age: 25, city: "Lagos" }
+  };
+
+  return (
+    <div>
+      <p>Name: {user.name} | Age: {user.age} | City: {user.city}</p>
+      <button onClick={changeName}>Change Name</button>
+    </div>
+  );
+}`,
+        lang: 'jsx',
+        boxType: 'info',
+        boxTitle: '⚡ The Spread + Override Pattern',
+        boxBody: '<code>{ ...user, name: "Michael" }</code> means: “copy every field from the user object, then set <code>name</code> to "Michael"”. Any field listed after the spread <strong>overwrites</strong> the copied value. Fields you do not list are kept exactly as they were. You will use this pattern constantly when building forms and user profile pages.'
       },
       {
         type: 'text',
@@ -679,10 +730,10 @@ export default App;`,
         type: 'text',
         title: 'Unguided Task: The Habit Tracker',
         timeEstimate: '45 min',
-        body: 'Time to build your own stateful component from scratch! \n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create a component that tracks how many glasses of water you drank today.\n3. You need one `useState` variable starting at `0`.\n4. Create an "Add Water" button that increases the count by 1.\n5. Create a "Reset" button that sets the count back to 0.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
+        body: 'Time to build your own stateful component from scratch! This version applies the Object State pattern you just learned — tracking two pieces of data inside one state object.\n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create **one state object** (not two separate variables): `const [tracker, setTracker] = useState({ count: 0, lastReset: \'Never\' })`.\n3. Create an "Add Water 💧" button. When clicked, use the spread pattern to update only the count: `setTracker({ ...tracker, count: tracker.count + 1 })`.\n4. Create a "Reset" button. When clicked, set count back to 0 AND update lastReset to the current time: `setTracker({ count: 0, lastReset: new Date().toLocaleTimeString() })`.\n5. Display `tracker.count` and `tracker.lastReset` on the screen.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you <code>import { useState } from "react";</code> at the very top? <br/>✓ Did you use the setter function (e.g., <code>setWater(water + 1)</code>) instead of <code>water++</code>? <br/>✓ Did you pass a function to onClick like <code>onClick={() => setWater(0)}</code>?'
+        boxBody: '✓ Did you use ONE state object instead of two separate <code>useState</code> calls? <br/>✓ Did your "Add Water" button use <code>{ ...tracker, count: tracker.count + 1 }</code> — spreading first, then overriding? <br/>✓ Did the <code>lastReset</code> text on screen update the moment you clicked Reset? <br/>✓ Did you access values using <code>tracker.count</code> and <code>tracker.lastReset</code> (dot notation)?'
       },
       {
         type: 'homework',
@@ -730,13 +781,13 @@ export default App;`,
             correct: 0
           },
           {
-            question: 'What is the best definition of "Props" in React?',
-            options: ['State that can be changed by a child component.', 'Custom HTML-like attributes used to pass data from a Parent down to a Child.', 'A way to link CSS files.', 'Variables that hold the color scheme.'],
+            question: 'You have `const [user, setUser] = useState({ name: "David", age: 25 })`. How do you update ONLY the name to "Michael" without losing the `age` value?',
+            options: ['setUser({ name: "Michael" })', 'setUser({ ...user, name: "Michael" })', 'user.name = "Michael"; setUser(user)', 'setUser(name: "Michael", age: user.age)'],
             correct: 1
           },
           {
-            question: 'What is the correct way to pass a number as a prop?',
-            options: ['<Card price="50" />', '<Card price=50 />', '<Card price={50} />', '<Card {price=50} />'],
+            question: 'If you render `<Counter /><Counter />` twice on the same page and click the button in the first counter, what happens to the second counter?',
+            options: ['Both counters update because they share the same state.', 'The second counter resets to 0.', 'Nothing — each component instance has its own completely separate state.', 'React throws an error because the same component cannot be rendered twice.'],
             correct: 2
           },
           {
@@ -809,7 +860,10 @@ export default function EventExamples() {
     </div>
   );
 }`,
-        lang: 'jsx'
+        lang: 'jsx',
+        boxType: 'info',
+        boxTitle: '🔍 What is e.target.value?',
+        boxBody: 'When a user types, React passes an <strong>Event Object</strong> (we call it <code>e</code>) to your handler function. This object contains details about the action. <br/><br/><strong><code>e.target</code></strong> — the actual HTML element the user interacted with (the input box itself). <br/><strong><code>e.target.value</code></strong> — whatever text the user typed into that element right now. <br/><br/>So <code>setText(e.target.value)</code> simply means: "put whatever the user just typed into my state variable." You will write this line on almost every input field you ever build in React.'
       },
       {
         type: 'text',
@@ -1045,6 +1099,37 @@ export default App;`,
         boxBody: 'Remember the Virtual DOM from Day 1? When an array changes (maybe an item is deleted or reordered), React needs to figure out exactly which item changed so it only updates that tiny piece of the screen. <br><br>The <code>key</code> is like a tracking ID. If you do not provide it, React gets confused, destroys the whole list, and redraws it from scratch — which is terrible for performance.'
       },
       {
+        type: 'code',
+        title: '✂️ Removing Items with .filter()',
+        body: 'You have learned how to render lists with `.map()`. But what about *removing* items from a list? That is where `.filter()` comes in. The `.filter()` method creates a new array containing only the items that pass a test you define — perfect for implementing "Delete" buttons or "Show only active items" features.',
+        code: `import { useState } from "react";
+
+export default function ShoppingList() {
+  const [items, setItems] = useState(["Shoes", "Shirt", "Hat", "Bag"]);
+
+  const removeItem = (itemToRemove) => {
+    // filter KEEPS every item where the condition is true.
+    // So this KEEPS everything EXCEPT the item we want to remove.
+    setItems(items.filter(item => item !== itemToRemove));
+  };
+
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={item}>
+          {item}
+          <button onClick={() => removeItem(item)}>✕ Remove</button>
+        </li>
+      ))}
+    </ul>
+  );
+}`,
+        lang: 'jsx',
+        boxType: 'tip',
+        boxTitle: 'The Real-World Power Move: .filter().map()',
+        boxBody: 'The most common pattern in production React apps is chaining both methods together. Filter first, then render only what passes: <br/><code>tasks.filter(task =&gt; !task.done).map(task =&gt; &lt;TaskItem key={task.id} /&gt;)</code><br/><br/>This one line says: "Give me only the unfinished tasks, then turn each one into a component." You will use this exact chain in your Task Manager homework.'
+      },
+      {
         type: 'text',
         title: 'Guided Project: The Netflix Movie List',
         body: 'Let\'s build something real. We are going to take an array of Movie Objects (like you would get from an API) and map them into reusable `<MovieCard />` components.'
@@ -1144,11 +1229,11 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: The High Score Leaderboard',
-        timeEstimate: '30 min',
-        body: 'Time to practice! Your task is to build a leaderboard ranking component.\n\n**Requirements:**\n1. Create a file named `Leaderboard.jsx`.\n2. Inside the file (but above the component), create an array of objects called `PLAYERS`. Each object should have an `id`, `name`, and `score` (e.g., `{ id: 1, name: "David", score: 9500 }`). Add at least 3 players.\n3. Build the `Leaderboard` component. Map over the `PLAYERS` array and render a `<div>` for each player showing their name and score.\n4. Make sure the parent `<div>` inside the map has a `key` prop!\n5. Import and display it in `App.jsx`.',
+        timeEstimate: '30–40 min',
+        body: 'Time to practice! Your task is to build a leaderboard that both renders AND filters a list of players.\n\n**Requirements:**\n1. Create a file named `Leaderboard.jsx`.\n2. Inside the file (above the component), create an array called `PLAYERS`. Each object should have `id`, `name`, and `score`. Add at least 5 players — some with scores above 5000, some below.\n3. Add a state variable: `const [showAll, setShowAll] = useState(true)`.\n4. Add a toggle button: "Show Top Scorers Only" / "Show All Players" — use a ternary to switch the label.\n5. Use the following logic to decide which players to display: `const displayedPlayers = showAll ? PLAYERS : PLAYERS.filter(p => p.score > 5000)`.\n6. Map over `displayedPlayers` to render a `<div>` for each player showing their rank position, name, and score. Remember the `key` prop!\n7. Import and display it in `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use <code>.map()</code> inside curly braces <code>{}</code> in your JSX? <br/>✓ Did you use <code>key={player.id}</code> on the outermost element returned by the map? <br/>✓ Did you export the component and import it successfully?'
+        boxBody: '✓ Did you use <code>PLAYERS.filter(p =&gt; p.score &gt; 5000)</code> to filter the list? <br/>✓ Did you map over <code>displayedPlayers</code> (not the original <code>PLAYERS</code> array)? <br/>✓ Does clicking the toggle button immediately hide/show players without a page reload? <br/>✓ Did you use <code>key={player.id}</code> on the outermost element returned by the map?'
       },
       {
         type: 'homework',
@@ -1163,14 +1248,14 @@ export default App;`,
         title: 'Knowledge Check',
         questions: [
           {
-            question: 'Which JavaScript array method is exclusively used to render lists of data in React?',
+            question: 'You have `const [items, setItems] = useState(["Shoes", "Shirt", "Hat"])`. How do you remove "Shirt" from the list without mutating state?',
             options: [
-              '.forEach()',
-              '.filter()',
-              '.map()',
-              '.reduce()'
+              'items.splice(1, 1); setItems(items)',
+              'setItems(items.filter(item => item !== "Shirt"))',
+              'setItems(items.map(item => item !== "Shirt"))',
+              'delete items[1]; setItems(items)'
             ],
-            correct: 2
+            correct: 1
           },
           {
             question: 'Why does React require a "key" prop when mapping over an array?',
@@ -1364,13 +1449,95 @@ export default App;`,
         lang: 'css'
       },
       {
+        type: 'code',
+        title: 'Level Up: Multi-Input Forms with One handleChange',
+        body: 'The newsletter form had only one input. Real forms have many — name, email, password, etc. Writing a separate `useState` and `onChange` for every field gets messy fast. The professional pattern is to store all your form fields in **one state object** and use a single `handleChange` function that detects which field changed using `e.target.name`.',
+        code: `import { useState } from "react";
+
+export default function ContactForm() {
+  // 1. One state object holds ALL the fields
+  const [form, setForm] = useState({ name: "", email: "", subject: "" });
+
+  // 2. One handler for ALL inputs
+  const handleChange = (e) => {
+    // e.target.name tells us WHICH field changed ("name", "email", or "subject")
+    // e.target.value is what the user typed
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(\`Message from \${form.name} about: \${form.subject}\`);
+    setForm({ name: "", email: "", subject: "" }); // Clear all at once
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Each input MUST have a 'name' attribute that matches the state key */}
+      <input name="name" value={form.name} onChange={handleChange} placeholder="Your name" />
+      <input name="email" value={form.email} onChange={handleChange} placeholder="Your email" />
+      <input name="subject" value={form.subject} onChange={handleChange} placeholder="Subject" />
+      <button type="submit" disabled={!form.name || !form.email}>Send</button>
+    </form>
+  );
+}`,
+        lang: 'jsx',
+        boxType: 'info',
+        boxTitle: '⚡ How [e.target.name] Works',
+        boxBody: 'The square brackets in <code>{ ...form, [e.target.name]: e.target.value }</code> are called a <strong>Computed Property Name</strong>. It means: "use the value of <code>e.target.name</code> as the key." So if the user typed in the email field, <code>e.target.name</code> is <code>"email"</code>, and the result is <code>{ ...form, email: "what they typed" }</code>. This one handler replaces three separate handlers.'
+      },
+      {
+        type: 'code',
+        title: 'Controlled select and textarea',
+        body: 'Text inputs are not the only form elements you will use. Dropdowns (`<select>`) and multi-line text areas (`<textarea>`) are in every real form. The good news: they are controlled exactly the same way — `value` tied to state, `onChange` updating state.',
+        code: `import { useState } from "react";
+
+export default function ProfileSetup() {
+  const [bio, setBio] = useState("");
+  const [level, setLevel] = useState("beginner");
+
+  return (
+    <form>
+      {/* textarea: value + onChange, exactly like <input> */}
+      <textarea
+        value={bio}
+        onChange={(e) => setBio(e.target.value)}
+        placeholder="Tell us about yourself..."
+        rows={4}
+      />
+
+      {/* select: value goes on the <select> tag, NOT on <option> tags */}
+      <select value={level} onChange={(e) => setLevel(e.target.value)}>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+
+      <p>Current level: {level}</p>
+    </form>
+  );
+}`,
+        lang: 'jsx',
+        boxType: 'warn',
+        boxTitle: 'Common Mistake with <select>',
+        boxBody: 'In plain HTML, you mark the selected option with a <code>selected</code> attribute on the <code>&lt;option&gt;</code> tag. In React, <strong>never do this</strong>. Instead, put <code>value={level}</code> on the <code>&lt;select&gt;</code> tag itself. React will automatically highlight the matching option. The same approach works for <code>&lt;textarea&gt;</code>.'
+      },
+      {
+        type: 'text',
+        title: '🛡️ Basic Form Validation: The Disabled Button Pattern',
+        body: 'One of the most common UX patterns in real apps is disabling the submit button when required fields are empty. This prevents blank or broken form submissions before they happen.\n\nBecause JSX attributes can hold any JavaScript expression, you can wire `disabled` directly to your state:',
+        boxType: 'tip',
+        boxTitle: 'disabled={!email}',
+        boxBody: '<code>disabled={!email}</code> means: "disable the button when the email string is empty (falsy)". An empty string <code>""</code> is falsy in JavaScript, so the button is disabled until the user types something. As soon as the field has content, <code>!email</code> becomes <code>false</code> and the button enables. <br/><br/>For multiple required fields: <code>disabled={!form.name || !form.email}</code> — the button stays disabled until BOTH fields have content.'
+      },
+      {
         type: 'text',
         title: 'Unguided Task: The Contact Form',
-        timeEstimate: '30–45 min',
-        body: 'Time to handle multiple inputs! Your task is to build a contact form for a portfolio website.\n\n**Requirements:**\n1. Create a file named `ContactForm.jsx`.\n2. Create TWO separate state variables: `name` and `message`.\n3. Build a `<form>` containing an `<input type="text">` for the name and a `<textarea>` for the message.\n4. Make sure both are "controlled" (tie their `value` and `onChange` to your state variables).\n5. Create a `handleSubmit` function that prevents the page refresh, alerts "Message sent by [Name]!", and clears both fields.\n6. Import and render it in `App.jsx`.',
+        timeEstimate: '40–55 min',
+        body: 'Time to put the professional form patterns together! Build a full contact form using the single-object state + `handleChange` approach you just learned — no separate state variable per field.\n\n**Requirements:**\n1. Create a file named `ContactForm.jsx`.\n2. Create ONE state object with three fields: `const [form, setForm] = useState({ name: \"\", subject: \"\", message: \"\" })`.\n3. Build a **single** `handleChange` function that uses `e.target.name` and `e.target.value` to update the correct field.\n4. Build a form with three controlled fields — each must have a `name` attribute matching the state key:\n   - An `<input type="text">` for name\n   - A `<select>` for subject (options: "General Inquiry", "Bug Report", "Partnership")\n   - A `<textarea>` for message\n5. Add a submit button. Disable it using `disabled={!form.name || !form.message}` so it only activates when both required fields have content.\n6. Create a `handleSubmit` function that prevents the page refresh, shows an alert with the form data, and clears the form back to empty strings.\n7. Import and render it in `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use <code>e.preventDefault()</code> inside your submit function? <br/>✓ Did you attach your submit function to the <code>&lt;form onSubmit={...}&gt;</code> rather than the button? <br/>✓ Did both input fields reset to empty strings after the alert?'
+        boxBody: '✓ Did you use ONE state object and ONE <code>handleChange</code> function — not three separate ones? <br/>✓ Does each input have a <code>name</code> attribute that exactly matches its key in the state object? <br/>✓ Did you use <code>value={form.subject}</code> on the <code>&lt;select&gt;</code> tag (not on the <code>&lt;option&gt;</code> tags)? <br/>✓ Is the submit button disabled until both name and message have content?'
       },
       {
         type: 'homework',
@@ -1395,9 +1562,9 @@ export default App;`,
             correct: 1
           },
           {
-            question: 'Which tool is best used when you want to show a component IF a condition is true, and show NOTHING if it is false?',
-            options: ['The Ternary Operator (? :)', 'A standard if/else block', 'The Logical AND operator (&&)', 'A Switch statement'],
-            correct: 2
+            question: 'You have a list of tasks in state. How do you correctly delete the task with `id: 3` without mutating the array?',
+            options: ['setTasks(tasks.splice(3))', 'setTasks(tasks.filter(task => task.id !== 3))', 'tasks.delete(3); setTasks(tasks)', 'setTasks(tasks.map(task => task.id !== 3))'],
+            correct: 1
           },
           {
             question: 'Which JavaScript array method is exclusively used to loop over data and generate lists of UI elements in React?',
@@ -1410,9 +1577,14 @@ export default App;`,
             correct: 1
           },
           {
-            question: 'Where MUST the "key" prop be placed when mapping an array?',
-            options: ['On the parent container outside the map.', 'On every single HTML tag inside the map.', 'On the outermost element or component returned inside the .map() callback.', 'Inside the App.jsx file.'],
-            correct: 2
+            question: 'What is the professional pattern for handling a form with multiple input fields (name, email, subject) in React?',
+            options: [
+              'Create a separate `useState` and `onChange` function for every single field.',
+              'Store all fields in one state object and use a single `handleChange` that reads `e.target.name` to know which field to update.',
+              'Use `document.querySelector` to read each field value on submit.',
+              'Put all field values in an array and use `.map()` to render and update them.'
+            ],
+            correct: 1
           },
           {
             question: 'What makes an input field a "Controlled Component" in React?',
@@ -1464,35 +1636,61 @@ export default App;`,
       },
       {
         type: 'text',
+        title: '⚡ Quick JS Refresher: async / await',
+        body: 'Before we build the guided project, we need to understand two JavaScript keywords that will appear in the code: `async` and `await`. These are not React concepts — they are standard JavaScript used for anything that takes time (like fetching data from the internet).\n\nJavaScript normally runs line by line, instantly. But fetching data from a server takes time — sometimes milliseconds, sometimes seconds. Without `async/await`, your code would continue running before the data arrives, giving you `undefined` instead of real data.',
+        boxType: 'info',
+        boxTitle: '\ud83d\udd0d How async / await works',
+        boxBody: '<strong><code>async</code></strong> marks a function as asynchronous — meaning it can contain waits. <br/><strong><code>await</code></strong> tells JavaScript: "pause right here until this operation finishes, then continue." <br/><br/>Example: <br/><code>const fetchAdvice = async () => {</code><br/><code>&nbsp;&nbsp;const response = await fetch(url); // Pause until server responds</code><br/><code>&nbsp;&nbsp;const data = await response.json(); // Pause until JSON is parsed</code><br/><code>&nbsp;&nbsp;setAdvice(data.slip.advice); // NOW we have the data</code><br/><code>};</code><br/><br/>Without <code>await</code>, <code>response</code> would be a pending Promise (not actual data) and your app would break. You will see this pattern on every API call in every React app.'
+      },
+      {
+        type: 'text',
         title: 'Guided Project: The Random Quote API',
         body: 'Let\'s build a component that reaches out to a real, live public API on the internet and fetches a random piece of advice the moment the page loads.'
       },
       {
         type: 'code',
         title: 'Step 1: Create QuoteGenerator.jsx',
-        body: 'Create a new file named `QuoteGenerator.jsx`. Notice how we use the empty dependency array `[]` so we only fetch the quote ONE time when the component mounts.',
+        body: 'Create a new file named `QuoteGenerator.jsx`. This version includes the three states every real API call needs: `advice` for the data, `loading` to show a spinner/message while waiting, and `error` to handle failures gracefully.',
         code: `// src/QuoteGenerator.jsx
 import { useState, useEffect } from "react";
 
 export default function QuoteGenerator() {
-  const [advice, setAdvice] = useState("Loading advice...");
+  const [advice, setAdvice] = useState("");
+  const [loading, setLoading] = useState(true);  // Start loading immediately
+  const [error, setError] = useState(null);       // No error yet
 
-  // The useEffect hook runs automatically!
   useEffect(() => {
-    // 1. Define the async fetch function
     const fetchAdvice = async () => {
-      const response = await fetch("https://api.adviceslip.com/advice");
-      const data = await response.json();
-      
-      // 2. Update our state with the fetched data
-      setAdvice(data.slip.advice);
+      // 1. Start loading
+      setLoading(true);
+      setError(null);
+
+      try {
+        // 2. Fetch (await: pause until server responds)
+        const response = await fetch("https://api.adviceslip.com/advice");
+        // 3. Parse JSON (await: pause until parsing is done)
+        const data = await response.json();
+        // 4. Store the real data
+        setAdvice(data.slip.advice);
+      } catch (err) {
+        // 5. If ANYTHING went wrong (offline, API down), catch it here
+        setError("Could not load advice. Please try again.");
+      } finally {
+        // 6. Always stop loading, whether it worked or not
+        setLoading(false);
+      }
     };
 
-    // 3. Call the function
     fetchAdvice();
-    
-  }, []); // <-- EMPTY ARRAY: Run only ONCE on load!
+  }, []); // Run only once on mount
 
+  // Render loading state
+  if (loading) return <div className="quote-card"><p>Loading advice...</p></div>;
+
+  // Render error state
+  if (error) return <div className="quote-card"><p style={{ color: '#f87171' }}>{error}</p></div>;
+
+  // Render the data
   return (
     <div className="quote-card">
       <h2>Daily Advice</h2>
@@ -1500,7 +1698,10 @@ export default function QuoteGenerator() {
     </div>
   );
 }`,
-        lang: 'jsx'
+        lang: 'jsx',
+        boxType: 'tip',
+        boxTitle: '🏆 The Full Professional Fetch Pattern',
+        boxBody: 'Every real-world API component should have these three states: <br/><strong>1. Loading</strong> — show a spinner/message while waiting for the server. <br/><strong>2. Error</strong> — catch failures gracefully instead of crashing silently. <br/><strong>3. Data</strong> — render the actual content once it arrives. <br/><br/>The <code>try/catch/finally</code> block is the standard way to handle this. <code>try</code> runs the risky code, <code>catch</code> handles any error that occurs, <code>finally</code> runs regardless of success or failure — perfect for turning off the loading state.'
       },
       {
         type: 'code',
@@ -1567,12 +1768,12 @@ export default App;`,
         title: 'Knowledge Check',
         questions: [
           {
-            question: 'Which of the following is considered a "Side Effect" in React?',
+            question: 'Inside a `useEffect`, why must you define your fetch function as `async` and use `await` before `fetch()`?',
             options: [
-              'Mapping an array into a list of <li> elements.',
-              'Passing Props from a parent to a child component.',
-              'Fetching data from an external database API.',
-              'Using a ternary operator for conditional rendering.'
+              'Because `fetch()` only works inside `useEffect` hooks.',
+              'Because React requires all functions to be async.',
+              '`fetch()` returns a Promise. Without `await`, your code continues before the data arrives and you get `undefined` instead of real data.',
+              'Because `async/await` is faster than regular functions.'
             ],
             correct: 2
           },
@@ -1607,12 +1808,12 @@ export default App;`,
             correct: 2
           },
           {
-            question: 'You want an effect to run only when the "userId" state variable changes. How should your dependency array look?',
+            question: 'What is the purpose of a `loading` state variable in a component that fetches API data?',
             options: [
-              'useEffect(() => {...}, [])',
-              'useEffect(() => {...}, [userId])',
-              'useEffect(() => {...}, [change(userId)])',
-              'useEffect(() => {...}).onChange(userId)'
+              'To slow down the app so the user can read content more easily.',
+              'To show a loading indicator while waiting for data and prevent showing empty or broken UI.',
+              'To cache the fetched data permanently in the browser.',
+              'To tell React to skip re-rendering until the fetch is done.'
             ],
             correct: 1
           }
