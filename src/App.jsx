@@ -1,17 +1,32 @@
 // src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { curriculum } from './data/curriculumData';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 
 function App() {
-  const [selectedDayIndex, setSelectedDayIndex] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // 1. Initialize state from localStorage (or default to 0 / 2 if new user)
+  const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
+    const savedDay = localStorage.getItem('speta_currentDay');
+    return savedDay !== null ? parseInt(savedDay, 10) : 0;
+  });
   
-  // NEW: State to track how far they are allowed to go.
-  // Index 2 represents Day 3. So Days 1, 2, and 3 are open by default.
-  const [maxUnlockedDay, setMaxUnlockedDay] = useState(2); 
+  const [maxUnlockedDay, setMaxUnlockedDay] = useState(() => {
+    const savedLock = localStorage.getItem('speta_maxUnlocked');
+    return savedLock !== null ? parseInt(savedLock, 10) : 2;
+  });
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // 2. Whenever state changes, save it automatically to localStorage!
+  useEffect(() => {
+    localStorage.setItem('speta_currentDay', selectedDayIndex);
+  }, [selectedDayIndex]);
+
+  useEffect(() => {
+    localStorage.setItem('speta_maxUnlocked', maxUnlockedDay);
+  }, [maxUnlockedDay]);
 
   const currentDayData = curriculum[selectedDayIndex];
 
@@ -44,7 +59,7 @@ function App() {
             setIsMobileMenuOpen(false);
           }} 
           isOpen={isMobileMenuOpen}
-          maxUnlocked={maxUnlockedDay} // Pass the lock state to the sidebar
+          maxUnlocked={maxUnlockedDay} 
         />
         
         {isMobileMenuOpen && (
@@ -53,7 +68,7 @@ function App() {
 
         <MainContent 
           dayData={currentDayData} 
-          onPassCheckpoint={unlockNextWeek} // Pass the unlock function down
+          onPassCheckpoint={unlockNextWeek} 
         />
       </div>
     </>
