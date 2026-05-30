@@ -4,6 +4,7 @@ import { curriculum } from './data/curriculumData';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
+import CongratsModal from './components/CongratsModal';
 
 function App() {
   // 1. Initialize state from localStorage (or default to 0 / 2 if new user)
@@ -19,6 +20,9 @@ function App() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Controls which week was just unlocked (null = modal hidden)
+  const [unlockedWeek, setUnlockedWeek] = useState(null);
+
   // 2. Whenever state changes, save it automatically to localStorage!
   useEffect(() => {
     localStorage.setItem('speta_currentDay', selectedDayIndex);
@@ -33,17 +37,17 @@ function App() {
   // Function to unlock the next week based on which exam was passed
   const unlockNextWeek = () => {
     if (selectedDayIndex === 2) {
-      // If passed Day 3 (index 2), unlock Week 2 (up to Day 6, index 5)
+      // Passed Day 3 exam → unlock Week 2 (up to Day 6, index 5)
       setMaxUnlockedDay(5);
-      alert("🎉 Congratulations! Week 2 is now unlocked! 🎉");
+      setUnlockedWeek(2);
     } else if (selectedDayIndex === 5) {
-      // If passed Day 6 (index 5), unlock Week 3 (up to Day 9, index 8)
+      // Passed Day 6 exam → unlock Week 3 (up to Day 9, index 8)
       setMaxUnlockedDay(8);
-      alert("🎉 Congratulations! Week 3 is now unlocked! 🎉");
+      setUnlockedWeek(3);
     } else {
       // Unlocks the rest of the course
       setMaxUnlockedDay(11);
-      alert("🎉 Congratulations! New content unlocked! 🎉");
+      setUnlockedWeek('default');
     }
   };
 
@@ -67,10 +71,19 @@ function App() {
         )}
 
         <MainContent 
+          key={selectedDayIndex}
           dayData={currentDayData} 
           onPassCheckpoint={unlockNextWeek} 
         />
       </div>
+
+      {/* Celebration modal — renders only when an exam is passed */}
+      {unlockedWeek !== null && (
+        <CongratsModal
+          weekUnlocked={unlockedWeek}
+          onClose={() => setUnlockedWeek(null)}
+        />
+      )}
     </>
   );
 }
