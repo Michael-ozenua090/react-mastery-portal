@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import CodeBlock from './CodeBlock';
 import { WEEK_COLORS } from '../data/curriculumData';
+import Footer from './Footer';
 
 // --- Markdown renderer for sec.body text ---
 // Handles: **bold**, `inline code`, and \n newlines
@@ -408,6 +409,8 @@ export default function MainContent({ dayData, onPassCheckpoint }) {
 
         </div>
       ))}
+
+      <Footer />
     </main>
   );
 }

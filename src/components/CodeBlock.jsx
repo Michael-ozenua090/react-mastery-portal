@@ -16,8 +16,8 @@ export default function CodeBlock({ code, lang = 'jsx' }) {
     <div className="code-block">
       <div className="code-header">
         <span className="code-lang">{lang}</span>
-        <button className="copy-btn" onClick={handleCopy}>
-          {copied ? 'Copied!' : 'Copy'}
+        <button className={`copy-btn ${copied ? 'copied' : ''}`} onClick={handleCopy}>
+          {copied ? 'Copied! ✓' : 'Copy'}
         </button>
       </div>
       <div className="code-body">
