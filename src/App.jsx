@@ -23,6 +23,11 @@ function App() {
   // Controls which week was just unlocked (null = modal hidden)
   const [unlockedWeek, setUnlockedWeek] = useState(null);
 
+  // 1.5 Theme state
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('speta_theme') || 'dark';
+  });
+
   // 2. Whenever state changes, save it automatically to localStorage!
   useEffect(() => {
     localStorage.setItem('speta_currentDay', selectedDayIndex);
@@ -31,6 +36,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem('speta_maxUnlocked', maxUnlockedDay);
   }, [maxUnlockedDay]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('speta_theme', theme);
+  }, [theme]);
 
   const currentDayData = curriculum[selectedDayIndex];
 
@@ -53,7 +63,11 @@ function App() {
 
   return (
     <>
-      <Header onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+      <Header 
+        onMenuClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+        theme={theme}
+        onToggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
+      />
       <div className="layout">
         <Sidebar 
           curriculum={curriculum} 

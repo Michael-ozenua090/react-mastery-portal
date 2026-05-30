@@ -54,15 +54,23 @@ function SafeHtml({ html }) {
     <>
       {lines.map((line, lineIdx) => {
         const segments = [];
-        const tagRegex = /<(code|strong|em)>([\s\S]*?)<\/\1>/g;
+        const tagRegex = /<(code|strong|em)>([\s\S]*?)<\/\1>|<a\s+href="([^"]+)">([\s\S]*?)<\/a>/g;
         let lastIdx = 0;
         let m;
         while ((m = tagRegex.exec(line)) !== null) {
           if (m.index > lastIdx) {
             segments.push(<span key={`t${lastIdx}`}>{decodeEntities(line.slice(lastIdx, m.index))}</span>);
           }
-          const Tag = m[1];
-          segments.push(<Tag key={m.index}>{decodeEntities(m[2])}</Tag>);
+          if (m[1]) {
+            const Tag = m[1];
+            segments.push(<Tag key={m.index}>{decodeEntities(m[2])}</Tag>);
+          } else if (m[3]) {
+            segments.push(
+              <a key={m.index} href={m[3]} target="_blank" rel="noopener noreferrer">
+                {decodeEntities(m[4])}
+              </a>
+            );
+          }
           lastIdx = tagRegex.lastIndex;
         }
         if (lastIdx < line.length) {
@@ -208,7 +216,7 @@ function CheckpointExam({ questions, onPass, title, week }) {
         </>
       ) : (
         <div style={{ textAlign: 'center', marginTop: '2rem', padding: '1.5rem', background: 'var(--card)', borderRadius: '8px' }}>
-          <h3 style={{ margin: 0, color: score >= (questions.length * 0.8) ? '#7ee787' : '#ff7b72' }}>
+          <h3 style={{ margin: 0 }} className={score >= (questions.length * 0.8) ? 'text-green' : 'text-red'}>
             You scored {score} / {questions.length}
           </h3>
           {score >= (questions.length * 0.8) ? (

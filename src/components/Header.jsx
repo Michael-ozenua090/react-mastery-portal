@@ -1,4 +1,4 @@
-export default function Header({ onMenuClick }) {
+export default function Header({ onMenuClick, theme, onToggleTheme }) {
   return (
     <div className="header">
       <button className="menu-btn" onClick={onMenuClick}>☰</button>
@@ -8,6 +8,14 @@ export default function Header({ onMenuClick }) {
         <span><b>3 days</b>/week</span>
       </div>
       <div className="header-tagline">For students who know HTML, CSS & JS</div>
+      <button 
+        className="theme-toggle" 
+        onClick={onToggleTheme}
+        aria-label="Toggle theme"
+        title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
     </div>
   );
 }

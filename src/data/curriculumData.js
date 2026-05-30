@@ -225,6 +225,13 @@ export default App;`,
         boxBody: '✓ Did you declare your new variables at the <strong>top</strong> of the function, before the <code>return</code>? <br/>✓ Did you use curly braces <code>{location}</code> and <code>{skills}</code> to inject them into the JSX? <br/>✓ Did you use <code>className</code> (not <code>class</code>) on every element you styled? <br/>✓ <strong>Bonus:</strong> Does the second card show completely different data and a different colour scheme?'
       },
       {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/writing-markup-with-jsx">Writing Markup with JSX</a>'
+      },
+      {
         type: 'quiz',
         title: 'Knowledge Check',
         questions: [
@@ -464,6 +471,13 @@ export default App;`,
         body: 'Your `ProfileCard` currently shows `name`, `role`, and a Team Lead badge. Now make it richer by adding two brand-new props — using only what you know: props and destructuring.\n\n**Requirements:**\n1. Open `ProfileCard.jsx` and add `avatar` and `skills` to the destructured parameters: `{ name, role, isLead, avatar, skills }`.\n2. Render `avatar` (an emoji string like `"👨\u200d💻"`) inside a `<span className="team-avatar">` at the top of the card.\n3. Render `skills` (a comma-separated string like `"React, Node, Python"`) inside a `<p className="team-skills">` below the role.\n4. Open `App.jsx` and update all three `<ProfileCard>` instances to pass the new `avatar` and `skills` props with different values for each person.',
         boxTitle: 'Homework Checklist',
         boxBody: '✓ Did you add <code>avatar</code> and <code>skills</code> to the destructured parameters <code>{ name, role, isLead, avatar, skills }</code>? <br/>✓ Did you render both new props inside the JSX with <code>{}</code> curly braces? <br/>✓ Did you pass strings using quotes (<code>avatar="👩‍💻"</code>) from <code>App.jsx</code>? <br/>✓ <strong>Bonus:</strong> Add a <code>yearsExp</code> number prop and display it as "X years experience" below the skills — pass it as <code>yearsExp={3}</code> (curly braces for numbers!).'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/your-first-component">Your First Component</a><br/>• <a href="https://react.dev/learn/passing-props-to-a-component">Passing Props to a Component</a>'
       },
       {
         type: 'quiz',
@@ -752,6 +766,13 @@ export default App;`,
         boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting — breaking things and fixing them — is worth more than re-reading the notes.'
       },
       {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/state-a-components-memory">State: A Component’s Memory</a><br/>• <a href="https://react.dev/learn/updating-objects-in-state">Updating Objects in State</a>'
+      },
+      {
         type: 'exam',
         title: 'Week 1 Certification Exam',
         questions: [
@@ -986,6 +1007,13 @@ export default App;`,
         body: 'Build a Dark / Light mode theme switcher — a feature used in virtually every professional app.\n\n**Requirements:**\n1. Create a file named `ThemeSwitcher.jsx`.\n2. Create a state variable `isDark` that starts as `true` (dark mode on by default).\n3. Render a button that says "☀️ Switch to Light Mode" when dark, and "🌙 Switch to Dark Mode" when light. Use a **ternary operator** for this.\n4. Use `isDark` with a **conditional className** to apply a `.dark-card` or `.light-card` class to the outer div, giving it different background and text colours.\n5. Add a toggle function that calls `setIsDark(!isDark)` when the button is clicked.\n6. Import and display it in `App.jsx`.',
         boxTitle: 'Homework Checklist',
         boxBody: '✓ Does the button text change based on the current theme state? <br/>✓ Does the card background colour change when you click? <br/>✓ Did you use a ternary operator for the button label and a conditional className for the styles? <br/>✓ <strong>Bonus:</strong> Save the theme to <code>localStorage</code> so it remembers the user’s preference after a page refresh — use <code>localStorage.setItem("theme", isDark ? "dark" : "light")</code>.'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/responding-to-events">Responding to Events</a><br/>• <a href="https://react.dev/learn/conditional-rendering">Conditional Rendering</a>'
       },
       {
         type: 'quiz',
@@ -1242,6 +1270,13 @@ export default App;`,
         body: 'In the Guided Project, we mapped the array directly into standard HTML `<div>` tags. In the real world, you map data into **Reusable Components** (like what we learned on Day 2!).\n\n**Requirements:**\n1. In your `MovieList.jsx` file, create a second, separate component at the bottom of the file called `function MovieItem({ title, year, rating })`. \n2. Move the HTML structure (the `div`, `h3`, `p` tags) out of the `.map()` and into the `MovieItem` return statement.\n3. Update your `.map()` to return `<MovieItem />` components instead of divs! Pass the data down as props (e.g. `title={movie.title}`).\n4. **CRITICAL:** Where does the `key` go now? It must go on the `<MovieItem>` tag itself, inside the map (e.g. `<MovieItem key={movie.id} ... />`).',
         boxTitle: 'Homework Checklist',
         boxBody: '✓ Did you extract the UI into a child component? <br/>✓ Does your map look like: <code>MOVIE_DATA.map(movie =&gt; &lt;MovieItem key={movie.id} title={movie.title} /&gt;)</code>? <br/>✓ Is the <code>key</code> placed on the custom component tag?'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/rendering-lists">Rendering Lists</a>'
       },
       {
         type: 'quiz',
@@ -1548,6 +1583,13 @@ export default function ProfileSetup() {
         boxBody: '✓ Did you create two separate state variables (one array, one string)? <br/>✓ Does typing in the input work without crashing? <br/>✓ When you submit, does the new task appear at the bottom of the list instantly? <br/>✓ Did you remember the <code>key</code> prop in your <code>.map()</code> function?'
       },
       {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/reference/react-dom/components/input">React &lt;input&gt; Reference</a>'
+      },
+      {
         type: 'exam',
         title: 'Week 2 Final Certification Exam',
         questions: [
@@ -1762,6 +1804,13 @@ export default App;`,
         body: 'If you start a timer in a component, and that component is deleted from the screen, the timer will keep running in the background forever and cause a memory leak! You must clean it up.\n\n**Requirements:**\n1. Create `Timer.jsx` with a `seconds` state (starting at 0).\n2. Write a `useEffect` with an empty array `[]`.\n3. Inside the effect, start a timer: `const interval = setInterval(() => { setSeconds(s => s + 1) }, 1000);`\n4. At the very end of your effect, **return a function** that clears the interval: `return () => clearInterval(interval);`\n5. Render the seconds on the screen.',
         boxTitle: 'Homework Checklist',
         boxBody: '✓ Did you use <code>setSeconds(s =&gt; s + 1)</code> instead of <code>seconds + 1</code> to get the most recent state? <br/>✓ Did you <code>return</code> an arrow function inside your useEffect to clean up the interval?'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/synchronizing-with-effects">Synchronizing with Effects</a>'
       },
       {
         type: 'quiz',

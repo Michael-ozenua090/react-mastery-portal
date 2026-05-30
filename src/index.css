@@ -19,6 +19,19 @@
   --tag-bg: #1f2937;
 }
 
+[data-theme='light'] {
+  --bg: #f8fafc;
+  --sidebar: #f1f5f9;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --accent: #059669;
+  --accent2: #d97706;
+  --text: #0f172a;
+  --muted: #64748b;
+  --code-bg: #0f172a; /* Keep code blocks dark */
+  --tag-bg: #e2e8f0;
+}
+
 html, body {
   height: 100%;
   overflow: hidden;
@@ -35,6 +48,7 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -83,7 +97,7 @@ body {
 .section { margin-bottom: 2rem; }
 .section-title { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
 .section-title::before { content: ''; display: inline-block; width: 3px; height: 1.1em; border-radius: 2px; background: var(--accent); flex-shrink: 0; }
-.section-body { font-size: 0.875rem; line-height: 1.8; color: #b0bec5; white-space: pre-line; }
+.section-body { font-size: 0.875rem; line-height: 1.8; color: var(--text); opacity: 0.85; white-space: pre-line; }
 
 /* Code blocks (For the new React Syntax Highlighter) */
 .code-block { margin-top: 1rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); background: var(--code-bg); }
@@ -100,6 +114,18 @@ body {
 .info-box.warn { background: rgba(247,183,49,0.07); border-color: var(--accent2); color: #ffe082; }
 .info-box.rule { background: rgba(163,113,247,0.07); border-color: #a371f7; color: #ce93d8; }
 .info-box.danger { background: rgba(247,129,102,0.07); border-color: #f78166; color: #ffab91; }
+.info-box.resource { background: rgba(56,189,248,0.07); border-color: #38bdf8; color: #bae6fd; }
+.info-box.resource a { color: #38bdf8; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(56,189,248,0.4); transition: border-color 0.2s; }
+.info-box.resource a:hover { border-color: #38bdf8; }
+
+[data-theme='light'] .info-box.tip { color: #0f766e; }
+[data-theme='light'] .info-box.info { color: #0369a1; }
+[data-theme='light'] .info-box.warn { color: #b45309; }
+[data-theme='light'] .info-box.rule { color: #6d28d9; }
+[data-theme='light'] .info-box.danger { color: #b91c1c; }
+[data-theme='light'] .info-box.resource { color: #0369a1; }
+[data-theme='light'] .info-box.resource a { color: #0369a1; border-color: rgba(3,105,161,0.3); }
+[data-theme='light'] .info-box.resource a:hover { border-color: #0369a1; }
 .info-box-title { font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; opacity: 0.8; }
 
 /* Milestone banner */
@@ -203,6 +229,8 @@ body {
 .quiz-feedback { margin-top: 1rem; font-weight: 600; font-size: 0.95rem; }
 .text-green { color: #7ee787; }
 .text-red { color: #ff7b72; }
+[data-theme='light'] .text-green { color: #059669; }
+[data-theme='light'] .text-red { color: #dc2626; }
 
 /* ============================================
    CONGRATS MODAL
@@ -357,4 +385,58 @@ body {
 
 .congrats-btn:active {
   transform: translateY(0);
+}
+
+/* ============================================
+   ENTERTAINING UI & MICRO-ANIMATIONS
+   ============================================ */
+
+/* Global container transitions for smooth theme switching */
+.header, .sidebar, .card, .main, .info-box, .rule-card, .quiz-card, .quiz-opt, .milestone {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover Lifts */
+.quiz-opt:not(:disabled):hover, .rule-card:hover, .info-box:hover, .milestone:hover, .quiz-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+[data-theme='dark'] .quiz-opt:not(:disabled):hover, [data-theme='dark'] .rule-card:hover, [data-theme='dark'] .info-box:hover, [data-theme='dark'] .milestone:hover, [data-theme='dark'] .quiz-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Bouncy Clicks */
+.quiz-opt:not(:disabled):active, .congrats-btn:active, .quiz-submit:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* Sidebar Item Playfulness */
+.sidebar-day {
+  transition: background-color 0.2s ease, padding-left 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sidebar-day:not(.locked):hover {
+  padding-left: 1.25rem; /* slight nudge right */
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, border-color 0.3s ease;
+}
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(15deg);
+  border-color: var(--accent);
+}
+.theme-toggle:active {
+  transform: scale(0.9) rotate(-15deg);
 }
