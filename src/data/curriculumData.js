@@ -1869,5 +1869,295 @@ export default App;`,
         ]
       }
     ]
+  },
+
+  // --- DAY 8 ---
+  {
+    dayNumber: 8, week: 3,
+    title: 'Custom Hooks',
+    subtitle: 'Creating your own reusable React superpower',
+    topics: ['Why Custom Hooks?', 'Rules of Hooks', 'Building useFetch', 'Loading & Error States', 'Knowledge Check'],
+    milestone: { icon: '🛠️', title: 'Extracting Logic', text: 'You have used React\'s built-in hooks. Now it is time to build your own. Custom hooks separate your app\'s logic from its UI, making your code incredibly clean and professional.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'What is a Custom Hook?',
+        body: 'On Day 7, you wrote fetch logic directly inside a component. But if you have 5 different pages that all fetch data, copying and pasting that `useEffect` 5 times violates the DRY (Don\'t Repeat Yourself) principle.\n\nA Custom Hook is just a standard JavaScript function that starts with the word `use` (e.g., `useFetch`, `useToggle`) and calls other hooks (like `useState` or `useEffect`) inside it.',
+        boxType: 'info',
+        boxTitle: 'The "use" Naming Convention',
+        boxBody: 'React is strict about this. Your custom hook <strong>must</strong> start with the word <code>use</code>. This tells React that this function is special, and allows React to enforce the Rules of Hooks on it.'
+      },
+      {
+        type: 'text',
+        title: '⚖️ The Rules of Hooks',
+        body: 'Before we build our own hooks, you must memorize the Two Golden Rules of Hooks. If you break these, React will crash with a very confusing error message.\n\n1. **Only call Hooks at the top level.** Do not call Hooks inside loops, conditions (`if` statements), or nested functions. React relies on the order in which Hooks are called to keep track of state.\n2. **Only call Hooks from React functions.** You can call them from regular React Components, or from your own Custom Hooks. Never call them from regular JavaScript functions.',
+        boxType: 'danger',
+        boxTitle: 'The Most Common Crash: Hooks Inside an "if" Statement',
+        boxBody: 'If you write: <code>if (isLoggedIn) { useEffect(...) }</code>, React will crash with an error like: <em>"Rendered more hooks than during the previous render."</em> Hooks must always be called in the exact same order on every single render. This is non-negotiable!'
+      },
+      {
+        type: 'code',
+        title: 'The "Before and After" Bridge',
+        body: 'Look at how much cleaner our component becomes when we extract the logic into a custom hook. We go from managing 3 states and a full `useEffect` block to just a single line of code.',
+        code: `// ❌ YESTERDAY (Day 7): Messy Component — logic lives inside the UI
+function Profile() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/user')
+      .then(res => res.json())
+      .then(setData)
+      .catch(err => setError(err.message))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  return <div>{data?.name}</div>;
+}
+
+// ✅ TODAY (Day 8): Clean Component — logic lives in the hook
+function Profile() {
+  const { data, isLoading, error } = useFetch('/api/user');
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  return <div>{data?.name}</div>;
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The useFetch Hook',
+        body: 'Let\'s build that `useFetch` hook.\n\nWe will also introduce a professional habit: the `AbortController`. If a user navigates away from the page before a fetch finishes, the `AbortController` cleanly cancels the background request. Without it, React will try to update a component that no longer exists and throw a memory leak warning.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create useFetch.js',
+        body: 'Create a new folder inside `src/` called `hooks/`. Inside it, create `useFetch.js`. This is a JavaScript file — it returns data and functions, not JSX!',
+        code: `// src/hooks/useFetch.js
+import { useState, useEffect } from "react";
+
+export default function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // 🛡️ Professional Habit: Create an AbortController to cancel stale requests
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        // Pass the abort signal into the fetch call
+        const response = await fetch(url, { signal: controller.signal });
+        if (!response.ok) throw new Error("Could not fetch data.");
+
+        const result = await response.json();
+        setData(result);
+        setError(null);
+      } catch (err) {
+        // If the error is just from aborting, we can safely ignore it
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    // ✅ Cleanup: abort the fetch if the component unmounts before it finishes
+    return () => controller.abort();
+  }, [url]); // Re-run if the URL changes
+
+  // Return state as an object — components destructure what they need
+  return { data, isLoading, error };
+}`,
+        lang: 'javascript'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Use it in App.jsx',
+        body: 'Now look how clean `App.jsx` becomes. One import, one line to call the hook, and then you focus purely on rendering the UI.',
+        code: `// src/App.jsx
+import './App.css';
+import useFetch from './hooks/useFetch';
+
+function App() {
+  // One line replaces 20+ lines of fetch logic!
+  const { data, isLoading, error } = useFetch("https://jsonplaceholder.typicode.com/users/1");
+
+  return (
+    <div className="app-container">
+      <h1>Week 3: Custom Hooks</h1>
+
+      <div className="profile-card">
+        {isLoading && <p className="loading">⏳ Loading user data...</p>}
+        {error && <p className="error">❌ Error: {error}</p>}
+
+        {data && (
+          <div>
+            <h2>{data.name}</h2>
+            <p className="email">📧 {data.email}</p>
+            <p className="city">🏙️ {data.address.city}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Styling (App.css)',
+        body: 'Add this CSS to style the loading, error, and success states. The `pulse` animation gives the loading state a professional breathing effect.',
+        code: `/* App.css */
+.profile-card {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #334155;
+  width: 300px;
+  margin: 2rem auto;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-card h2 { color: #f8fafc; margin-top: 0; margin-bottom: 1rem; }
+.profile-card p { color: #cbd5e1; margin: 0.5rem 0; font-size: 1rem; }
+
+.loading { color: #38bdf8 !important; animation: pulse 1.5s infinite; }
+.error { color: #ef4444 !important; font-weight: bold; }
+
+@keyframes pulse {
+  0%   { opacity: 0.6; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.6; }
+}`,
+        lang: 'css'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The useToggle Hook',
+        timeEstimate: '20 min',
+        body: 'Custom hooks do not always have to be complex API fetchers. Let\'s build a simple one to toggle a boolean — perfect for dark mode, dropdowns, or show/hide password buttons.\n\n**Requirements:**\n1. Fill in the `toggle` function in the scaffold below so it correctly flips the boolean.\n2. Import `useToggle` into `App.jsx`.\n3. Use it to show/hide a `<p>` tag that says `"🎉 Secret message revealed!"` when a button is clicked.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Does your function name start with "use"? <br/>✓ Does your hook return an <strong>array</strong> (not an object)? <br/>✓ Does clicking the button correctly show <em>and</em> hide the message on alternate clicks?'
+      },
+      {
+        type: 'code',
+        title: 'Your Scaffold (fill in the blanks)',
+        body: 'Create `useToggle.js` inside your `hooks/` folder and fill in the missing `toggle` function. Notice we return an **array** here — this lets callers name the values whatever they want, just like `useState` does.',
+        code: `// src/hooks/useToggle.js
+import { useState } from "react";
+
+export default function useToggle(initialValue = false) {
+  const [state, setState] = useState(initialValue);
+
+  // YOUR JOB: Write a function called "toggle"
+  // that flips state to its opposite using setState
+  const toggle = () => ???;
+
+  // Return an ARRAY (like useState does)
+  // This lets callers write: const [isOpen, toggleOpen] = useToggle();
+  return [state, toggle];
+}`,
+        lang: 'javascript'
+      },
+      {
+        type: 'homework',
+        title: 'Advanced Hook: useWindowSize',
+        timeEstimate: '45 min',
+        body: 'Often you need to know the exact width of the user\'s screen for responsive layouts. Let\'s build a hook that listens to the browser window and returns the live width!\n\n**Requirements:**\n1. Create `useWindowSize.js` in your `hooks/` folder.\n2. Create a state variable `width` starting at `window.innerWidth`.\n3. Write a `useEffect` with a `handleResize` function inside that updates `width` to `window.innerWidth`.\n4. Attach the listener: `window.addEventListener("resize", handleResize)`.\n5. **Critical:** Return a cleanup function that removes it: `return () => window.removeEventListener("resize", handleResize)`.\n6. Return `width` from the hook and render it in `App.jsx`. Try dragging your browser smaller — the number should change live!\n\n**Hint:** The dependency array for this `useEffect` should be empty `[]` — you only want to attach and clean up the event listener once.',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you use an empty dependency array <code>[]</code> so the listener is only attached once? <br/>✓ Did you include the cleanup function to prevent a memory leak? <br/>✓ Does the number change immediately as you resize the browser window?'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Documentation',
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/reusing-logic-with-custom-hooks" target="_blank">Reusing Logic with Custom Hooks</a>'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'What is the primary benefit of creating a Custom Hook?',
+            options: [
+              'It makes the code run faster in the browser.',
+              'It allows you to share stateful logic between components without repeating code.',
+              'It connects React directly to a SQL database.',
+              'It replaces the need for CSS styling.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What is the mandatory naming convention for a Custom Hook?',
+            options: [
+              'It must end with "Hook" (e.g., fetchHook).',
+              'It must be all uppercase (e.g., USEFETCH).',
+              'It must start with the word "use" (e.g., useFetch).',
+              'It must start with a capital letter (e.g., UseFetch).'
+            ],
+            correct: 2
+          },
+          {
+            question: 'Which of the following BREAKS the Rules of Hooks?',
+            options: [
+              'Calling useState at the top of a component function.',
+              'Calling useEffect inside an "if" statement.',
+              'Calling a custom hook from another custom hook.',
+              'Using multiple useState calls in the same component.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What does the AbortController in useFetch actually do?',
+            options: [
+              'It speeds up the network request.',
+              'It retries the fetch if it fails.',
+              'It cancels the network request if the component unmounts before it finishes.',
+              'It converts the response from XML to JSON.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'What does a Custom Hook typically return?',
+            options: [
+              'JSX/HTML elements that get drawn on the screen.',
+              'Only a single boolean value.',
+              'Data and/or functions (usually packaged in an object or an array).',
+              'A new React Component.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you use useFetch on three different pages, do those pages share the exact same state?',
+            options: [
+              'Yes, changing data on Page 1 will change it on Page 2.',
+              'No. Custom Hooks share the LOGIC, but the state is completely independent for each component.',
+              'Yes, but only if they are rendered at the same time.',
+              'React throws an error if you use a hook more than once.'
+            ],
+            correct: 1
+          }
+        ]
+      }
+    ]
   }
 ];

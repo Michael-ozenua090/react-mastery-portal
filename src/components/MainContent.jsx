@@ -55,7 +55,7 @@ function SafeHtml({ html }) {
     <>
       {lines.map((line, lineIdx) => {
         const segments = [];
-        const tagRegex = /<(code|strong|em)>([\s\S]*?)<\/\1>|<a\s+href="([^"]+)">([\s\S]*?)<\/a>/g;
+        const tagRegex = /<(code|strong|em)>([\s\S]*?)<\/\1>|<a\s+[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
         let lastIdx = 0;
         let m;
         while ((m = tagRegex.exec(line)) !== null) {
