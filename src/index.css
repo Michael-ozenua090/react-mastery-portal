@@ -13,16 +13,64 @@
 }
 
 :root {
-  --bg: #0d1117;
-  --sidebar: #0a0e13;
-  --card: #161b22;
-  --border: #21262d;
-  --accent: #00d4aa;
-  --accent2: #f7b731;
-  --text: #e6edf3;
-  --muted: #7d8590;
-  --code-bg: #0d1117;
-  --tag-bg: #1f2937;
+  --bg: var(--color-surface-base);
+  --sidebar: var(--color-surface-raised);
+  --card: var(--color-surface-muted);
+  --border: var(--color-surface-muted);
+  --accent: var(--color-surface-strong);
+  --accent2: var(--color-text-tertiary);
+  --text: var(--color-text-primary);
+  --muted: var(--color-text-inverse);
+  --code-bg: var(--color-surface-base);
+  --tag-bg: var(--color-surface-muted);
+
+  /* Writing Markup with JSX Tokens */
+  --font-family-primary: 'Optimistic Text';
+  --font-family-stack: 'Optimistic Text', -apple-system, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-size-base: 17px;
+  --font-weight-base: 400;
+  --font-line-height-base: 30px;
+  
+  --font-size-xs: 13px;
+  --font-size-sm: 13.6px;
+  --font-size-md: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 40px;
+
+  --color-text-primary: #f6f7f9;
+  --color-text-secondary: #ebecf0;
+  --color-text-tertiary: #58c4dc;
+  --color-text-inverse: #99a1b3;
+  --color-surface-base: #000000;
+  --color-surface-muted: #343a46;
+  --color-surface-raised: #23272f;
+  --color-surface-strong: #58afdf;
+  --color-border-default: #e5e7eb;
+  --color-border-strong: #087ea4;
+
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+  --space-8: 28px;
+
+  --radius-xs: 8px;
+  --radius-sm: 16px;
+  --radius-md: 9999px;
+
+  --shadow-1: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgb(64, 71, 86) 0px 0px 0px 1px inset;
+  --shadow-2: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(255, 255, 255, 0.08) 0px 0px 0px 1px inset;
+  --shadow-3: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 4px 0px inset;
+
+  --motion-duration-instant: 100ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 300ms;
 }
 
 [data-theme='light'] {
@@ -51,7 +99,10 @@ html, body {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-family-stack);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-base);
+  line-height: var(--font-line-height-base);
   background: var(--bg);
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
