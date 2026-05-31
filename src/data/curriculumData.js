@@ -2159,5 +2159,230 @@ export default function useToggle(initialValue = false) {
         ]
       }
     ]
+  },
+  // --- DAY 9 ---
+  {
+    dayNumber: 9, week: 3,
+    title: 'React Router',
+    subtitle: 'Multi-page navigation in a Single Page App',
+    topics: ['Client-Side Routing', 'BrowserRouter', 'Routes & Route', 'The Link Component', 'Certification Exam'],
+    milestone: { icon: '🧭', title: 'Mapping the Web', text: 'Real applications have multiple pages. Today, you learn how to seamlessly navigate between URLs without ever refreshing the browser.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'Single Page Applications (SPAs)',
+        body: 'Historically, when you clicked a link to go to `/about`, the browser requested a brand new HTML file from the server, causing the screen to blink white and refresh.\n\nReact is a **Single Page Application**. There is only one HTML file (`index.html`). When a user navigates to `/about`, React simply destroys the "Home" component and draws the "About" component on the screen instantly. \n\nTo manage this fake "multi-page" illusion, we use the industry-standard library: **React Router**.',
+        boxType: 'info',
+        boxTitle: 'Installation Required',
+        boxBody: 'React Router does not come built into React. In your terminal, you must run: <br/><code>npm install react-router-dom</code>'
+      },
+      {
+        type: 'text',
+        title: '⚠️ The Golden Rule of Navigation',
+        body: 'Because we are preventing the browser from refreshing, we can **never use standard HTML anchor tags** (`<a href="/about">`). \n\nIf you use an `<a>` tag, the browser will refresh, and all your React State (like logged-in users or shopping cart items) will be instantly destroyed.',
+        boxType: 'danger',
+        boxTitle: 'Use <Link> instead of <a>',
+        boxBody: 'React Router provides a special component called <code>&lt;Link to="/about"&gt;</code>. It looks exactly like a normal link, but it intercepts the click and updates the URL secretly behind the scenes, preserving all your app\'s memory.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The Multi-Page Portfolio',
+        body: 'Let\'s convert a standard React app into a multi-page website with a Home page, an About page, and a persistent Navigation bar.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: The BrowserRouter (main.jsx)',
+        body: 'To use React Router, we must wrap our entire application inside a `<BrowserRouter>`. We usually do this at the very top level of our app, in `main.jsx`.',
+        code: `// src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom' // 1. Import it!
+import App from './App.jsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    {/* 2. Wrap the App! Now every component inside can use the router. */}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+)`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Define Routes (App.jsx)',
+        body: 'Now we set up our "traffic cop". We tell React: "If the URL is `/`, show the Home component. If the URL is `/about`, show the About component."',
+        code: `// src/App.jsx
+import { Routes, Route } from 'react-router-dom';
+
+// Simple components just for this example
+const Home = () => <h2>🏠 Home Page</h2>;
+const About = () => <h2>📖 About Us</h2>;
+
+function App() {
+  return (
+    <div className="app-container">
+      <h1>Speta Portfolio</h1>
+      
+      {/* The Routes component looks at the URL and decides what to show */}
+      <div className="page-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </div>
+  );
+}
+
+export default App;`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: Navigation Links (Navbar.jsx)',
+        body: 'Finally, let\'s create a Navigation component using `<Link>` so the user can actually click around!',
+        code: `// src/Navbar.jsx
+import { Link } from 'react-router-dom';
+
+export default function Navbar() {
+  return (
+    <nav className="navbar">
+      {/* Do NOT use <a href="/">! Use <Link to="/"> */}
+      <Link to="/" className="nav-link">Home</Link>
+      <Link to="/about" className="nav-link">About</Link>
+    </nav>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The 404 Error Page',
+        timeEstimate: '15 min',
+        body: 'What happens if a user types `mysite.com/pizza` and that route doesn\'t exist? The screen goes blank! Let\'s fix that.\n\n**Requirements:**\n1. Create a simple component called `NotFound` that displays a "404 - Page Not Found" message.\n2. In your `App.jsx`, add a new `<Route>` at the very bottom of your `<Routes>` list.\n3. For the path, use the special wildcard character `path="*"`. This tells React Router: "If the URL doesn\'t match anything above, show this element."\n4. Set the `element` to your new `<NotFound />` component.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you use the asterisk <code>path="*"</code>? <br/>✓ Is the 404 route the very last route in your list? <br/>✓ Does typing a fake URL instantly show your error component?'
+      },
+      {
+        type: 'homework',
+        title: 'Dynamic URL Parameters',
+        timeEstimate: '45 min',
+        body: 'If you have 1,000 users, you can\'t write 1,000 `<Route>` tags. You need Dynamic Routes!\n\n**Requirements:**\n1. In `App.jsx`, create a dynamic route: `<Route path="/users/:id" element={<UserProfile />} />`.\n2. Note the colon `:`! This means whatever is typed after `/users/` will be treated as a variable named `id`.\n3. In your `UserProfile.jsx` component, import the `useParams` hook from `react-router-dom`.\n4. Call it to extract the variable: `const { id } = useParams();`\n5. Render a message on the screen: "Now viewing profile for User # [id]".',
+        boxTitle: 'Homework Checklist',
+        boxBody: '✓ Did you create a dynamic route using <code>:id</code>? <br/>✓ Did you use the <code>useParams</code> hook to extract the ID? <br/>✓ Does the screen correctly display the dynamic ID?'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        boxType: 'resource',
+        boxTitle: 'Official React Router Docs',
+        boxBody: 'Routing can get incredibly complex. Check out the <a href="https://reactrouter.com/en/main/start/tutorial" target="_blank" style="color: var(--accent); text-decoration: underline;">Official React Router Tutorial</a> to see how to handle nested routes and data loaders.'
+      },
+      {
+        type: 'exam',
+        title: 'Week 3 Certification Exam',
+        questions: [
+          {
+            question: 'What happens if you use useEffect WITHOUT a dependency array?',
+            options: [
+              'The effect will only run once when the component first mounts.',
+              'The effect will run on every single re-render, potentially causing an infinite loop.',
+              'The effect will never run.',
+              'React will throw a syntax error.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'If you want an API call to run EXACTLY ONCE when the component loads, what should your dependency array be?',
+            options: ['Nothing', 'An empty object: {}', 'An empty array: []', 'An array with the word "mount": ["mount"]'],
+            correct: 2
+          },
+          {
+            question: 'Why do we sometimes need to return a "Cleanup Function" inside a useEffect?',
+            options: [
+              'To stop background processes like timers or event listeners from running after the component unmounts.',
+              'To delete the component from the screen.',
+              'To reset all state variables to zero.',
+              'To wipe the database clear.'
+            ],
+            correct: 0
+          },
+          {
+            question: 'What is the mandatory naming convention for a Custom Hook?',
+            options: [
+              'It must end with "Hook" (e.g., fetchHook).',
+              'It must start with the word "use" (e.g., useFetch).',
+              'It must be all uppercase (e.g., USEFETCH).',
+              'It must start with a capital letter (e.g., UseFetch).'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What happens if you call a Hook inside an "if" statement?',
+            options: [
+              'React will only run the hook if the condition is true.',
+              'It will work perfectly fine.',
+              'React will crash because Hooks must be called in the exact same order on every single render.',
+              'The hook will become a regular JavaScript function.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you use a custom hook on three different pages, do those pages share the exact same state data?',
+            options: [
+              'Yes, changing the data on Page 1 will change it on Page 2.',
+              'Yes, but only if they are rendered at the exact same time.',
+              'No. Custom Hooks share the LOGIC, but the state itself is completely independent for each component that uses it.',
+              'React throws an error if you use a hook more than once.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'What is the main advantage of Client-Side Routing in a React SPA?',
+            options: [
+              'It makes the code easier to read.',
+              'It automatically encrypts the URL.',
+              'It is required by Google for SEO.',
+              'It prevents the browser from refreshing the page, making navigation instant and preserving state.'
+            ],
+            correct: 3
+          },
+          {
+            question: 'Why should you avoid using standard HTML <a href="..."> tags for internal navigation in React?',
+            options: [
+              'They cause CSS bugs.',
+              'They force the browser to do a full page refresh, which destroys your React application state.',
+              'They are deprecated in modern HTML.',
+              'They cannot be clicked on mobile devices.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'Which component is used to wrap your entire application so it can use routing features?',
+            options: [
+              '<BrowserRouter>',
+              '<RouterWrapper>',
+              '<Routes>',
+              '<NavigationProvider>'
+            ],
+            correct: 0
+          },
+          {
+            question: 'How do you create a "Catch-All" route to display a 404 Not Found page for invalid URLs?',
+            options: [
+              '<Route error={true} element={<NotFound />} />',
+              '<Route path="catch" element={<NotFound />} />',
+              '<Route path="*" element={<NotFound />} />',
+              '<Route path="404" element={<NotFound />} />'
+            ],
+            correct: 2
+          }
+        ]
+      }
+    ]
   }
 ];
