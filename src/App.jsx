@@ -5,41 +5,21 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import CongratsModal from './components/CongratsModal';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
-  // 1. Initialize state from localStorage (or default to 0 / 2 if new user)
-  const [selectedDayIndex, setSelectedDayIndex] = useState(() => {
-    const savedDay = localStorage.getItem('speta_currentDay');
-    return savedDay !== null ? parseInt(savedDay, 10) : 0;
-  });
-  
-  const [maxUnlockedDay, setMaxUnlockedDay] = useState(() => {
-    const savedLock = localStorage.getItem('speta_maxUnlocked');
-    return savedLock !== null ? parseInt(savedLock, 10) : 2;
-  });
+  // 1. Initialize state from localStorage via Custom Hook
+  const [selectedDayIndex, setSelectedDayIndex] = useLocalStorage('speta_currentDay', 0);
+  const [maxUnlockedDay, setMaxUnlockedDay] = useLocalStorage('speta_maxUnlocked', 2);
+  const [theme, setTheme] = useLocalStorage('speta_theme', 'dark');
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Controls which week was just unlocked (null = modal hidden)
   const [unlockedWeek, setUnlockedWeek] = useState(null);
 
-  // 1.5 Theme state
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('speta_theme') || 'dark';
-  });
-
-  // 2. Whenever state changes, save it automatically to localStorage!
-  useEffect(() => {
-    localStorage.setItem('speta_currentDay', selectedDayIndex);
-  }, [selectedDayIndex]);
-
-  useEffect(() => {
-    localStorage.setItem('speta_maxUnlocked', maxUnlockedDay);
-  }, [maxUnlockedDay]);
-
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('speta_theme', theme);
   }, [theme]);
 
   const currentDayData = curriculum[selectedDayIndex];
