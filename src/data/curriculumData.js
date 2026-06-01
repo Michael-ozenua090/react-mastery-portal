@@ -129,8 +129,8 @@ export const curriculum = [
         code: `import './App.css';
 
 function App() {
-  const studentName = "Michael Oshovue";
-  const track = "Lead Instructor @ Speta";
+  const studentName = "Michael Ozenua .O";
+  const track = "Lead Instructor @ React Mastery";
 
   return (
     <div className="app-container">
@@ -411,7 +411,7 @@ import ProfileCard from './ProfileCard'; // Importing our new component!
 function App() {
   return (
     <div className="team-container">
-      <h1 className="team-title">Speta Tech Team</h1>
+      <h1 className="team-title">React Mastery Tech Team</h1>
       
       <div className="team-grid">
         {/* Rendering the same component 3 times with different data! */}
@@ -644,7 +644,7 @@ export default function UserProfile() {
       },
       {
         type: 'text',
-        title: 'Guided Project: The Speta Like Button',
+        title: 'Guided Project: The React Mastery Like Button',
         body: 'Let\'s build something you see every day on social media: an interactive Like button. We will use TWO state variables together — a boolean to track if something is liked, and a number to track the total count.'
       },
       {
@@ -1362,7 +1362,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'Guided Project: The Speta Newsletter',
+        title: 'Guided Project: The React Mastery Newsletter',
         body: 'Let\'s build a clean, controlled newsletter signup form. We will capture an email address, prevent the page refresh, and clear the input field after the user submits.'
       },
       {
@@ -1380,7 +1380,7 @@ export default function Newsletter() {
     e.preventDefault(); 
     
     // 2. Do something with the data
-    alert(\`Success! \${email} has been added to the Speta mailing list.\`);
+    alert(\`Success! \${email} has been added to the React Mastery mailing list.\`);
     
     // 3. Clear the form by resetting the state to an empty string
     setEmail(""); 
@@ -2224,7 +2224,7 @@ const About = () => <h2>📖 About Us</h2>;
 function App() {
   return (
     <div className="app-container">
-      <h1>Speta Portfolio</h1>
+      <h1>React Mastery Portfolio</h1>
       
       {/* The Routes component looks at the URL and decides what to show */}
       <div className="page-content">

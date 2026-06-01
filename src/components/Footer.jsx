@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-logo">
             <span className="logo-icon">🚀</span>
-            <span className="logo-text">Speta Academy</span>
+            <span className="logo-text">React Mastery</span>
           </div>
           <p className="footer-mission">
             Empowering the next generation of tech professionals through modern, project-based education.
@@ -30,7 +30,7 @@ export default function Footer() {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {currentYear} Speta Academy. Built by Michael Oshovue.</p>
+        <p>&copy; {currentYear} React Mastery. Built by Michael Ozenua .O.</p>
         <div className="social-links">
           <a href="#" aria-label="GitHub">GitHub</a>
           <a href="#" aria-label="LinkedIn">LinkedIn</a>
