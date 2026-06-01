@@ -43,7 +43,7 @@
   --color-text-primary: #f6f7f9;
   --color-text-secondary: #ebecf0;
   --color-text-tertiary: #58c4dc;
-  --color-text-inverse: #99a1b3;
+  --color-text-inverse: #b4bccf;
   --color-surface-base: #000000;
   --color-surface-muted: #343a46;
   --color-surface-raised: #23272f;
@@ -81,7 +81,7 @@
   --accent: #059669;
   --accent2: #d97706;
   --text: #0f172a;
-  --muted: #64748b;
+  --muted: #475569;
   --code-bg: #0f172a; /* Keep code blocks dark */
   --tag-bg: #e2e8f0;
 }

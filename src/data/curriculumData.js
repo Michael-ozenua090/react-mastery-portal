@@ -199,7 +199,7 @@ export default App;`,
 }
 
 .profile-bio { 
-  color: #94a3b8; 
+  color: #c9d1d9; 
   font-size: 0.9rem; 
   line-height: 1.5; 
   margin-top: 1.5rem; 
@@ -444,7 +444,7 @@ export default App;`,
   text-align: center;
 }
 .team-card h3 { margin: 0 0 0.5rem 0; font-size: 1.4rem; }
-.team-role { color: #8b949e; margin-bottom: 1rem; font-size: 0.9rem; }
+.team-role { color: #c9d1d9; margin-bottom: 1rem; font-size: 0.9rem; }
 .team-badge { 
   background-color: rgba(0, 212, 170, 0.2); 
   color: #00d4aa; 
@@ -719,7 +719,7 @@ export default App;`,
   margin: 2rem auto;
 }
 
-.like-card p { color: #94a3b8; margin-bottom: 1rem; }
+.like-card p { color: #c9d1d9; margin-bottom: 1rem; }
 
 .btn {
   border: none;
@@ -732,7 +732,7 @@ export default App;`,
 }
 
 .btn:active { transform: scale(0.96); }
-.btn.default { background: #334155; color: #94a3b8; }
+.btn.default { background: #334155; color: #c9d1d9; }
 .btn.liked {
   background: rgba(239, 68, 68, 0.15);
   color: #f87171;
@@ -1250,7 +1250,7 @@ export default App;`,
 
 .movie-card:hover { transform: translateY(-5px); border-color: #38bdf8; }
 .movie-card h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
-.year { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
+.year { color: #c9d1d9; font-size: 0.9rem; margin-bottom: 1rem; }
 .rating { font-size: 1.2rem; margin: 0; }`,
         lang: 'css'
       },
@@ -1445,7 +1445,7 @@ export default App;`,
 }
 
 .form-card h2 { color: #f8fafc; margin-top: 0; }
-.form-card p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.form-card p { color: #c9d1d9; font-size: 0.9rem; margin-bottom: 1.5rem; }
 
 .newsletter-form {
   display: flex;
