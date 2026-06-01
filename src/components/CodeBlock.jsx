@@ -1,7 +1,12 @@
 // src/components/CodeBlock.jsx
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
+import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useState } from 'react';
+
+SyntaxHighlighter.registerLanguage('jsx', jsx);
+SyntaxHighlighter.registerLanguage('css', css);
 
 export default function CodeBlock({ code, lang = 'jsx' }) {
   const [copied, setCopied] = useState(false);
