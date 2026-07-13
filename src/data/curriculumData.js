@@ -2505,6 +2505,14 @@ export default function Navbar() {
         boxBody: 'This pattern is used by almost every major React library (like React Router\'s <code>useNavigate</code> or Redux\'s <code>useSelector</code>). They are all just wrappers around React Context!'
       },
       {
+        type: 'text',
+        title: '📚 Further Reading',
+        body: 'The Context API is a powerful tool, but understanding exactly how data flows through the component tree requires practice. To master global state and see more advanced architectural patterns, reading the official documentation is highly recommended.',
+        boxType: 'info',
+        boxTitle: 'Official React Docs',
+        boxBody: 'Dive deeper into Context by reading the official guide on <a href="https://react.dev/learn/passing-data-deeply-with-context" target="_blank" style="color: var(--accent); text-decoration: underline;">Passing Data Deeply with Context</a>.'
+      },
+      {
         type: 'quiz',
         title: 'Knowledge Check',
         questions: [
