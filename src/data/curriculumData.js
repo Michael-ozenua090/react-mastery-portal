@@ -2389,7 +2389,7 @@ export default function Navbar() {
     dayNumber: 10, week: 4,
     title: 'The Context API',
     subtitle: 'Managing global state without Prop Drilling',
-    topics: ['Prop Drilling', 'createContext', 'The Provider Component', 'useContext', 'Knowledge Check'],
+    topics: ['Prop Drilling', 'The Radio Analogy', 'When NOT to use Context', 'createContext & Provider', 'useContext', 'Knowledge Check'],
     milestone: { icon: '🌍', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
     sections: [
       {
@@ -2398,7 +2398,23 @@ export default function Navbar() {
         body: 'Imagine you have a `User` object containing the logged-in user\'s name. \n\nYour `App` component holds this state. But the component that actually needs to display the name is a `ProfileAvatar` component, which is nested inside a `Navbar`, which is nested inside a `Header`. \n\nTo get the data there, you have to pass it as a prop through `Header`, and then through `Navbar`, even though neither of those components care about the user data! This is called **Prop Drilling**, and it makes code messy and hard to maintain.',
         boxType: 'info',
         boxTitle: 'The Solution: React Context',
-        boxBody: 'The Context API allows you to broadcast data globally. Any component, no matter how deep in the tree, can simply "tune in" to that broadcast and grab the data directly.'
+        boxBody: 'The Context API allows you to bypass the middle-men. Any component, no matter how deep in the tree, can simply "tune in" to a global broadcast and grab the data directly.'
+      },
+      {
+        type: 'text',
+        title: '📻 How it Works: The Radio Analogy',
+        body: 'Before we write any code, you need to understand that React Context is exactly like a real-world Radio Station. It requires three distinct pieces to work:\n\n1. **The Frequency (`createContext`)**: You have to claim a specific channel for your data (e.g., 99.5 FM).\n2. **The Radio Tower (`Provider`)**: You need a massive tower at the very top of your application to broadcast the music (your state) into the air.\n3. **The Radio Receiver (`useContext`)**: Down in your individual components, you turn on the radio, tune it to 99.5 FM, and instantly hear the music.',
+        boxType: 'rule',
+        boxTitle: 'The Component Tree Rule',
+        boxBody: 'Just like a real radio tower, the <code>Provider</code> can only broadcast to components that live <em>beneath</em> it. That is why we usually wrap our entire <code>&lt;App /&gt;</code> inside the Provider!'
+      },
+      {
+        type: 'text',
+        title: '⚠️ When NOT to use Context',
+        body: 'Context feels like magic, so beginners often try to put *every* piece of state into it. This is a massive mistake.\n\nWhenever the state inside a Provider changes, **every single component listening to that Provider will re-render.** If you put a rapidly changing text input into a global Context, your entire application will re-render every time the user types a single letter, causing massive lag.',
+        boxType: 'danger',
+        boxTitle: 'The Rule of Thumb',
+        boxBody: 'Only use Context for data that changes rarely or needs to be accessed globally by many different components. Examples: <strong>Logged-in User Data, Dark/Light Theme, or Shopping Cart Items.</strong> For local form inputs, stick to standard <code>useState</code>!'
       },
       {
         type: 'text',
@@ -2408,18 +2424,19 @@ export default function Navbar() {
       {
         type: 'code',
         title: 'Step 1: Create the Context (UserContext.jsx)',
-        body: 'First, we create the context and a special "Provider" component that will wrap around our app and hold the state.',
+        body: 'First, we create the Frequency (`createContext`) and the Tower (`UserProvider`).',
         code: `// src/context/UserContext.jsx
 import { createContext, useState } from 'react';
 
-// 1. Create the Context (the broadcast channel)
+// 1. Create the Context (The Radio Frequency)
 export const UserContext = createContext();
 
-// 2. Create the Provider (the radio tower that broadcasts the data)
+// 2. Create the Provider (The Radio Tower)
 export function UserProvider({ children }) {
   const [user, setUser] = useState("Jane Doe"); // Our global state
 
   return (
+    // The "value" is what we are broadcasting to the world
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
@@ -2430,7 +2447,7 @@ export function UserProvider({ children }) {
       {
         type: 'code',
         title: 'Step 2: Wrap the App (main.jsx)',
-        body: 'For components to hear the broadcast, they must be inside the Provider. We usually wrap our entire `<App />` inside it.',
+        body: 'For components to hear the broadcast, they must be inside the Provider. We wrap our entire `<App />` inside it.',
         code: `// src/main.jsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -2450,7 +2467,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       {
         type: 'code',
         title: 'Step 3: Consume the Data (Navbar.jsx)',
-        body: 'Now, any component can use the `useContext` hook to grab the data instantly, without any props!',
+        body: 'Now, any component can use the `useContext` hook (The Receiver) to grab the data instantly, without any props!',
         code: `// src/Navbar.jsx
 import { useContext } from 'react';
 import { UserContext } from './context/UserContext';
@@ -2502,24 +2519,24 @@ export default function Navbar() {
             correct: 1
           },
           {
-            question: 'What is the purpose of the "Provider" component?',
+            question: 'In our Radio analogy, what does the <Provider> component act as?',
             options: [
-              'To broadcast the context data to all the components nested inside of it.',
-              'To securely encrypt passwords.',
-              'To provide CSS styles to HTML elements.',
-              'To fetch data from a backend server.'
+              'The Radio Receiver that listens to the music.',
+              'The Radio Tower that broadcasts the data to all components beneath it.',
+              'The Radio Frequency (like 99.5 FM).',
+              'The static interference.'
             ],
-            correct: 0
+            correct: 1
           },
           {
-            question: 'Which hook do you use to access the data broadcasted by a Provider?',
+            question: 'Why is it a bad idea to put a rapidly changing text input into a global Context?',
             options: [
-              'useProvider()',
-              'useGlobal()',
-              'useContext()',
-              'useState()'
+              'Because Context can only hold numbers.',
+              'Because every component listening to that Context will re-render on every keystroke, causing severe lag.',
+              'Because it is a security risk.',
+              'Because React does not allow strings in Context.'
             ],
-            correct: 2
+            correct: 1
           },
           {
             question: 'What happens if you try to use useContext() in a component that is NOT wrapped inside the corresponding Provider?',
