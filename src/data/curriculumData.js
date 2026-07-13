@@ -2384,5 +2384,165 @@ export default function Navbar() {
         ]
       }
     ]
+  },
+  {
+    dayNumber: 10, week: 4,
+    title: 'The Context API',
+    subtitle: 'Managing global state without Prop Drilling',
+    topics: ['Prop Drilling', 'createContext', 'The Provider Component', 'useContext', 'Knowledge Check'],
+    milestone: { icon: '🌍', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'The Nightmare of Prop Drilling',
+        body: 'Imagine you have a `User` object containing the logged-in user\'s name. \n\nYour `App` component holds this state. But the component that actually needs to display the name is a `ProfileAvatar` component, which is nested inside a `Navbar`, which is nested inside a `Header`. \n\nTo get the data there, you have to pass it as a prop through `Header`, and then through `Navbar`, even though neither of those components care about the user data! This is called **Prop Drilling**, and it makes code messy and hard to maintain.',
+        boxType: 'info',
+        boxTitle: 'The Solution: React Context',
+        boxBody: 'The Context API allows you to broadcast data globally. Any component, no matter how deep in the tree, can simply "tune in" to that broadcast and grab the data directly.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: Global User Auth',
+        body: 'Let\'s create a Global Authentication Context. We will set up a Provider to broadcast the user\'s name, and a completely separate component will read it.'
+      },
+      {
+        type: 'code',
+        title: 'Step 1: Create the Context (UserContext.jsx)',
+        body: 'First, we create the context and a special "Provider" component that will wrap around our app and hold the state.',
+        code: `// src/context/UserContext.jsx
+import { createContext, useState } from 'react';
+
+// 1. Create the Context (the broadcast channel)
+export const UserContext = createContext();
+
+// 2. Create the Provider (the radio tower that broadcasts the data)
+export function UserProvider({ children }) {
+  const [user, setUser] = useState("Jane Doe"); // Our global state
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Wrap the App (main.jsx)',
+        body: 'For components to hear the broadcast, they must be inside the Provider. We usually wrap our entire `<App />` inside it.',
+        code: `// src/main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import { UserProvider } from './context/UserContext.jsx' // Import Provider
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    {/* Wrap the App to make User data available everywhere! */}
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </React.StrictMode>,
+)`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: Consume the Data (Navbar.jsx)',
+        body: 'Now, any component can use the `useContext` hook to grab the data instantly, without any props!',
+        code: `// src/Navbar.jsx
+import { useContext } from 'react';
+import { UserContext } from './context/UserContext';
+
+export default function Navbar() {
+  // Grab the user data directly from the context!
+  const { user, setUser } = useContext(UserContext);
+
+  return (
+    <nav className="navbar">
+      <p>Welcome back, {user}!</p>
+      
+      {/* We can even update the global state from here! */}
+      <button onClick={() => setUser("Guest")}>Log Out</button>
+    </nav>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The Shopping Cart Context',
+        timeEstimate: '30 min',
+        body: 'Time to build your own global state for an E-commerce store!\n\n**Requirements:**\n1. Create a `CartContext.jsx` file.\n2. Inside, create and export a `CartContext`.\n3. Create and export a `CartProvider` component. Inside it, create a state variable `cartCount` (starting at 0).\n4. Return the `<CartContext.Provider>` passing `cartCount` and `setCartCount` in the `value` object.\n5. Wrap a test component in `App.jsx` with your `<CartProvider>`.\n6. In a nested child component, use `useContext` to display the cart count and a button to increase it.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you export BOTH the Context and the Provider? <br/>✓ Did you remember the <code>children</code> prop in your Provider component? <br/>✓ Does clicking the button in the child component successfully update the global state?'
+      },
+      {
+        type: 'homework',
+        title: 'Advanced Context: Custom Hook Wrappers',
+        timeEstimate: '20 min',
+        body: 'Importing BOTH `useContext` and `UserContext` into every file gets annoying. Professional developers write a custom hook to wrap it!\n\n**Requirements:**\n1. Go back to your `UserContext.jsx` file.\n2. At the bottom, write a new custom hook:\n`export const useUser = () => useContext(UserContext);`\n3. Now, go to your `Navbar.jsx`.\n4. Delete the `useContext` and `UserContext` imports.\n5. Instead, just import your new hook: `import { useUser } from "./context/UserContext";`\n6. Call it cleanly: `const { user, setUser } = useUser();`\n\nThis makes your code dramatically cleaner and easier to read!',
+        boxTitle: 'Pro-Tip',
+        boxBody: 'This pattern is used by almost every major React library (like React Router\'s <code>useNavigate</code> or Redux\'s <code>useSelector</code>). They are all just wrappers around React Context!'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'What problem does the Context API solve?',
+            options: [
+              'It makes API fetch requests faster.',
+              'It eliminates "Prop Drilling" by allowing you to share state globally across the component tree.',
+              'It automatically styles your application.',
+              'It replaces the need for React Router.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What is the purpose of the "Provider" component?',
+            options: [
+              'To broadcast the context data to all the components nested inside of it.',
+              'To securely encrypt passwords.',
+              'To provide CSS styles to HTML elements.',
+              'To fetch data from a backend server.'
+            ],
+            correct: 0
+          },
+          {
+            question: 'Which hook do you use to access the data broadcasted by a Provider?',
+            options: [
+              'useProvider()',
+              'useGlobal()',
+              'useContext()',
+              'useState()'
+            ],
+            correct: 2
+          },
+          {
+            question: 'What happens if you try to use useContext() in a component that is NOT wrapped inside the corresponding Provider?',
+            options: [
+              'React automatically wraps it for you.',
+              'The context will return undefined (or the default value), potentially crashing your app if you try to read its properties.',
+              'It will trigger an infinite loop.',
+              'It fetches the data from the internet instead.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'Why do Senior Developers often write a custom hook (like useUser) to wrap useContext?',
+            options: [
+              'Because useContext is deprecated.',
+              'It improves performance and stops re-renders.',
+              'It prevents hackers from accessing the state.',
+              'It simplifies imports and makes the code cleaner for other developers to read.'
+            ],
+            correct: 3
+          }
+        ]
+      }
+    ]
   }
 ];
