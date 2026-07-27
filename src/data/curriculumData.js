@@ -2569,5 +2569,151 @@ export default function Navbar() {
         ]
       }
     ]
+  },
+  {
+    dayNumber: 11, week: 4,
+    title: 'useRef & The DOM',
+    subtitle: 'Silent memory and direct HTML control',
+    topics: ['The Re-render Problem', 'The Sticky Note Analogy', 'When NOT to use useRef', 'Direct DOM Access', 'Further Reading', 'Knowledge Check'],
+    milestone: { icon: '🎯', title: 'Targeting Elements', text: 'Today you learn how to remember data without triggering re-renders, and how to directly control HTML elements like a pro.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'The Re-render Problem',
+        body: 'By now, you know that `useState` is how we remember data in React. But `useState` has a side effect: every time you update a state variable, React completely redraws (re-renders) the component to show the new data on the screen. \n\nBut what if you want to remember a piece of data in the background *without* forcing the screen to redraw? Or what if you just want to grab a specific HTML element (like an `<input>`) to force the cursor to focus on it? \n\nFor this, we use the **`useRef`** hook.',
+        boxType: 'info',
+        boxTitle: 'The Definition',
+        boxBody: '`useRef` is a hook that lets you reference a value that\'s not needed for rendering. It returns an object with a single property: <code>current</code>.'
+      },
+      {
+        type: 'text',
+        title: '📝 The Sticky Note Analogy',
+        body: 'Think of `useState` as a loud megaphone. When you change state, you scream into the megaphone, and React immediately scrambles to redraw the entire screen to match what you said.\n\nThink of `useRef` as a **secret sticky note** on the back of your component. You can write information on it (`ref.current = 5`), and you can read it later. But React doesn\'t know about the sticky note, and it will never redraw the screen when you change it.',
+        boxType: 'rule',
+        boxTitle: 'The .current Property',
+        boxBody: 'When you create a ref: <code>const myRef = useRef(0)</code>, you cannot just log <code>myRef</code>. The data always lives inside the <code>current</code> property. You must write <code>myRef.current</code>.'
+      },
+      {
+        type: 'text',
+        title: '⚠️ When NOT to use useRef',
+        body: 'Because `useRef` is "silent" and doesn\'t trigger a re-render, beginners sometimes try to use it to replace `useState` to make their app "faster."\n\nIf you try to display a ref on the screen (e.g., `<h1>{myRef.current}</h1>`), the screen **will not update** when the ref changes. The user will be stuck looking at stale data.',
+        boxType: 'danger',
+        boxTitle: 'The Golden Rule',
+        boxBody: 'If the data is going to be displayed on the screen (in your JSX), you MUST use <code>useState</code>. If the data is only used in the background (like a timer ID, or tracking how many times a button was clicked for analytics), use <code>useRef</code>.'
+      },
+      {
+        type: 'text',
+        title: 'Guided Project: The Auto-Focus Input',
+        body: 'The most common use of `useRef` is to directly grab an HTML element. Let\'s build an input field that automatically focuses (puts the blinking cursor inside it) when the user clicks a button.'
+      },
+      {
+        type: 'code',
+        title: 'Wiring up the Ref',
+        body: 'We create a ref, and then pass it to the special `ref` attribute on our HTML element.',
+        code: `import { useRef } from 'react';
+
+export default function SearchBar() {
+  // 1. Create a sticky note (starts empty)
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    // 3. We can now directly control the HTML element!
+    // We access the raw DOM node via .current, then call the native .focus() method
+    inputRef.current.focus();
+  };
+
+  return (
+    <div className="search-container">
+      {/* 2. Attach the sticky note to this specific input element */}
+      <input ref={inputRef} type="text" placeholder="Search Speta Academy..." />
+      
+      <button onClick={handleFocus}>Focus the Input</button>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'text',
+        title: 'Unguided Task: The Video Controller',
+        timeEstimate: '25 min',
+        body: 'Let\'s use `useRef` to control a media element! HTML `<video>` tags have built-in `.play()` and `.pause()` methods, but you need a ref to access them.\n\n**Requirements:**\n1. Create a `VideoPlayer` component.\n2. Create a `videoRef` using `useRef(null)`.\n3. Add a `<video>` tag to your JSX and attach your ref to it. (You can use this URL for the `src`: `https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4`).\n4. Create two buttons: "Play" and "Pause".\n5. Write onClick handlers for both. The Play button should call `videoRef.current.play()`. The Pause button should call `videoRef.current.pause()`.',
+        boxType: 'rule',
+        boxTitle: 'Self-Audit Checklist',
+        boxBody: '✓ Did you attach the ref using the <code>ref={videoRef}</code> prop on the video tag? <br/>✓ Did you remember to use <code>.current</code> before calling .play() or .pause()?'
+      },
+      {
+        type: 'homework',
+        title: 'Advanced Ref: The Silent Stopwatch',
+        timeEstimate: '30 min',
+        body: 'We can use `useRef` to store background data. Let\'s build a stopwatch!\n\n**Requirements:**\n1. You need `useState` to track the `seconds` (because we want to see the numbers tick up on the screen).\n2. You need `useRef` to store the `timerId` (because saving the timer ID shouldn\'t cause a screen refresh).\n3. Create a `handleStart` function that uses `setInterval` to increase the seconds every 1000ms. Save the ID returned by `setInterval` into your ref: `timerRef.current = setInterval(...)`.\n4. Create a `handleStop` function that stops the timer by passing your ref to `clearInterval`: `clearInterval(timerRef.current)`.\n5. Render the seconds and the Start/Stop buttons.',
+        boxTitle: 'Pro-Tip',
+        boxBody: 'This pattern is incredibly common. We use state for what the user <em>sees</em>, and refs for the background mechanics that the developer needs to <em>control</em>.'
+      },
+      {
+        type: 'text',
+        title: '📚 Further Reading',
+        body: 'Understanding when to use `useState` versus `useRef` is one of the key milestones in becoming a Senior React Developer. The official docs have a fantastic visual breakdown of this comparison.',
+        boxType: 'info',
+        boxTitle: 'Official React Docs',
+        boxBody: 'Deepen your understanding by reading the official guide on <a href="https://react.dev/learn/referencing-values-with-refs" target="_blank" style="color: var(--accent); text-decoration: underline;">Referencing Values with Refs</a>.'
+      },
+      {
+        type: 'quiz',
+        title: 'Knowledge Check',
+        questions: [
+          {
+            question: 'What is the primary difference between useState and useRef?',
+            options: [
+              'useRef is much faster at updating the screen.',
+              'useState triggers a component re-render when it changes, but useRef does not.',
+              'useRef can only store strings, while useState can store objects.',
+              'useState is for external APIs, useRef is for internal APIs.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'If you create a ref called `myRef`, how do you access the actual data stored inside it?',
+            options: [
+              'myRef.value',
+              'myRef.data',
+              'myRef.current',
+              'myRef()'
+            ],
+            correct: 2
+          },
+          {
+            question: 'When should you absolutely NOT use useRef?',
+            options: [
+              'When you need to store the ID of a setInterval timer.',
+              'When you need to directly focus an HTML input element.',
+              'When you are building a custom Video Player.',
+              'When you want to display the data on the screen for the user to see.'
+            ],
+            correct: 3
+          },
+          {
+            question: 'How do you attach a ref to an HTML element in JSX?',
+            options: [
+              'By passing it to the "id" attribute.',
+              'By passing it to the special "ref" attribute (e.g., <input ref={myRef} />).',
+              'By wrapping the element in a <Provider>.',
+              'By calling document.getElementById().'
+            ],
+            correct: 1
+          },
+          {
+            question: 'In the Stopwatch homework, why did we store the timer ID in a ref instead of state?',
+            options: [
+              'Because setInterval requires a ref to function.',
+              'Because we wanted to display the ID on the screen.',
+              'Because storing the ID is just background mechanics; putting it in state would cause an unnecessary, invisible re-render.',
+              'Because state cannot hold numbers.'
+            ],
+            correct: 2
+          }
+        ]
+      }
+    ]
   }
 ];
