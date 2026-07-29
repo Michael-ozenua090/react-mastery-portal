@@ -1,10 +1,10 @@
-// src/data/curriculumData.js
+﻿// src/data/curriculumData.js
 
 export const WEEK_COLORS = {
-  1: { color: '#00d4aa', label: 'Week 1 — Foundations' },
-  2: { color: '#f7b731', label: 'Week 2 — Core Concepts' },
-  3: { color: '#a371f7', label: 'Week 3 — Intermediate' },
-  4: { color: '#f78166', label: 'Week 4 — Advanced & Project' }
+  1: { color: '#00d4aa', label: 'Week 1 â€” Foundations' },
+  2: { color: '#f7b731', label: 'Week 2 â€” Core Concepts' },
+  3: { color: '#a371f7', label: 'Week 3 â€” Intermediate' },
+  4: { color: '#f78166', label: 'Week 4 â€” Advanced & Project' }
 };
 
 export const curriculum = [
@@ -13,7 +13,7 @@ export const curriculum = [
     title: 'Getting Started with React',
     subtitle: 'Setup, file structure & JSX explained',
     topics: ['Node Setup', 'What is React', 'Vite Setup', 'JSX Rules', 'Expressions', 'Knowledge Check'],
-    milestone: { icon: '🚀', title: 'Welcome to React!', text: 'Today is your foundation. We will set up your professional environment and learn the core language of React: JSX.' },
+    milestone: { icon: 'ðŸš€', title: 'Welcome to React!', text: 'Today is your foundation. We will set up your professional environment and learn the core language of React: JSX.' },
     sections: [
       {
         type: 'text',
@@ -29,7 +29,7 @@ export const curriculum = [
         body: 'React is a declarative JavaScript library for building user interfaces. Instead of manually manipulating the DOM (like writing document.getElementById), you describe what the UI should look like, and React handles the rest efficiently.\n\nReact uses a "Virtual DOM" (a lightweight, invisible copy of the actual web page). When your data changes, React updates the Virtual DOM first, compares it to the real page, and only updates the exact tiny piece that changed instead of reloading the whole page.',
         boxType: 'tip',
         boxTitle: 'Why React over plain JS?',
-        boxBody: 'Vanilla JS gets messy fast when your UI has lots of moving parts. React keeps everything organised into small, reusable pieces called components. <br/><br/><strong>The Virtual DOM in plain English:</strong> Imagine you have a printed recipe book (the real DOM) and a rough notepad (the Virtual DOM). When a recipe changes, you scribble the edit on the notepad first, compare it to the book, then only erase and rewrite the exact sentence that changed — instead of reprinting the whole book. That is how React updates the screen so fast.'
+        boxBody: 'Vanilla JS gets messy fast when your UI has lots of moving parts. React keeps everything organised into small, reusable pieces called components. <br/><br/><strong>The Virtual DOM in plain English:</strong> Imagine you have a printed recipe book (the real DOM) and a rough notepad (the Virtual DOM). When a recipe changes, you scribble the edit on the notepad first, compare it to the book, then only erase and rewrite the exact sentence that changed â€” instead of reprinting the whole book. That is how React updates the screen so fast.'
       },
       {
         type: 'setup',
@@ -43,32 +43,32 @@ export const curriculum = [
       },
       {
         type: 'text',
-        title: '🔧 Install React DevTools (Do This Now!)',
-        body: 'React DevTools is a free browser extension that gives you superpowers. Without it, when your code breaks you are essentially debugging blindfolded. With it, you can see exactly what data is inside every component in real time.\n\n**Install it in 30 seconds:**\n1. Open Chrome (or Firefox) and search for **"React Developer Tools extension"**.\n2. Click "Add to Chrome" → "Add extension".\n3. A small React icon will appear in your browser toolbar.\n4. Once your Vite app is running, click the icon — it turns from grey to coloured. You will see two new tabs in Chrome DevTools (F12): **"⚛ Components"** and **"⚛ Profiler"**.',
+        title: 'ðŸ”§ Install React DevTools (Do This Now!)',
+        body: 'React DevTools is a free browser extension that gives you superpowers. Without it, when your code breaks you are essentially debugging blindfolded. With it, you can see exactly what data is inside every component in real time.\n\n**Install it in 30 seconds:**\n1. Open Chrome (or Firefox) and search for **"React Developer Tools extension"**.\n2. Click "Add to Chrome" â†’ "Add extension".\n3. A small React icon will appear in your browser toolbar.\n4. Once your Vite app is running, click the icon â€” it turns from grey to coloured. You will see two new tabs in Chrome DevTools (F12): **"âš› Components"** and **"âš› Profiler"**.',
         boxType: 'tip',
         boxTitle: 'What does it actually show me?',
-        boxBody: 'The <strong>Components</strong> tab shows your entire component tree — every component on the page, its current props, and its current state. When you click a button and the count changes, you can <em>watch the state update live</em> in the panel. This is the single most important debugging tool you will use throughout this course.'
+        boxBody: 'The <strong>Components</strong> tab shows your entire component tree â€” every component on the page, its current props, and its current state. When you click a button and the count changes, you can <em>watch the state update live</em> in the panel. This is the single most important debugging tool you will use throughout this course.'
       },
       {
         type: 'text',
-        title: '〰️ Those Squiggly Lines in VS Code — What Do They Mean?',
-        body: 'When you first open your project in VS Code, you will see coloured underlines beneath some of your code. These come from a tool called **ESLint** — a built-in code spell-checker that catches common mistakes before you even run the app.\n\n- **Red squiggles:** A syntax error — your code will not run until you fix it.\n- **Yellow squiggles:** A warning — the code will run, but you are doing something React considers risky (like a missing `key` prop in a list).\n- **Blue squiggles:** An informational hint.\n\nYour first instinct should be to hover over the squiggle — VS Code shows you exactly what is wrong and often suggests a fix.',
+        title: 'ã€°ï¸ Those Squiggly Lines in VS Code â€” What Do They Mean?',
+        body: 'When you first open your project in VS Code, you will see coloured underlines beneath some of your code. These come from a tool called **ESLint** â€” a built-in code spell-checker that catches common mistakes before you even run the app.\n\n- **Red squiggles:** A syntax error â€” your code will not run until you fix it.\n- **Yellow squiggles:** A warning â€” the code will run, but you are doing something React considers risky (like a missing `key` prop in a list).\n- **Blue squiggles:** An informational hint.\n\nYour first instinct should be to hover over the squiggle â€” VS Code shows you exactly what is wrong and often suggests a fix.',
         boxType: 'info',
         boxTitle: 'ESLint is on your side',
-        boxBody: 'Think of ESLint as a senior developer sitting next to you, pointing out things before they become bugs. Do not dismiss the warnings — they are almost always right. When you are stuck and the app is not behaving as expected, look at the squiggly lines first.'
+        boxBody: 'Think of ESLint as a senior developer sitting next to you, pointing out things before they become bugs. Do not dismiss the warnings â€” they are almost always right. When you are stuck and the app is not behaving as expected, look at the squiggly lines first.'
       },
       {
         type: 'filetree',
         title: 'Understanding the File Structure',
         body: 'After setup, your project looks like this. Pay close attention to which files you should and should not edit:',
         tree: `my-app/
-├── 📁 node_modules/       ← 🚫 NEVER TOUCH — installed packages live here
-├── 📁 public/             ← ✅ Static files (images like avatar.png go here)
-├── 📁 src/                ← ✅ YOUR CODE GOES HERE
-│   ├── App.jsx            ← ✅ Main app component (you will edit this a lot)
-│   ├── App.css            ← ✅ Styles for App
-│   └── main.jsx           ← ⚠️  Entry point — leave alone for now
-└── package.json           ← ⚠️  Project config`
+â”œâ”€â”€ ðŸ“ node_modules/       â† ðŸš« NEVER TOUCH â€” installed packages live here
+â”œâ”€â”€ ðŸ“ public/             â† âœ… Static files (images like avatar.png go here)
+â”œâ”€â”€ ðŸ“ src/                â† âœ… YOUR CODE GOES HERE
+â”‚   â”œâ”€â”€ App.jsx            â† âœ… Main app component (you will edit this a lot)
+â”‚   â”œâ”€â”€ App.css            â† âœ… Styles for App
+â”‚   â””â”€â”€ main.jsx           â† âš ï¸  Entry point â€” leave alone for now
+â””â”€â”€ package.json           â† âš ï¸  Project config`
       },
       {
         type: 'rules',
@@ -77,7 +77,7 @@ export const curriculum = [
         rules: [
           { num: '1', title: 'One root element', body: 'Every JSX block needs exactly one parent. Wrap siblings in <div> or an empty fragment <>...</>' },
           { num: '2', title: 'className not class', body: '"class" is a JS keyword. Always write className="myClass" in JSX.' },
-          { num: '3', title: 'Close every tag', body: '<img />, <br />, <input /> — the slash is mandatory for self-closing tags in JSX.' }
+          { num: '3', title: 'Close every tag', body: '<img />, <br />, <input /> â€” the slash is mandatory for self-closing tags in JSX.' }
         ]
       },
       {
@@ -114,13 +114,13 @@ export const curriculum = [
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: '⚡ What are those backticks (`)?',
-        boxBody: 'Look at line 3 in the code: <code>{`card theme-${user}`}</code>. Those backtick quotes (<code>`</code>) are called a <strong>Template Literal</strong> — a special type of JavaScript string that lets you embed variables directly using <code>${}</code>. Compare: <br/><strong>Old way:</strong> <code>"card theme-" + user</code> <br/><strong>Template literal:</strong> <code>`card theme-${user}`</code> <br/>They do the same thing — template literals are just cleaner to read. You will see them throughout this course whenever we need to mix a variable into a string.'
+        boxTitle: 'âš¡ What are those backticks (`)?',
+        boxBody: 'Look at line 3 in the code: <code>{`card theme-${user}`}</code>. Those backtick quotes (<code>`</code>) are called a <strong>Template Literal</strong> â€” a special type of JavaScript string that lets you embed variables directly using <code>${}</code>. Compare: <br/><strong>Old way:</strong> <code>"card theme-" + user</code> <br/><strong>Template literal:</strong> <code>`card theme-${user}`</code> <br/>They do the same thing â€” template literals are just cleaner to read. You will see them throughout this course whenever we need to mix a variable into a string.'
       },
       {
         type: 'text',
         title: 'Guided Project: The Digital Business Card',
-        body: "Let's build our first real React page. We will create a professional digital ID card that uses JSX expressions and className styling — exactly how a real developer would build it."
+        body: "Let's build our first real React page. We will create a professional digital ID card that uses JSX expressions and className styling â€” exactly how a real developer would build it."
       },
       {
         type: 'code',
@@ -210,26 +210,26 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: Build a Twitter Clone Card',
-        timeEstimate: '30–45 min',
+        timeEstimate: '30â€“45 min',
         body: 'Now it is your turn to write code from scratch. Clear out your App.jsx and App.css. Your task is to build a single "Tweet" card.\n\n**Requirements for Audit:**\n1. You must define a `const username` and `const tweetBody` at the top of your function.\n2. You must inject those variables into your JSX using `{}`.\n3. You must use `className` to style it to look like a Tweet (white box, gray border, bold name).\n4. You must add an image of a heart icon for the "Like" button, and it must load from your `/public` folder.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use exactly one parent <code>&lt;div&gt;</code>? <br/>✓ Did you use <code>className</code> instead of <code>class</code>? <br/>✓ Does your <code>&lt;img /&gt;</code> tag have a closing slash?'
+        boxBody: 'âœ“ Did you use exactly one parent <code>&lt;div&gt;</code>? <br/>âœ“ Did you use <code>className</code> instead of <code>class</code>? <br/>âœ“ Does your <code>&lt;img /&gt;</code> tag have a closing slash?'
       },
       {
         type: 'homework',
         title: 'Customise Your Business Card',
-        timeEstimate: '30–45 min',
-        body: 'You built a Digital Business Card in class using JSX variables and className. Now extend it using **only what you have learned today** — no new concepts needed!\n\n**Requirements:**\n1. Add two new `const` variables inside your `App` function: `const location = "Lagos, Nigeria"` and `const skills = "HTML · CSS · JavaScript"`.\n2. Render both variables on your card inside their own `<p>` tags, each with a unique `className`.\n3. Style the new elements in `App.css` — pick your own font size and colour.\n4. Change the entire colour scheme of the card — try a purple theme (`#7c3aed`) or a warm amber theme (`#f97316`).\n5. **Bonus:** Add a second `<div className="profile-card">` below the first with completely different variable values — a fictional second person.',
+        timeEstimate: '30â€“45 min',
+        body: 'You built a Digital Business Card in class using JSX variables and className. Now extend it using **only what you have learned today** â€” no new concepts needed!\n\n**Requirements:**\n1. Add two new `const` variables inside your `App` function: `const location = "Lagos, Nigeria"` and `const skills = "HTML Â· CSS Â· JavaScript"`.\n2. Render both variables on your card inside their own `<p>` tags, each with a unique `className`.\n3. Style the new elements in `App.css` â€” pick your own font size and colour.\n4. Change the entire colour scheme of the card â€” try a purple theme (`#7c3aed`) or a warm amber theme (`#f97316`).\n5. **Bonus:** Add a second `<div className="profile-card">` below the first with completely different variable values â€” a fictional second person.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you declare your new variables at the <strong>top</strong> of the function, before the <code>return</code>? <br/>✓ Did you use curly braces <code>{location}</code> and <code>{skills}</code> to inject them into the JSX? <br/>✓ Did you use <code>className</code> (not <code>class</code>) on every element you styled? <br/>✓ <strong>Bonus:</strong> Does the second card show completely different data and a different colour scheme?'
+        boxBody: 'âœ“ Did you declare your new variables at the <strong>top</strong> of the function, before the <code>return</code>? <br/>âœ“ Did you use curly braces <code>{location}</code> and <code>{skills}</code> to inject them into the JSX? <br/>âœ“ Did you use <code>className</code> (not <code>class</code>) on every element you styled? <br/>âœ“ <strong>Bonus:</strong> Does the second card show completely different data and a different colour scheme?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/writing-markup-with-jsx">Writing Markup with JSX</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/writing-markup-with-jsx">Writing Markup with JSX</a>'
       },
       {
         type: 'quiz',
@@ -271,7 +271,7 @@ export default App;`,
               'A <body> tag',
               'A <html> tag',
               'A Fragment (<>) or a single parent <div>',
-              'Nothing — JSX allows multiple root elements by default'
+              'Nothing â€” JSX allows multiple root elements by default'
             ],
             correct: 2
           },
@@ -294,7 +294,7 @@ export default App;`,
     title: 'Components & Props',
     subtitle: 'Building reusable UI pieces that talk to each other',
     topics: ['Component Tree', 'Import & Export', 'Props (Custom Attributes)', 'Destructuring', 'Knowledge Check'],
-    milestone: { icon: '🧱', title: 'Think in Components', text: 'Today you stop writing web pages and start building Lego blocks. By the end of today, you will know how to build a component once and reuse it everywhere.' },
+    milestone: { icon: 'ðŸ§±', title: 'Think in Components', text: 'Today you stop writing web pages and start building Lego blocks. By the end of today, you will know how to build a component once and reuse it everywhere.' },
     sections: [
       {
         type: 'text',
@@ -340,7 +340,7 @@ function StudentCard(props) {
       {
         type: 'code',
         title: 'Props (The Modern Way: Destructuring)',
-        body: 'Writing `props.` over and over gets repetitive. Modern React developers use standard JavaScript **Object Destructuring** right inside the function parameters to pull out exactly what they need instantly. If you have not seen this before — destructuring is a JavaScript trick that unpacks values from an object directly into named variables, so you can use them without writing `props.name` every time.',
+        body: 'Writing `props.` over and over gets repetitive. Modern React developers use standard JavaScript **Object Destructuring** right inside the function parameters to pull out exactly what they need instantly. If you have not seen this before â€” destructuring is a JavaScript trick that unpacks values from an object directly into named variables, so you can use them without writing `props.name` every time.',
         code: `// We pull 'name' and 'grade' directly out of the hidden props object!
 function StudentCard({ name, grade }) {
   return (
@@ -352,13 +352,13 @@ function StudentCard({ name, grade }) {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: '⚡ Quick JS Refresher: What is Destructuring?',
-        boxBody: 'Destructuring is a standard JavaScript shortcut — it is not React-specific. It unpacks values from an object into separate variables in one line. <br/><strong>Without destructuring:</strong> <code>const name = props.name; const grade = props.grade;</code> <br/><strong>With destructuring:</strong> <code>const { name, grade } = props;</code> <br/>React lets us do this shortcut right inside the function parentheses: <code>function StudentCard({ name, grade })</code>. Same result, cleaner code.'
+        boxTitle: 'âš¡ Quick JS Refresher: What is Destructuring?',
+        boxBody: 'Destructuring is a standard JavaScript shortcut â€” it is not React-specific. It unpacks values from an object into separate variables in one line. <br/><strong>Without destructuring:</strong> <code>const name = props.name; const grade = props.grade;</code> <br/><strong>With destructuring:</strong> <code>const { name, grade } = props;</code> <br/>React lets us do this shortcut right inside the function parentheses: <code>function StudentCard({ name, grade })</code>. Same result, cleaner code.'
       },
       {
         type: 'code',
         title: 'Bonus Skill: Default Prop Values',
-        body: 'What happens if a parent forgets to pass a required prop? By default, you get `undefined` — which can cause blank text or broken layouts. The fix is simple: add a default value directly inside the destructuring parameters.',
+        body: 'What happens if a parent forgets to pass a required prop? By default, you get `undefined` â€” which can cause blank text or broken layouts. The fix is simple: add a default value directly inside the destructuring parameters.',
         code: `// If 'name' is not passed, it falls back to "Guest" automatically
 function Greeting({ name = "Guest", role = "Member" }) {
   return (
@@ -369,12 +369,12 @@ function Greeting({ name = "Guest", role = "Member" }) {
   );
 }
 
-// This works perfectly — 'role' will show "Member" by default
+// This works perfectly â€” 'role' will show "Member" by default
 <Greeting name="Precious" />`,
         lang: 'jsx',
         boxType: 'tip',
-        boxTitle: '💡 Default Props in the Real World',
-        boxBody: 'You will use default props constantly for optional data — things like avatar images, placeholder text, or fallback labels. The pattern <code>{ propName = defaultValue }</code> is just standard JavaScript destructuring with a default assignment. It is not a React-specific feature.'
+        boxTitle: 'ðŸ’¡ Default Props in the Real World',
+        boxBody: 'You will use default props constantly for optional data â€” things like avatar images, placeholder text, or fallback labels. The pattern <code>{ propName = defaultValue }</code> is just standard JavaScript destructuring with a default assignment. It is not a React-specific feature.'
       },
       {
         type: 'text',
@@ -458,26 +458,26 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: The E-Commerce Product Grid',
-        timeEstimate: '45–60 min',
+        timeEstimate: '45â€“60 min',
         body: 'Time to prove you understand props and files! Your task is to build a reusable `<Product />` component and display 3 different items on the screen.\n\n**Requirements:**\n1. Create a new file named `Product.jsx` inside your `src/` folder.\n2. In that file, build and `export default` a `Product` component that accepts three props: `title`, `price`, and `isOnSale`.\n3. Render the `title` and `price` inside the component using `{}`.\n4. Use a ternary operator (`? :`) to display a "SALE!" badge only if `isOnSale` is true.\n5. Open your `App.jsx`, import your new `Product` component, and render three of them with different data. Make sure at least one is on sale, and one is not.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you <code>export default</code> the Product component and <code>import</code> it into App.jsx? <br/>✓ Did you use curly braces <code>{ title, price }</code> in the parameters? <br/>✓ Did you pass strings in quotes (<code>title="Shoes"</code>) but booleans/numbers in curly braces (<code>price={50} isOnSale={true}</code>)?'
+        boxBody: 'âœ“ Did you <code>export default</code> the Product component and <code>import</code> it into App.jsx? <br/>âœ“ Did you use curly braces <code>{ title, price }</code> in the parameters? <br/>âœ“ Did you pass strings in quotes (<code>title="Shoes"</code>) but booleans/numbers in curly braces (<code>price={50} isOnSale={true}</code>)?'
       },
       {
         type: 'homework',
         title: 'Expand the ProfileCard',
-        timeEstimate: '45–60 min',
-        body: 'Your `ProfileCard` currently shows `name`, `role`, and a Team Lead badge. Now make it richer by adding two brand-new props — using only what you know: props and destructuring.\n\n**Requirements:**\n1. Open `ProfileCard.jsx` and add `avatar` and `skills` to the destructured parameters: `{ name, role, isLead, avatar, skills }`.\n2. Render `avatar` (an emoji string like `"👨\u200d💻"`) inside a `<span className="team-avatar">` at the top of the card.\n3. Render `skills` (a comma-separated string like `"React, Node, Python"`) inside a `<p className="team-skills">` below the role.\n4. Open `App.jsx` and update all three `<ProfileCard>` instances to pass the new `avatar` and `skills` props with different values for each person.',
+        timeEstimate: '45â€“60 min',
+        body: 'Your `ProfileCard` currently shows `name`, `role`, and a Team Lead badge. Now make it richer by adding two brand-new props â€” using only what you know: props and destructuring.\n\n**Requirements:**\n1. Open `ProfileCard.jsx` and add `avatar` and `skills` to the destructured parameters: `{ name, role, isLead, avatar, skills }`.\n2. Render `avatar` (an emoji string like `"ðŸ‘¨\u200dðŸ’»"`) inside a `<span className="team-avatar">` at the top of the card.\n3. Render `skills` (a comma-separated string like `"React, Node, Python"`) inside a `<p className="team-skills">` below the role.\n4. Open `App.jsx` and update all three `<ProfileCard>` instances to pass the new `avatar` and `skills` props with different values for each person.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you add <code>avatar</code> and <code>skills</code> to the destructured parameters <code>{ name, role, isLead, avatar, skills }</code>? <br/>✓ Did you render both new props inside the JSX with <code>{}</code> curly braces? <br/>✓ Did you pass strings using quotes (<code>avatar="👩‍💻"</code>) from <code>App.jsx</code>? <br/>✓ <strong>Bonus:</strong> Add a <code>yearsExp</code> number prop and display it as "X years experience" below the skills — pass it as <code>yearsExp={3}</code> (curly braces for numbers!).'
+        boxBody: 'âœ“ Did you add <code>avatar</code> and <code>skills</code> to the destructured parameters <code>{ name, role, isLead, avatar, skills }</code>? <br/>âœ“ Did you render both new props inside the JSX with <code>{}</code> curly braces? <br/>âœ“ Did you pass strings using quotes (<code>avatar="ðŸ‘©â€ðŸ’»"</code>) from <code>App.jsx</code>? <br/>âœ“ <strong>Bonus:</strong> Add a <code>yearsExp</code> number prop and display it as "X years experience" below the skills â€” pass it as <code>yearsExp={3}</code> (curly braces for numbers!).'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/your-first-component">Your First Component</a><br/>• <a href="https://react.dev/learn/passing-props-to-a-component">Passing Props to a Component</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/your-first-component">Your First Component</a><br/>â€¢ <a href="https://react.dev/learn/passing-props-to-a-component">Passing Props to a Component</a>'
       },
       {
         type: 'quiz',
@@ -542,7 +542,7 @@ export default App;`,
     title: 'State with useState',
     subtitle: 'Making components remember and react to change',
     topics: ['What is State', 'useState Hook', 'State Updates', 'Never Mutate State', 'Certification Exam'],
-    milestone: { icon: '⚡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
+    milestone: { icon: 'âš¡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
     sections: [
       {
         type: 'text',
@@ -550,7 +550,7 @@ export default App;`,
         body: 'State is data that belongs to a component and can change over time. \n\nThink of a component like a person. Props are things given to them (like a name tag). State is what they are feeling right now (like their mood). Moods change! When state changes, React automatically "re-renders" the component to show the new data on the screen.',
         boxType: 'warn',
         boxTitle: 'Why not just use a regular variable?',
-        boxBody: 'If you write <code>let score = 0;</code> and then do <code>score = 1;</code>, the math works, but <strong>React will not update the screen</strong>. Regular variables are invisible to React. State is special—when you update State, it taps React on the shoulder and says, "Hey, redraw the screen!"'
+        boxBody: 'If you write <code>let score = 0;</code> and then do <code>score = 1;</code>, the math works, but <strong>React will not update the screen</strong>. Regular variables are invisible to React. State is specialâ€”when you update State, it taps React on the shoulder and says, "Hey, redraw the screen!"'
       },
       {
         type: 'code',
@@ -577,26 +577,26 @@ export default function Counter() {
 }`,
         lang: 'jsx',
         boxType: 'tip',
-        boxTitle: '💡 Pro Tip: The Safe Way to Update From Previous State',
-        boxBody: 'In the example above we write <code>setCount(count + 1)</code>. This works for simple cases, but there is a safer pattern you will see in real codebases: <code>setCount(prev => prev + 1)</code>. <br/><br/>The <code>prev</code> version passes a function to the setter. React guarantees that <code>prev</code> is always the most up-to-date value — important when multiple updates happen at the same time. <strong>Rule of thumb:</strong> if your new state depends on the old state, use <code>prev =&gt;</code>. <br/><br/><strong>One more key insight:</strong> Each component instance has its own completely separate state. If you render <code>&lt;Counter /&gt;&lt;Counter /&gt;</code> twice, each counter is totally independent — clicking one has zero effect on the other.'
+        boxTitle: 'ðŸ’¡ Pro Tip: The Safe Way to Update From Previous State',
+        boxBody: 'In the example above we write <code>setCount(count + 1)</code>. This works for simple cases, but there is a safer pattern you will see in real codebases: <code>setCount(prev => prev + 1)</code>. <br/><br/>The <code>prev</code> version passes a function to the setter. React guarantees that <code>prev</code> is always the most up-to-date value â€” important when multiple updates happen at the same time. <strong>Rule of thumb:</strong> if your new state depends on the old state, use <code>prev =&gt;</code>. <br/><br/><strong>One more key insight:</strong> Each component instance has its own completely separate state. If you render <code>&lt;Counter /&gt;&lt;Counter /&gt;</code> twice, each counter is totally independent â€” clicking one has zero effect on the other.'
       },
       {
         type: 'code',
-        title: '⚠️ The Golden Rule: Never Mutate State',
-        body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**. The three dots (`...`) you will see below are the **Spread Operator** — they unpack all the existing items from the old array into a brand new one, then we add the new item at the end.',
+        title: 'âš ï¸ The Golden Rule: Never Mutate State',
+        body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**. The three dots (`...`) you will see below are the **Spread Operator** â€” they unpack all the existing items from the old array into a brand new one, then we add the new item at the end.',
         code: `import { useState } from "react";
 
 export default function ShoppingCart() {
   const [items, setItems] = useState(["Shoes", "Shirt"]);
 
   const addItemWrong = () => {
-    // ❌ WRONG: Mutating the array directly
+    // âŒ WRONG: Mutating the array directly
     items.push("Hat"); 
     setItems(items); // React thinks nothing changed, screen won't update!
   };
 
   const addItemRight = () => {
-    // ✅ CORRECT: Using the "Spread Operator" (...) to create a NEW array
+    // âœ… CORRECT: Using the "Spread Operator" (...) to create a NEW array
     // This says: "Copy all existing items, and add Hat to the end."
     setItems([...items, "Hat"]); 
   };
@@ -622,10 +622,10 @@ export default function UserProfile() {
   const [user, setUser] = useState({ name: "David", age: 25, city: "Lagos" });
 
   const changeName = () => {
-    // ❌ WRONG: Mutating the object directly
-    // user.name = "Michael"; ← React won't notice this!
+    // âŒ WRONG: Mutating the object directly
+    // user.name = "Michael"; â† React won't notice this!
 
-    // ✅ CORRECT: Spread the old fields, override only 'name'
+    // âœ… CORRECT: Spread the old fields, override only 'name'
     setUser({ ...user, name: "Michael" });
     // Result: { name: "Michael", age: 25, city: "Lagos" }
   };
@@ -639,13 +639,13 @@ export default function UserProfile() {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: '⚡ The Spread + Override Pattern',
-        boxBody: '<code>{ ...user, name: "Michael" }</code> means: “copy every field from the user object, then set <code>name</code> to "Michael"”. Any field listed after the spread <strong>overwrites</strong> the copied value. Fields you do not list are kept exactly as they were. You will use this pattern constantly when building forms and user profile pages.'
+        boxTitle: 'âš¡ The Spread + Override Pattern',
+        boxBody: '<code>{ ...user, name: "Michael" }</code> means: â€œcopy every field from the user object, then set <code>name</code> to "Michael"â€. Any field listed after the spread <strong>overwrites</strong> the copied value. Fields you do not list are kept exactly as they were. You will use this pattern constantly when building forms and user profile pages.'
       },
       {
         type: 'text',
         title: 'Guided Project: The React Mastery Like Button',
-        body: 'Let\'s build something you see every day on social media: an interactive Like button. We will use TWO state variables together — a boolean to track if something is liked, and a number to track the total count.'
+        body: 'Let\'s build something you see every day on social media: an interactive Like button. We will use TWO state variables together â€” a boolean to track if something is liked, and a number to track the total count.'
       },
       {
         type: 'code',
@@ -677,7 +677,7 @@ export default function LikeButton() {
         className={\`btn \${isLiked ? 'liked' : 'default'}\`}
         onClick={handleLikeClick}
       >
-        {isLiked ? '❤️ Liked' : '🤍 Like'} ({likeCount})
+        {isLiked ? 'â¤ï¸ Liked' : 'ðŸ¤ Like'} ({likeCount})
       </button>
     </div>
   );
@@ -687,7 +687,7 @@ export default function LikeButton() {
       {
         type: 'code',
         title: 'Step 2: Update App.jsx',
-        body: 'Now bridge your new component into your main application file. The Island Rule from Day 2 in action — import at the top, render in the return!',
+        body: 'Now bridge your new component into your main application file. The Island Rule from Day 2 in action â€” import at the top, render in the return!',
         code: `// src/App.jsx
 import './App.css';
 import LikeButton from './LikeButton'; // Import the new component
@@ -707,7 +707,7 @@ export default App;`,
       {
         type: 'code',
         title: 'Step 3: The Styling (App.css)',
-        body: 'Add this to your `App.css`. Notice how the `.liked` class applies a red glow — this is the conditional className pattern you will use throughout the course!',
+        body: 'Add this to your `App.css`. Notice how the `.liked` class applies a red glow â€” this is the conditional className pattern you will use throughout the course!',
         code: `/* Add to App.css */
 .like-card {
   background: #1e293b;
@@ -744,33 +744,33 @@ export default App;`,
         type: 'text',
         title: 'Unguided Task: The Habit Tracker',
         timeEstimate: '45 min',
-        body: 'Time to build your own stateful component from scratch! This version applies the Object State pattern you just learned — tracking two pieces of data inside one state object.\n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create **one state object** (not two separate variables): `const [tracker, setTracker] = useState({ count: 0, lastReset: \'Never\' })`.\n3. Create an "Add Water 💧" button. When clicked, use the spread pattern to update only the count: `setTracker({ ...tracker, count: tracker.count + 1 })`.\n4. Create a "Reset" button. When clicked, set count back to 0 AND update lastReset to the current time: `setTracker({ count: 0, lastReset: new Date().toLocaleTimeString() })`.\n5. Display `tracker.count` and `tracker.lastReset` on the screen.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
+        body: 'Time to build your own stateful component from scratch! This version applies the Object State pattern you just learned â€” tracking two pieces of data inside one state object.\n\n**Requirements:**\n1. Create a new file named `HabitTracker.jsx`.\n2. Create **one state object** (not two separate variables): `const [tracker, setTracker] = useState({ count: 0, lastReset: \'Never\' })`.\n3. Create an "Add Water ðŸ’§" button. When clicked, use the spread pattern to update only the count: `setTracker({ ...tracker, count: tracker.count + 1 })`.\n4. Create a "Reset" button. When clicked, set count back to 0 AND update lastReset to the current time: `setTracker({ count: 0, lastReset: new Date().toLocaleTimeString() })`.\n5. Display `tracker.count` and `tracker.lastReset` on the screen.\n6. Import and render your `<HabitTracker />` inside `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use ONE state object instead of two separate <code>useState</code> calls? <br/>✓ Did your "Add Water" button use <code>{ ...tracker, count: tracker.count + 1 }</code> — spreading first, then overriding? <br/>✓ Did the <code>lastReset</code> text on screen update the moment you clicked Reset? <br/>✓ Did you access values using <code>tracker.count</code> and <code>tracker.lastReset</code> (dot notation)?'
+        boxBody: 'âœ“ Did you use ONE state object instead of two separate <code>useState</code> calls? <br/>âœ“ Did your "Add Water" button use <code>{ ...tracker, count: tracker.count + 1 }</code> â€” spreading first, then overriding? <br/>âœ“ Did the <code>lastReset</code> text on screen update the moment you clicked Reset? <br/>âœ“ Did you access values using <code>tracker.count</code> and <code>tracker.lastReset</code> (dot notation)?'
       },
       {
         type: 'homework',
         title: 'The Mood Tracker',
-        timeEstimate: '45–60 min',
-        body: 'Build a component that tracks your mood for the day using State.\n\n**Requirements:**\n1. Create a file named `MoodTracker.jsx`.\n2. Create two state variables: `mood` (a string, starting as `"Neutral"`) and `moodEmoji` (a string, starting as `"😐"`).\n3. Render 3 buttons: "😄 Happy", "😐 Neutral", and "😢 Sad".\n4. Clicking each button must update BOTH state variables — e.g. clicking Happy sets `mood` to `"Happy"` and `moodEmoji` to `"😄"`.\n5. Display a line like: "Today I am feeling: 😄 Happy" that updates live as buttons are clicked.\n6. Use a conditional className to change the background colour of the card based on mood (green for Happy, grey for Neutral, blue for Sad).',
+        timeEstimate: '45â€“60 min',
+        body: 'Build a component that tracks your mood for the day using State.\n\n**Requirements:**\n1. Create a file named `MoodTracker.jsx`.\n2. Create two state variables: `mood` (a string, starting as `"Neutral"`) and `moodEmoji` (a string, starting as `"ðŸ˜"`).\n3. Render 3 buttons: "ðŸ˜„ Happy", "ðŸ˜ Neutral", and "ðŸ˜¢ Sad".\n4. Clicking each button must update BOTH state variables â€” e.g. clicking Happy sets `mood` to `"Happy"` and `moodEmoji` to `"ðŸ˜„"`.\n5. Display a line like: "Today I am feeling: ðŸ˜„ Happy" that updates live as buttons are clicked.\n6. Use a conditional className to change the background colour of the card based on mood (green for Happy, grey for Neutral, blue for Sad).',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Do both <code>mood</code> and <code>moodEmoji</code> update when a button is clicked? <br/>✓ Is the displayed text reactive — does it change without a page reload? <br/>✓ Did you use a dynamic <code>className</code> to change the card colour? <br/>✓ <strong>Bonus:</strong> Add a timestamp that shows "Last updated at HH:MM" using <code>new Date().toLocaleTimeString()</code> whenever a mood is selected.'
+        boxBody: 'âœ“ Do both <code>mood</code> and <code>moodEmoji</code> update when a button is clicked? <br/>âœ“ Is the displayed text reactive â€” does it change without a page reload? <br/>âœ“ Did you use a dynamic <code>className</code> to change the card colour? <br/>âœ“ <strong>Bonus:</strong> Add a timestamp that shows "Last updated at HH:MM" using <code>new Date().toLocaleTimeString()</code> whenever a mood is selected.'
       },
       {
         type: 'text',
-        title: '🔭 Coming Up in Week 2',
-        body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Events & Conditional Rendering (Day 4):** How to react to user actions like clicks and typing — and how to show or hide UI based on conditions using the Ternary operator and `&&`.\n2. **Lists & .map() (Day 5):** How to render dynamic lists of data from arrays — the skill behind every feed, product grid, and todo list you have ever seen.\n3. **Forms & User Input (Day 6):** How to capture user input safely with controlled components, prevent page reloads, and combine everything you have learned to build a working To-Do List.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
+        title: 'ðŸ”­ Coming Up in Week 2',
+        body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Events & Conditional Rendering (Day 4):** How to react to user actions like clicks and typing â€” and how to show or hide UI based on conditions using the Ternary operator and `&&`.\n2. **Lists & .map() (Day 5):** How to render dynamic lists of data from arrays â€” the skill behind every feed, product grid, and todo list you have ever seen.\n3. **Forms & User Input (Day 6):** How to capture user input safely with controlled components, prevent page reloads, and combine everything you have learned to build a working To-Do List.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
         boxType: 'tip',
         boxTitle: 'Tip: Keep Building Between Classes',
-        boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting — breaking things and fixing them — is worth more than re-reading the notes.'
+        boxBody: 'The students who improve fastest are the ones who keep their code editor open after class. Even 30 minutes of experimenting â€” breaking things and fixing them â€” is worth more than re-reading the notes.'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/state-a-components-memory">State: A Component’s Memory</a><br/>• <a href="https://react.dev/learn/updating-objects-in-state">Updating Objects in State</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/state-a-components-memory">State: A Componentâ€™s Memory</a><br/>â€¢ <a href="https://react.dev/learn/updating-objects-in-state">Updating Objects in State</a>'
       },
       {
         type: 'exam',
@@ -808,7 +808,7 @@ export default App;`,
           },
           {
             question: 'If you render `<Counter /><Counter />` twice on the same page and click the button in the first counter, what happens to the second counter?',
-            options: ['Both counters update because they share the same state.', 'The second counter resets to 0.', 'Nothing — each component instance has its own completely separate state.', 'React throws an error because the same component cannot be rendered twice.'],
+            options: ['Both counters update because they share the same state.', 'The second counter resets to 0.', 'Nothing â€” each component instance has its own completely separate state.', 'React throws an error because the same component cannot be rendered twice.'],
             correct: 2
           },
           {
@@ -836,14 +836,14 @@ export default App;`,
     title: 'Events & Conditional Rendering',
     subtitle: 'Making your app react to the user',
     topics: ['onClick & onChange', 'Pass, Don\'t Call', 'Ternary (? :)', 'Logical AND (&&)', 'Knowledge Check'],
-    milestone: { icon: '🎯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
+    milestone: { icon: 'ðŸŽ¯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
     sections: [
       {
         type: 'text',
         title: 'Event Handling in React',
         body: 'React handles events similarly to standard HTML, but with a few very important differences:\n\n1. **CamelCase:** In HTML you write `onclick`. In React, you must write `onClick`.\n2. **Pass, Don\'t Call:** You pass a function to the event, you don\'t call it as a string. \n3. **The Event Object (e):** Just like vanilla JS, React gives you an event object containing details about the action (like what the user typed).',
         boxType: 'danger',
-        boxTitle: 'The Infinite Loop Crash (⚠️ CRITICAL)',
+        boxTitle: 'The Infinite Loop Crash (âš ï¸ CRITICAL)',
         boxBody: 'If you write <code>onClick={calculateScore()}</code> with parentheses, the function runs <strong>immediately</strong> when the page loads. If that function updates State, it forces a reload, which runs the function again, causing an Infinite Loop that crashes the browser! <br><br><strong>Always pass the function name without parentheses:</strong> <code>onClick={calculateScore}</code> or use an arrow function: <code>onClick={() => calculateScore(5)}</code>.'
       },
       {
@@ -883,8 +883,8 @@ export default function EventExamples() {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: '🔍 What is e.target.value?',
-        boxBody: 'When a user types, React passes an <strong>Event Object</strong> (we call it <code>e</code>) to your handler function. This object contains details about the action. <br/><br/><strong><code>e.target</code></strong> — the actual HTML element the user interacted with (the input box itself). <br/><strong><code>e.target.value</code></strong> — whatever text the user typed into that element right now. <br/><br/>So <code>setText(e.target.value)</code> simply means: "put whatever the user just typed into my state variable." You will write this line on almost every input field you ever build in React.'
+        boxTitle: 'ðŸ” What is e.target.value?',
+        boxBody: 'When a user types, React passes an <strong>Event Object</strong> (we call it <code>e</code>) to your handler function. This object contains details about the action. <br/><br/><strong><code>e.target</code></strong> â€” the actual HTML element the user interacted with (the input box itself). <br/><strong><code>e.target.value</code></strong> â€” whatever text the user typed into that element right now. <br/><br/>So <code>setText(e.target.value)</code> simply means: "put whatever the user just typed into my state variable." You will write this line on almost every input field you ever build in React.'
       },
       {
         type: 'text',
@@ -928,7 +928,7 @@ export default function Dashboard() {
       {/* LOGICAL AND (&&) -> Only show this div if isLoggedIn is true! */}
       {isLoggedIn && (
         <div className="secret-content">
-          <h3>🤫 Secret Dashboard Data</h3>
+          <h3>ðŸ¤« Secret Dashboard Data</h3>
           <p>Your bank balance is $1,000,000.</p>
         </div>
       )}
@@ -994,26 +994,26 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: The FAQ Accordion',
-        timeEstimate: '30–40 min',
-        body: 'Time to practice! Your task is to build a frequently asked question (FAQ) component that expands when clicked.\n\n**Requirements:**\n1. Create a file named `FaqBox.jsx`.\n2. Create a state variable called `isOpen` that starts as `false`.\n3. Create a `<div className="faq-card">` that holds an `<h3>` with a question (e.g., "What is React?").\n4. Add an `onClick` event to the `<h3>` or a button that toggles `isOpen` to true/false.\n5. Use the `&&` operator to display a `<p>` tag with the answer *only* when `isOpen` is true.\n6. Import and render it in your `App.jsx`.\n\n💡 **Hint:** To toggle a boolean, use `setIsOpen(!isOpen)` — the `!` operator flips `true` to `false` and `false` to `true`.',
+        timeEstimate: '30â€“40 min',
+        body: 'Time to practice! Your task is to build a frequently asked question (FAQ) component that expands when clicked.\n\n**Requirements:**\n1. Create a file named `FaqBox.jsx`.\n2. Create a state variable called `isOpen` that starts as `false`.\n3. Create a `<div className="faq-card">` that holds an `<h3>` with a question (e.g., "What is React?").\n4. Add an `onClick` event to the `<h3>` or a button that toggles `isOpen` to true/false.\n5. Use the `&&` operator to display a `<p>` tag with the answer *only* when `isOpen` is true.\n6. Import and render it in your `App.jsx`.\n\nðŸ’¡ **Hint:** To toggle a boolean, use `setIsOpen(!isOpen)` â€” the `!` operator flips `true` to `false` and `false` to `true`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use camelCase for <code>onClick</code>? <br/>✓ Did you pass a function to onClick without instantly calling it? <br/>✓ Did you use <code>isOpen && &lt;p&gt;Answer&lt;/p&gt;</code> to hide the text?'
+        boxBody: 'âœ“ Did you use camelCase for <code>onClick</code>? <br/>âœ“ Did you pass a function to onClick without instantly calling it? <br/>âœ“ Did you use <code>isOpen && &lt;p&gt;Answer&lt;/p&gt;</code> to hide the text?'
       },
       {
         type: 'homework',
         title: 'The Dark / Light Mode Toggle',
-        timeEstimate: '45–60 min',
-        body: 'Build a Dark / Light mode theme switcher — a feature used in virtually every professional app.\n\n**Requirements:**\n1. Create a file named `ThemeSwitcher.jsx`.\n2. Create a state variable `isDark` that starts as `true` (dark mode on by default).\n3. Render a button that says "☀️ Switch to Light Mode" when dark, and "🌙 Switch to Dark Mode" when light. Use a **ternary operator** for this.\n4. Use `isDark` with a **conditional className** to apply a `.dark-card` or `.light-card` class to the outer div, giving it different background and text colours.\n5. Add a toggle function that calls `setIsDark(!isDark)` when the button is clicked.\n6. Import and display it in `App.jsx`.',
+        timeEstimate: '45â€“60 min',
+        body: 'Build a Dark / Light mode theme switcher â€” a feature used in virtually every professional app.\n\n**Requirements:**\n1. Create a file named `ThemeSwitcher.jsx`.\n2. Create a state variable `isDark` that starts as `true` (dark mode on by default).\n3. Render a button that says "â˜€ï¸ Switch to Light Mode" when dark, and "ðŸŒ™ Switch to Dark Mode" when light. Use a **ternary operator** for this.\n4. Use `isDark` with a **conditional className** to apply a `.dark-card` or `.light-card` class to the outer div, giving it different background and text colours.\n5. Add a toggle function that calls `setIsDark(!isDark)` when the button is clicked.\n6. Import and display it in `App.jsx`.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Does the button text change based on the current theme state? <br/>✓ Does the card background colour change when you click? <br/>✓ Did you use a ternary operator for the button label and a conditional className for the styles? <br/>✓ <strong>Bonus:</strong> Save the theme to <code>localStorage</code> so it remembers the user’s preference after a page refresh — use <code>localStorage.setItem("theme", isDark ? "dark" : "light")</code>.'
+        boxBody: 'âœ“ Does the button text change based on the current theme state? <br/>âœ“ Does the card background colour change when you click? <br/>âœ“ Did you use a ternary operator for the button label and a conditional className for the styles? <br/>âœ“ <strong>Bonus:</strong> Save the theme to <code>localStorage</code> so it remembers the userâ€™s preference after a page refresh â€” use <code>localStorage.setItem("theme", isDark ? "dark" : "light")</code>.'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/responding-to-events">Responding to Events</a><br/>• <a href="https://react.dev/learn/conditional-rendering">Conditional Rendering</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/responding-to-events">Responding to Events</a><br/>â€¢ <a href="https://react.dev/learn/conditional-rendering">Conditional Rendering</a>'
       },
       {
         type: 'quiz',
@@ -1079,7 +1079,7 @@ export default App;`,
     title: 'Lists & Keys',
     subtitle: 'Rendering arrays of data dynamically',
     topics: ['Array.map()', 'Dynamic UI', 'The Key Prop', 'List of Components', 'Knowledge Check'],
-    milestone: { icon: '📋', title: 'Data-Driven UI', text: 'Stop hardcoding your components. Today you will learn how to take an array of data and automatically generate a beautiful interface for it.' },
+    milestone: { icon: 'ðŸ“‹', title: 'Data-Driven UI', text: 'Stop hardcoding your components. Today you will learn how to take an array of data and automatically generate a beautiful interface for it.' },
     sections: [
       {
         type: 'text',
@@ -1120,16 +1120,16 @@ export default App;`,
       },
       {
         type: 'text',
-        title: '🔑 The Danger Zone: The Key Prop',
+        title: 'ðŸ”‘ The Danger Zone: The Key Prop',
         body: 'Did you notice the `key={skill}` in the code above? **This is mandatory.**\n\nWhenever you map over a list in React, the outermost element you return MUST have a unique `key` prop. If you forget it, React will scream at you in the console with a red warning.',
         boxType: 'danger',
         boxTitle: 'Why does React need Keys?',
-        boxBody: 'Remember the Virtual DOM from Day 1? When an array changes (maybe an item is deleted or reordered), React needs to figure out exactly which item changed so it only updates that tiny piece of the screen. <br><br>The <code>key</code> is like a tracking ID. If you do not provide it, React gets confused, destroys the whole list, and redraws it from scratch — which is terrible for performance.'
+        boxBody: 'Remember the Virtual DOM from Day 1? When an array changes (maybe an item is deleted or reordered), React needs to figure out exactly which item changed so it only updates that tiny piece of the screen. <br><br>The <code>key</code> is like a tracking ID. If you do not provide it, React gets confused, destroys the whole list, and redraws it from scratch â€” which is terrible for performance.'
       },
       {
         type: 'code',
-        title: '✂️ Removing Items with .filter()',
-        body: 'You have learned how to render lists with `.map()`. But what about *removing* items from a list? That is where `.filter()` comes in. The `.filter()` method creates a new array containing only the items that pass a test you define — perfect for implementing "Delete" buttons or "Show only active items" features.',
+        title: 'âœ‚ï¸ Removing Items with .filter()',
+        body: 'You have learned how to render lists with `.map()`. But what about *removing* items from a list? That is where `.filter()` comes in. The `.filter()` method creates a new array containing only the items that pass a test you define â€” perfect for implementing "Delete" buttons or "Show only active items" features.',
         code: `import { useState } from "react";
 
 export default function ShoppingList() {
@@ -1146,7 +1146,7 @@ export default function ShoppingList() {
       {items.map(item => (
         <li key={item}>
           {item}
-          <button onClick={() => removeItem(item)}>✕ Remove</button>
+          <button onClick={() => removeItem(item)}>âœ• Remove</button>
         </li>
       ))}
     </ul>
@@ -1170,9 +1170,9 @@ export default function ShoppingList() {
 
 // 1. A simulated database array of objects
 const MOVIE_DATA = [
-  { id: "m1", title: "Inception", year: 2010, rating: "⭐️⭐️⭐️⭐️⭐️" },
-  { id: "m2", title: "Interstellar", year: 2014, rating: "⭐️⭐️⭐️⭐️" },
-  { id: "m3", title: "The Dark Knight", year: 2008, rating: "⭐️⭐️⭐️⭐️⭐️" }
+  { id: "m1", title: "Inception", year: 2010, rating: "â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸" },
+  { id: "m2", title: "Interstellar", year: 2014, rating: "â­ï¸â­ï¸â­ï¸â­ï¸" },
+  { id: "m3", title: "The Dark Knight", year: 2008, rating: "â­ï¸â­ï¸â­ï¸â­ï¸â­ï¸" }
 ];
 
 export default function MovieList() {
@@ -1257,26 +1257,26 @@ export default App;`,
       {
         type: 'text',
         title: 'Unguided Task: The High Score Leaderboard',
-        timeEstimate: '30–40 min',
-        body: 'Time to practice! Your task is to build a leaderboard that both renders AND filters a list of players.\n\n**Requirements:**\n1. Create a file named `Leaderboard.jsx`.\n2. Inside the file (above the component), create an array called `PLAYERS`. Each object should have `id`, `name`, and `score`. Add at least 5 players — some with scores above 5000, some below.\n3. Add a state variable: `const [showAll, setShowAll] = useState(true)`.\n4. Add a toggle button: "Show Top Scorers Only" / "Show All Players" — use a ternary to switch the label.\n5. Use the following logic to decide which players to display: `const displayedPlayers = showAll ? PLAYERS : PLAYERS.filter(p => p.score > 5000)`.\n6. Map over `displayedPlayers` to render a `<div>` for each player showing their rank position, name, and score. Remember the `key` prop!\n7. Import and display it in `App.jsx`.',
+        timeEstimate: '30â€“40 min',
+        body: 'Time to practice! Your task is to build a leaderboard that both renders AND filters a list of players.\n\n**Requirements:**\n1. Create a file named `Leaderboard.jsx`.\n2. Inside the file (above the component), create an array called `PLAYERS`. Each object should have `id`, `name`, and `score`. Add at least 5 players â€” some with scores above 5000, some below.\n3. Add a state variable: `const [showAll, setShowAll] = useState(true)`.\n4. Add a toggle button: "Show Top Scorers Only" / "Show All Players" â€” use a ternary to switch the label.\n5. Use the following logic to decide which players to display: `const displayedPlayers = showAll ? PLAYERS : PLAYERS.filter(p => p.score > 5000)`.\n6. Map over `displayedPlayers` to render a `<div>` for each player showing their rank position, name, and score. Remember the `key` prop!\n7. Import and display it in `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use <code>PLAYERS.filter(p =&gt; p.score &gt; 5000)</code> to filter the list? <br/>✓ Did you map over <code>displayedPlayers</code> (not the original <code>PLAYERS</code> array)? <br/>✓ Does clicking the toggle button immediately hide/show players without a page reload? <br/>✓ Did you use <code>key={player.id}</code> on the outermost element returned by the map?'
+        boxBody: 'âœ“ Did you use <code>PLAYERS.filter(p =&gt; p.score &gt; 5000)</code> to filter the list? <br/>âœ“ Did you map over <code>displayedPlayers</code> (not the original <code>PLAYERS</code> array)? <br/>âœ“ Does clicking the toggle button immediately hide/show players without a page reload? <br/>âœ“ Did you use <code>key={player.id}</code> on the outermost element returned by the map?'
       },
       {
         type: 'homework',
         title: 'Combining .map() with Components',
-        timeEstimate: '45–60 min',
+        timeEstimate: '45â€“60 min',
         body: 'In the Guided Project, we mapped the array directly into standard HTML `<div>` tags. In the real world, you map data into **Reusable Components** (like what we learned on Day 2!).\n\n**Requirements:**\n1. In your `MovieList.jsx` file, create a second, separate component at the bottom of the file called `function MovieItem({ title, year, rating })`. \n2. Move the HTML structure (the `div`, `h3`, `p` tags) out of the `.map()` and into the `MovieItem` return statement.\n3. Update your `.map()` to return `<MovieItem />` components instead of divs! Pass the data down as props (e.g. `title={movie.title}`).\n4. **CRITICAL:** Where does the `key` go now? It must go on the `<MovieItem>` tag itself, inside the map (e.g. `<MovieItem key={movie.id} ... />`).',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you extract the UI into a child component? <br/>✓ Does your map look like: <code>MOVIE_DATA.map(movie =&gt; &lt;MovieItem key={movie.id} title={movie.title} /&gt;)</code>? <br/>✓ Is the <code>key</code> placed on the custom component tag?'
+        boxBody: 'âœ“ Did you extract the UI into a child component? <br/>âœ“ Does your map look like: <code>MOVIE_DATA.map(movie =&gt; &lt;MovieItem key={movie.id} title={movie.title} /&gt;)</code>? <br/>âœ“ Is the <code>key</code> placed on the custom component tag?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/rendering-lists">Rendering Lists</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/rendering-lists">Rendering Lists</a>'
       },
       {
         type: 'quiz',
@@ -1342,19 +1342,19 @@ export default App;`,
     title: 'Forms & User Input',
     subtitle: 'Controlled components and submitting data',
     topics: ['Controlled Inputs', 'onSubmit', 'e.preventDefault()', 'Clearing Forms', 'Certification Exam'],
-    milestone: { icon: '📝', title: 'Two-Way Communication', text: 'Today you learn how to safely capture user data, prevent page reloads, and use forms to build truly interactive applications.' },
+    milestone: { icon: 'ðŸ“', title: 'Two-Way Communication', text: 'Today you learn how to safely capture user data, prevent page reloads, and use forms to build truly interactive applications.' },
     sections: [
       {
         type: 'text',
         title: 'The "Controlled Component" Pattern',
-        body: 'In standard HTML, input fields (`<input>`, `<textarea>`) manage their own state. You type, and the browser remembers what you typed. \n\nIn React, we do not let the browser manage data — we want React to be the single source of truth. We do this by "controlling" the input. \n\nTo control an input, you must do TWO things:\n1. Tie the `value` attribute to a state variable.\n2. Tie the `onChange` event to a state setter function.',
+        body: 'In standard HTML, input fields (`<input>`, `<textarea>`) manage their own state. You type, and the browser remembers what you typed. \n\nIn React, we do not let the browser manage data â€” we want React to be the single source of truth. We do this by "controlling" the input. \n\nTo control an input, you must do TWO things:\n1. Tie the `value` attribute to a state variable.\n2. Tie the `onChange` event to a state setter function.',
         boxType: 'tip',
         boxTitle: 'The Input Loop',
         boxBody: 'When a user types "A", the <code>onChange</code> function fires and updates the state. React then re-renders the component, passing the new state back into the input\'s <code>value</code> attribute. It happens so fast the user cannot tell, but React is entirely in control.'
       },
       {
         type: 'text',
-        title: '⚠️ The Page Refresh Killer',
+        title: 'âš ï¸ The Page Refresh Killer',
         body: 'HTML forms have a built-in behavior from the 1990s: when you click a `<button type="submit">`, the browser attempts to send the data to a server and **refreshes the page**. \n\nIn a Single Page Application like React, a page refresh destroys all your state! You lose everything.',
         boxType: 'danger',
         boxTitle: 'e.preventDefault() is Mandatory',
@@ -1486,7 +1486,7 @@ export default App;`,
       {
         type: 'code',
         title: 'Level Up: Multi-Input Forms with One handleChange',
-        body: 'The newsletter form had only one input. Real forms have many — name, email, password, etc. Writing a separate `useState` and `onChange` for every field gets messy fast. The professional pattern is to store all your form fields in **one state object** and use a single `handleChange` function that detects which field changed using `e.target.name`.',
+        body: 'The newsletter form had only one input. Real forms have many â€” name, email, password, etc. Writing a separate `useState` and `onChange` for every field gets messy fast. The professional pattern is to store all your form fields in **one state object** and use a single `handleChange` function that detects which field changed using `e.target.name`.',
         code: `import { useState } from "react";
 
 export default function ContactForm() {
@@ -1518,13 +1518,13 @@ export default function ContactForm() {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: '⚡ How [e.target.name] Works',
+        boxTitle: 'âš¡ How [e.target.name] Works',
         boxBody: 'The square brackets in <code>{ ...form, [e.target.name]: e.target.value }</code> are called a <strong>Computed Property Name</strong>. It means: "use the value of <code>e.target.name</code> as the key." So if the user typed in the email field, <code>e.target.name</code> is <code>"email"</code>, and the result is <code>{ ...form, email: "what they typed" }</code>. This one handler replaces three separate handlers.'
       },
       {
         type: 'code',
         title: 'Controlled select and textarea',
-        body: 'Text inputs are not the only form elements you will use. Dropdowns (`<select>`) and multi-line text areas (`<textarea>`) are in every real form. The good news: they are controlled exactly the same way — `value` tied to state, `onChange` updating state.',
+        body: 'Text inputs are not the only form elements you will use. Dropdowns (`<select>`) and multi-line text areas (`<textarea>`) are in every real form. The good news: they are controlled exactly the same way â€” `value` tied to state, `onChange` updating state.',
         code: `import { useState } from "react";
 
 export default function ProfileSetup() {
@@ -1559,20 +1559,20 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: '🛡️ Basic Form Validation: The Disabled Button Pattern',
+        title: 'ðŸ›¡ï¸ Basic Form Validation: The Disabled Button Pattern',
         body: 'One of the most common UX patterns in real apps is disabling the submit button when required fields are empty. This prevents blank or broken form submissions before they happen.\n\nBecause JSX attributes can hold any JavaScript expression, you can wire `disabled` directly to your state:',
         boxType: 'tip',
         boxTitle: 'disabled={!email}',
-        boxBody: '<code>disabled={!email}</code> means: "disable the button when the email string is empty (falsy)". An empty string <code>""</code> is falsy in JavaScript, so the button is disabled until the user types something. As soon as the field has content, <code>!email</code> becomes <code>false</code> and the button enables. <br/><br/>For multiple required fields: <code>disabled={!form.name || !form.email}</code> — the button stays disabled until BOTH fields have content.'
+        boxBody: '<code>disabled={!email}</code> means: "disable the button when the email string is empty (falsy)". An empty string <code>""</code> is falsy in JavaScript, so the button is disabled until the user types something. As soon as the field has content, <code>!email</code> becomes <code>false</code> and the button enables. <br/><br/>For multiple required fields: <code>disabled={!form.name || !form.email}</code> â€” the button stays disabled until BOTH fields have content.'
       },
       {
         type: 'text',
         title: 'Unguided Task: The Contact Form',
-        timeEstimate: '40–55 min',
-        body: 'Time to put the professional form patterns together! Build a full contact form using the single-object state + `handleChange` approach you just learned — no separate state variable per field.\n\n**Requirements:**\n1. Create a file named `ContactForm.jsx`.\n2. Create ONE state object with three fields: `const [form, setForm] = useState({ name: \"\", subject: \"\", message: \"\" })`.\n3. Build a **single** `handleChange` function that uses `e.target.name` and `e.target.value` to update the correct field.\n4. Build a form with three controlled fields — each must have a `name` attribute matching the state key:\n   - An `<input type="text">` for name\n   - A `<select>` for subject (options: "General Inquiry", "Bug Report", "Partnership")\n   - A `<textarea>` for message\n5. Add a submit button. Disable it using `disabled={!form.name || !form.message}` so it only activates when both required fields have content.\n6. Create a `handleSubmit` function that prevents the page refresh, shows an alert with the form data, and clears the form back to empty strings.\n7. Import and render it in `App.jsx`.',
+        timeEstimate: '40â€“55 min',
+        body: 'Time to put the professional form patterns together! Build a full contact form using the single-object state + `handleChange` approach you just learned â€” no separate state variable per field.\n\n**Requirements:**\n1. Create a file named `ContactForm.jsx`.\n2. Create ONE state object with three fields: `const [form, setForm] = useState({ name: \"\", subject: \"\", message: \"\" })`.\n3. Build a **single** `handleChange` function that uses `e.target.name` and `e.target.value` to update the correct field.\n4. Build a form with three controlled fields â€” each must have a `name` attribute matching the state key:\n   - An `<input type="text">` for name\n   - A `<select>` for subject (options: "General Inquiry", "Bug Report", "Partnership")\n   - A `<textarea>` for message\n5. Add a submit button. Disable it using `disabled={!form.name || !form.message}` so it only activates when both required fields have content.\n6. Create a `handleSubmit` function that prevents the page refresh, shows an alert with the form data, and clears the form back to empty strings.\n7. Import and render it in `App.jsx`.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use ONE state object and ONE <code>handleChange</code> function — not three separate ones? <br/>✓ Does each input have a <code>name</code> attribute that exactly matches its key in the state object? <br/>✓ Did you use <code>value={form.subject}</code> on the <code>&lt;select&gt;</code> tag (not on the <code>&lt;option&gt;</code> tags)? <br/>✓ Is the submit button disabled until both name and message have content?'
+        boxBody: 'âœ“ Did you use ONE state object and ONE <code>handleChange</code> function â€” not three separate ones? <br/>âœ“ Does each input have a <code>name</code> attribute that exactly matches its key in the state object? <br/>âœ“ Did you use <code>value={form.subject}</code> on the <code>&lt;select&gt;</code> tag (not on the <code>&lt;option&gt;</code> tags)? <br/>âœ“ Is the submit button disabled until both name and message have content?'
       },
       {
         type: 'homework',
@@ -1580,14 +1580,14 @@ export default function ProfileSetup() {
         timeEstimate: '60+ min',
         body: 'This is where Week 2 comes together. You will combine what you learned on Day 5 (Mapping Arrays) with what you learned today (Forms) to build a working To-Do List.\n\n**Requirements:**\n1. Create `TaskManager.jsx`.\n2. Create a state variable for your list of tasks: `const [tasks, setTasks] = useState(["Learn React", "Read Comics"])`.\n3. Create a state variable for the new task input: `const [newTask, setNewTask] = useState("")`.\n4. Build a form with an input and a submit button. Tie the input to the `newTask` state.\n5. On submit, prevent the default refresh, and use the spread operator to add the new task to the array: `setTasks([...tasks, newTask])`. Then clear the input.\n6. Below the form, map over the `tasks` array and render a `<div className="task">` for each one.\n\n*Hint: If you get stuck, look at the "Never Mutate State" section from Day 3 to remember how the Spread Operator works!*',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you create two separate state variables (one array, one string)? <br/>✓ Does typing in the input work without crashing? <br/>✓ When you submit, does the new task appear at the bottom of the list instantly? <br/>✓ Did you remember the <code>key</code> prop in your <code>.map()</code> function?'
+        boxBody: 'âœ“ Did you create two separate state variables (one array, one string)? <br/>âœ“ Does typing in the input work without crashing? <br/>âœ“ When you submit, does the new task appear at the bottom of the list instantly? <br/>âœ“ Did you remember the <code>key</code> prop in your <code>.map()</code> function?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/reference/react-dom/components/input">React &lt;input&gt; Reference</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/reference/react-dom/components/input">React &lt;input&gt; Reference</a>'
       },
       {
         type: 'exam',
@@ -1658,19 +1658,19 @@ export default function ProfileSetup() {
     title: 'The useEffect Hook',
     subtitle: 'Connecting your app to the outside world',
     topics: ['What is a Side Effect?', 'useEffect Syntax', 'The Dependency Array', 'Cleanup Functions', 'Knowledge Check'],
-    milestone: { icon: '🌐', title: 'Welcome to Week 3!', text: 'Your apps are about to get real. Today, you learn how to reach outside of React to fetch data from the internet, control the browser, and manage timers.' },
+    milestone: { icon: 'ðŸŒ', title: 'Welcome to Week 3!', text: 'Your apps are about to get real. Today, you learn how to reach outside of React to fetch data from the internet, control the browser, and manage timers.' },
     sections: [
       {
         type: 'text',
         title: 'What is a Side Effect?',
-        body: 'React components are supposed to be "pure" — they take in data (Props/State) and return UI (JSX). \n\nBut sometimes, your component needs to do things that fall *outside* of simply drawing UI. We call these **Side Effects**. Common side effects include:\n1. Fetching data from an API or database.\n2. Setting a timer or interval (`setTimeout`).\n3. Directly changing the browser (like updating `document.title`).\n\nTo handle these safely without breaking React\'s rendering process, we use the **`useEffect`** Hook.',
+        body: 'React components are supposed to be "pure" â€” they take in data (Props/State) and return UI (JSX). \n\nBut sometimes, your component needs to do things that fall *outside* of simply drawing UI. We call these **Side Effects**. Common side effects include:\n1. Fetching data from an API or database.\n2. Setting a timer or interval (`setTimeout`).\n3. Directly changing the browser (like updating `document.title`).\n\nTo handle these safely without breaking React\'s rendering process, we use the **`useEffect`** Hook.',
         boxType: 'info',
         boxTitle: 'The Component Lifecycle',
         boxBody: 'Think of a component like a person. It is <strong>born</strong> (Mounts onto the screen), it <strong>grows</strong> (Updates when state changes), and it <strong>dies</strong> (Unmounts/disappears from the screen). <code>useEffect</code> lets you run specific code at these exact moments.'
       },
       {
         type: 'text',
-        title: '⚠️ The Dependency Array (The Infinite Loop Killer)',
+        title: 'âš ï¸ The Dependency Array (The Infinite Loop Killer)',
         body: 'The `useEffect` hook takes two arguments: a function, and an array.\n`useEffect(() => { /* your code */ }, [dependencies]);`\n\nThe second argument (the array) tells React exactly *when* to run the effect. If you mess this up, you will crash your browser.',
         boxType: 'danger',
         boxTitle: 'The 3 Rules of the Dependency Array',
@@ -1678,11 +1678,11 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: '⚡ Quick JS Refresher: async / await',
-        body: 'Before we build the guided project, we need to understand two JavaScript keywords that will appear in the code: `async` and `await`. These are not React concepts — they are standard JavaScript used for anything that takes time (like fetching data from the internet).\n\nJavaScript normally runs line by line, instantly. But fetching data from a server takes time — sometimes milliseconds, sometimes seconds. Without `async/await`, your code would continue running before the data arrives, giving you `undefined` instead of real data.',
+        title: 'âš¡ Quick JS Refresher: async / await',
+        body: 'Before we build the guided project, we need to understand two JavaScript keywords that will appear in the code: `async` and `await`. These are not React concepts â€” they are standard JavaScript used for anything that takes time (like fetching data from the internet).\n\nJavaScript normally runs line by line, instantly. But fetching data from a server takes time â€” sometimes milliseconds, sometimes seconds. Without `async/await`, your code would continue running before the data arrives, giving you `undefined` instead of real data.',
         boxType: 'info',
         boxTitle: '\ud83d\udd0d How async / await works',
-        boxBody: '<strong><code>async</code></strong> marks a function as asynchronous — meaning it can contain waits. <br/><strong><code>await</code></strong> tells JavaScript: "pause right here until this operation finishes, then continue." <br/><br/>Example: <br/><code>const fetchAdvice = async () => {</code><br/><code>&nbsp;&nbsp;const response = await fetch(url); // Pause until server responds</code><br/><code>&nbsp;&nbsp;const data = await response.json(); // Pause until JSON is parsed</code><br/><code>&nbsp;&nbsp;setAdvice(data.slip.advice); // NOW we have the data</code><br/><code>};</code><br/><br/>Without <code>await</code>, <code>response</code> would be a pending Promise (not actual data) and your app would break. You will see this pattern on every API call in every React app.'
+        boxBody: '<strong><code>async</code></strong> marks a function as asynchronous â€” meaning it can contain waits. <br/><strong><code>await</code></strong> tells JavaScript: "pause right here until this operation finishes, then continue." <br/><br/>Example: <br/><code>const fetchAdvice = async () => {</code><br/><code>&nbsp;&nbsp;const response = await fetch(url); // Pause until server responds</code><br/><code>&nbsp;&nbsp;const data = await response.json(); // Pause until JSON is parsed</code><br/><code>&nbsp;&nbsp;setAdvice(data.slip.advice); // NOW we have the data</code><br/><code>};</code><br/><br/>Without <code>await</code>, <code>response</code> would be a pending Promise (not actual data) and your app would break. You will see this pattern on every API call in every React app.'
       },
       {
         type: 'text',
@@ -1742,8 +1742,8 @@ export default function QuoteGenerator() {
 }`,
         lang: 'jsx',
         boxType: 'tip',
-        boxTitle: '🏆 The Full Professional Fetch Pattern',
-        boxBody: 'Every real-world API component should have these three states: <br/><strong>1. Loading</strong> — show a spinner/message while waiting for the server. <br/><strong>2. Error</strong> — catch failures gracefully instead of crashing silently. <br/><strong>3. Data</strong> — render the actual content once it arrives. <br/><br/>The <code>try/catch/finally</code> block is the standard way to handle this. <code>try</code> runs the risky code, <code>catch</code> handles any error that occurs, <code>finally</code> runs regardless of success or failure — perfect for turning off the loading state.'
+        boxTitle: 'ðŸ† The Full Professional Fetch Pattern',
+        boxBody: 'Every real-world API component should have these three states: <br/><strong>1. Loading</strong> â€” show a spinner/message while waiting for the server. <br/><strong>2. Error</strong> â€” catch failures gracefully instead of crashing silently. <br/><strong>3. Data</strong> â€” render the actual content once it arrives. <br/><br/>The <code>try/catch/finally</code> block is the standard way to handle this. <code>try</code> runs the risky code, <code>catch</code> handles any error that occurs, <code>finally</code> runs regardless of success or failure â€” perfect for turning off the loading state.'
       },
       {
         type: 'code',
@@ -1795,7 +1795,7 @@ export default App;`,
         body: 'Side effects aren\'t just for APIs! Let\'s control the browser itself.\n\n**Requirements:**\n1. Create a file named `TitleUpdater.jsx`.\n2. Create a state variable called `notificationCount` (start at 0).\n3. Create a button that increases `notificationCount` by 1 when clicked.\n4. Write a `useEffect` hook. Inside it, write: `document.title = "You have " + notificationCount + " notifications";`\n5. **Crucial:** You want this effect to run every time `notificationCount` changes. What should you put in the dependency array?\n6. Render it in `App.jsx` and watch the browser tab name change when you click!',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you import <code>useEffect</code> at the top? <br/>✓ Did you put <code>[notificationCount]</code> in your dependency array? <br/>✓ Does clicking the button immediately change the text at the top of your web browser tab?'
+        boxBody: 'âœ“ Did you import <code>useEffect</code> at the top? <br/>âœ“ Did you put <code>[notificationCount]</code> in your dependency array? <br/>âœ“ Does clicking the button immediately change the text at the top of your web browser tab?'
       },
       {
         type: 'homework',
@@ -1803,14 +1803,14 @@ export default App;`,
         timeEstimate: '45 min',
         body: 'If you start a timer in a component, and that component is deleted from the screen, the timer will keep running in the background forever and cause a memory leak! You must clean it up.\n\n**Requirements:**\n1. Create `Timer.jsx` with a `seconds` state (starting at 0).\n2. Write a `useEffect` with an empty array `[]`.\n3. Inside the effect, start a timer: `const interval = setInterval(() => { setSeconds(s => s + 1) }, 1000);`\n4. At the very end of your effect, **return a function** that clears the interval: `return () => clearInterval(interval);`\n5. Render the seconds on the screen.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you use <code>setSeconds(s =&gt; s + 1)</code> instead of <code>seconds + 1</code> to get the most recent state? <br/>✓ Did you <code>return</code> an arrow function inside your useEffect to clean up the interval?'
+        boxBody: 'âœ“ Did you use <code>setSeconds(s =&gt; s + 1)</code> instead of <code>seconds + 1</code> to get the most recent state? <br/>âœ“ Did you <code>return</code> an arrow function inside your useEffect to clean up the interval?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/synchronizing-with-effects">Synchronizing with Effects</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/synchronizing-with-effects">Synchronizing with Effects</a>'
       },
       {
         type: 'quiz',
@@ -1877,7 +1877,7 @@ export default App;`,
     title: 'Custom Hooks',
     subtitle: 'Creating your own reusable React superpower',
     topics: ['Why Custom Hooks?', 'Rules of Hooks', 'Building useFetch', 'Loading & Error States', 'Knowledge Check'],
-    milestone: { icon: '🛠️', title: 'Extracting Logic', text: 'You have used React\'s built-in hooks. Now it is time to build your own. Custom hooks separate your app\'s logic from its UI, making your code incredibly clean and professional.' },
+    milestone: { icon: 'ðŸ› ï¸', title: 'Extracting Logic', text: 'You have used React\'s built-in hooks. Now it is time to build your own. Custom hooks separate your app\'s logic from its UI, making your code incredibly clean and professional.' },
     sections: [
       {
         type: 'text',
@@ -1889,7 +1889,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: '⚖️ The Rules of Hooks',
+        title: 'âš–ï¸ The Rules of Hooks',
         body: 'Before we build our own hooks, you must memorize the Two Golden Rules of Hooks. If you break these, React will crash with a very confusing error message.\n\n1. **Only call Hooks at the top level.** Do not call Hooks inside loops, conditions (`if` statements), or nested functions. React relies on the order in which Hooks are called to keep track of state.\n2. **Only call Hooks from React functions.** You can call them from regular React Components, or from your own Custom Hooks. Never call them from regular JavaScript functions.',
         boxType: 'danger',
         boxTitle: 'The Most Common Crash: Hooks Inside an "if" Statement',
@@ -1899,7 +1899,7 @@ export default App;`,
         type: 'code',
         title: 'The "Before and After" Bridge',
         body: 'Look at how much cleaner our component becomes when we extract the logic into a custom hook. We go from managing 3 states and a full `useEffect` block to just a single line of code.',
-        code: `// ❌ YESTERDAY (Day 7): Messy Component — logic lives inside the UI
+        code: `// âŒ YESTERDAY (Day 7): Messy Component â€” logic lives inside the UI
 function Profile() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -1918,7 +1918,7 @@ function Profile() {
   return <div>{data?.name}</div>;
 }
 
-// ✅ TODAY (Day 8): Clean Component — logic lives in the hook
+// âœ… TODAY (Day 8): Clean Component â€” logic lives in the hook
 function Profile() {
   const { data, isLoading, error } = useFetch('/api/user');
 
@@ -1936,7 +1936,7 @@ function Profile() {
       {
         type: 'code',
         title: 'Step 1: Create useFetch.js',
-        body: 'Create a new folder inside `src/` called `hooks/`. Inside it, create `useFetch.js`. This is a JavaScript file — it returns data and functions, not JSX!',
+        body: 'Create a new folder inside `src/` called `hooks/`. Inside it, create `useFetch.js`. This is a JavaScript file â€” it returns data and functions, not JSX!',
         code: `// src/hooks/useFetch.js
 import { useState, useEffect } from "react";
 
@@ -1946,7 +1946,7 @@ export default function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // 🛡️ Professional Habit: Create an AbortController to cancel stale requests
+    // ðŸ›¡ï¸ Professional Habit: Create an AbortController to cancel stale requests
     const controller = new AbortController();
 
     const fetchData = async () => {
@@ -1972,11 +1972,11 @@ export default function useFetch(url) {
 
     fetchData();
 
-    // ✅ Cleanup: abort the fetch if the component unmounts before it finishes
+    // âœ… Cleanup: abort the fetch if the component unmounts before it finishes
     return () => controller.abort();
   }, [url]); // Re-run if the URL changes
 
-  // Return state as an object — components destructure what they need
+  // Return state as an object â€” components destructure what they need
   return { data, isLoading, error };
 }`,
         lang: 'javascript'
@@ -1998,14 +1998,14 @@ function App() {
       <h1>Week 3: Custom Hooks</h1>
 
       <div className="profile-card">
-        {isLoading && <p className="loading">⏳ Loading user data...</p>}
-        {error && <p className="error">❌ Error: {error}</p>}
+        {isLoading && <p className="loading">â³ Loading user data...</p>}
+        {error && <p className="error">âŒ Error: {error}</p>}
 
         {data && (
           <div>
             <h2>{data.name}</h2>
-            <p className="email">📧 {data.email}</p>
-            <p className="city">🏙️ {data.address.city}</p>
+            <p className="email">ðŸ“§ {data.email}</p>
+            <p className="city">ðŸ™ï¸ {data.address.city}</p>
           </div>
         )}
       </div>
@@ -2052,15 +2052,15 @@ export default App;`,
         type: 'text',
         title: 'Unguided Task: The useToggle Hook',
         timeEstimate: '20 min',
-        body: 'Custom hooks do not always have to be complex API fetchers. Let\'s build a simple one to toggle a boolean — perfect for dark mode, dropdowns, or show/hide password buttons.\n\n**Requirements:**\n1. Fill in the `toggle` function in the scaffold below so it correctly flips the boolean.\n2. Import `useToggle` into `App.jsx`.\n3. Use it to show/hide a `<p>` tag that says `"🎉 Secret message revealed!"` when a button is clicked.',
+        body: 'Custom hooks do not always have to be complex API fetchers. Let\'s build a simple one to toggle a boolean â€” perfect for dark mode, dropdowns, or show/hide password buttons.\n\n**Requirements:**\n1. Fill in the `toggle` function in the scaffold below so it correctly flips the boolean.\n2. Import `useToggle` into `App.jsx`.\n3. Use it to show/hide a `<p>` tag that says `"ðŸŽ‰ Secret message revealed!"` when a button is clicked.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Does your function name start with "use"? <br/>✓ Does your hook return an <strong>array</strong> (not an object)? <br/>✓ Does clicking the button correctly show <em>and</em> hide the message on alternate clicks?'
+        boxBody: 'âœ“ Does your function name start with "use"? <br/>âœ“ Does your hook return an <strong>array</strong> (not an object)? <br/>âœ“ Does clicking the button correctly show <em>and</em> hide the message on alternate clicks?'
       },
       {
         type: 'code',
         title: 'Your Scaffold (fill in the blanks)',
-        body: 'Create `useToggle.js` inside your `hooks/` folder and fill in the missing `toggle` function. Notice we return an **array** here — this lets callers name the values whatever they want, just like `useState` does.',
+        body: 'Create `useToggle.js` inside your `hooks/` folder and fill in the missing `toggle` function. Notice we return an **array** here â€” this lets callers name the values whatever they want, just like `useState` does.',
         code: `// src/hooks/useToggle.js
 import { useState } from "react";
 
@@ -2081,16 +2081,16 @@ export default function useToggle(initialValue = false) {
         type: 'homework',
         title: 'Advanced Hook: useWindowSize',
         timeEstimate: '45 min',
-        body: 'Often you need to know the exact width of the user\'s screen for responsive layouts. Let\'s build a hook that listens to the browser window and returns the live width!\n\n**Requirements:**\n1. Create `useWindowSize.js` in your `hooks/` folder.\n2. Create a state variable `width` starting at `window.innerWidth`.\n3. Write a `useEffect` with a `handleResize` function inside that updates `width` to `window.innerWidth`.\n4. Attach the listener: `window.addEventListener("resize", handleResize)`.\n5. **Critical:** Return a cleanup function that removes it: `return () => window.removeEventListener("resize", handleResize)`.\n6. Return `width` from the hook and render it in `App.jsx`. Try dragging your browser smaller — the number should change live!\n\n**Hint:** The dependency array for this `useEffect` should be empty `[]` — you only want to attach and clean up the event listener once.',
+        body: 'Often you need to know the exact width of the user\'s screen for responsive layouts. Let\'s build a hook that listens to the browser window and returns the live width!\n\n**Requirements:**\n1. Create `useWindowSize.js` in your `hooks/` folder.\n2. Create a state variable `width` starting at `window.innerWidth`.\n3. Write a `useEffect` with a `handleResize` function inside that updates `width` to `window.innerWidth`.\n4. Attach the listener: `window.addEventListener("resize", handleResize)`.\n5. **Critical:** Return a cleanup function that removes it: `return () => window.removeEventListener("resize", handleResize)`.\n6. Return `width` from the hook and render it in `App.jsx`. Try dragging your browser smaller â€” the number should change live!\n\n**Hint:** The dependency array for this `useEffect` should be empty `[]` â€” you only want to attach and clean up the event listener once.',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you use an empty dependency array <code>[]</code> so the listener is only attached once? <br/>✓ Did you include the cleanup function to prevent a memory leak? <br/>✓ Does the number change immediately as you resize the browser window?'
+        boxBody: 'âœ“ Did you use an empty dependency array <code>[]</code> so the listener is only attached once? <br/>âœ“ Did you include the cleanup function to prevent a memory leak? <br/>âœ“ Does the number change immediately as you resize the browser window?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
-        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>• <a href="https://react.dev/learn/reusing-logic-with-custom-hooks" target="_blank">Reusing Logic with Custom Hooks</a>'
+        boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/reusing-logic-with-custom-hooks" target="_blank">Reusing Logic with Custom Hooks</a>'
       },
       {
         type: 'quiz',
@@ -2166,7 +2166,7 @@ export default function useToggle(initialValue = false) {
     title: 'React Router',
     subtitle: 'Multi-page navigation in a Single Page App',
     topics: ['Client-Side Routing', 'BrowserRouter', 'Routes & Route', 'The Link Component', 'Certification Exam'],
-    milestone: { icon: '🧭', title: 'Mapping the Web', text: 'Real applications have multiple pages. Today, you learn how to seamlessly navigate between URLs without ever refreshing the browser.' },
+    milestone: { icon: 'ðŸ§­', title: 'Mapping the Web', text: 'Real applications have multiple pages. Today, you learn how to seamlessly navigate between URLs without ever refreshing the browser.' },
     sections: [
       {
         type: 'text',
@@ -2178,7 +2178,7 @@ export default function useToggle(initialValue = false) {
       },
       {
         type: 'text',
-        title: '⚠️ The Golden Rule of Navigation',
+        title: 'âš ï¸ The Golden Rule of Navigation',
         body: 'Because we are preventing the browser from refreshing, we can **never use standard HTML anchor tags** (`<a href="/about">`). \n\nIf you use an `<a>` tag, the browser will refresh, and all your React State (like logged-in users or shopping cart items) will be instantly destroyed.',
         boxType: 'danger',
         boxTitle: 'Use <Link> instead of <a>',
@@ -2218,8 +2218,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 import { Routes, Route } from 'react-router-dom';
 
 // Simple components just for this example
-const Home = () => <h2>🏠 Home Page</h2>;
-const About = () => <h2>📖 About Us</h2>;
+const Home = () => <h2>ðŸ  Home Page</h2>;
+const About = () => <h2>ðŸ“– About Us</h2>;
 
 function App() {
   return (
@@ -2265,7 +2265,7 @@ export default function Navbar() {
         body: 'What happens if a user types `mysite.com/pizza` and that route doesn\'t exist? The screen goes blank! Let\'s fix that.\n\n**Requirements:**\n1. Create a simple component called `NotFound` that displays a "404 - Page Not Found" message.\n2. In your `App.jsx`, add a new `<Route>` at the very bottom of your `<Routes>` list.\n3. For the path, use the special wildcard character `path="*"`. This tells React Router: "If the URL doesn\'t match anything above, show this element."\n4. Set the `element` to your new `<NotFound />` component.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you use the asterisk <code>path="*"</code>? <br/>✓ Is the 404 route the very last route in your list? <br/>✓ Does typing a fake URL instantly show your error component?'
+        boxBody: 'âœ“ Did you use the asterisk <code>path="*"</code>? <br/>âœ“ Is the 404 route the very last route in your list? <br/>âœ“ Does typing a fake URL instantly show your error component?'
       },
       {
         type: 'homework',
@@ -2273,11 +2273,11 @@ export default function Navbar() {
         timeEstimate: '45 min',
         body: 'If you have 1,000 users, you can\'t write 1,000 `<Route>` tags. You need Dynamic Routes!\n\n**Requirements:**\n1. In `App.jsx`, create a dynamic route: `<Route path="/users/:id" element={<UserProfile />} />`.\n2. Note the colon `:`! This means whatever is typed after `/users/` will be treated as a variable named `id`.\n3. In your `UserProfile.jsx` component, import the `useParams` hook from `react-router-dom`.\n4. Call it to extract the variable: `const { id } = useParams();`\n5. Render a message on the screen: "Now viewing profile for User # [id]".',
         boxTitle: 'Homework Checklist',
-        boxBody: '✓ Did you create a dynamic route using <code>:id</code>? <br/>✓ Did you use the <code>useParams</code> hook to extract the ID? <br/>✓ Does the screen correctly display the dynamic ID?'
+        boxBody: 'âœ“ Did you create a dynamic route using <code>:id</code>? <br/>âœ“ Did you use the <code>useParams</code> hook to extract the ID? <br/>âœ“ Does the screen correctly display the dynamic ID?'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Router Docs',
         boxBody: 'Routing can get incredibly complex. Check out the <a href="https://reactrouter.com/en/main/start/tutorial" target="_blank" style="color: var(--accent); text-decoration: underline;">Official React Router Tutorial</a> to see how to handle nested routes and data loaders.'
@@ -2385,12 +2385,13 @@ export default function Navbar() {
       }
     ]
   },
+  // --- DAY 10 ---
   {
     dayNumber: 10, week: 4,
     title: 'The Context API',
     subtitle: 'Managing global state without Prop Drilling',
     topics: ['Prop Drilling', 'The Radio Analogy', 'When NOT to use Context', 'createContext & Provider', 'useContext', 'Knowledge Check'],
-    milestone: { icon: '🌍', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
+    milestone: { icon: 'ðŸŒ', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
     sections: [
       {
         type: 'text',
@@ -2402,7 +2403,7 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: '📻 How it Works: The Radio Analogy',
+        title: 'ðŸ“» How it Works: The Radio Analogy',
         body: 'Before we write any code, you need to understand that React Context is exactly like a real-world Radio Station. It requires three distinct pieces to work:\n\n1. **The Frequency (`createContext`)**: You have to claim a specific channel for your data (e.g., 99.5 FM).\n2. **The Radio Tower (`Provider`)**: You need a massive tower at the very top of your application to broadcast the music (your state) into the air.\n3. **The Radio Receiver (`useContext`)**: Down in your individual components, you turn on the radio, tune it to 99.5 FM, and instantly hear the music.',
         boxType: 'rule',
         boxTitle: 'The Component Tree Rule',
@@ -2410,7 +2411,7 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: '⚠️ When NOT to use Context',
+        title: 'âš ï¸ When NOT to use Context',
         body: 'Context feels like magic, so beginners often try to put *every* piece of state into it. This is a massive mistake.\n\nWhenever the state inside a Provider changes, **every single component listening to that Provider will re-render.** If you put a rapidly changing text input into a global Context, your entire application will re-render every time the user types a single letter, causing massive lag.',
         boxType: 'danger',
         boxTitle: 'The Rule of Thumb',
@@ -2419,12 +2420,12 @@ export default function Navbar() {
       {
         type: 'text',
         title: 'Guided Project: Global User Auth',
-        body: 'Let\'s create a Global Authentication Context. We will set up a Provider to broadcast the user\'s name, and a completely separate component will read it.'
+        body: 'Let\'s create a Global Authentication Context step-by-step. \n\n**Setup:** Before we write code, go to your `src` folder. Create a new folder named `context`. This is where professional developers store their global state files!'
       },
       {
         type: 'code',
-        title: 'Step 1: Create the Context (UserContext.jsx)',
-        body: 'First, we create the Frequency (`createContext`) and the Tower (`UserProvider`).',
+        title: 'Step 1: Create the Context (src/context/UserContext.jsx)',
+        body: 'Inside your new `context` folder, create a file named `UserContext.jsx`. Here, we create the Frequency (`createContext`) and the Tower (`UserProvider`).',
         code: `// src/context/UserContext.jsx
 import { createContext, useState } from 'react';
 
@@ -2446,28 +2447,28 @@ export function UserProvider({ children }) {
       },
       {
         type: 'code',
-        title: 'Step 2: Wrap the App (main.jsx)',
-        body: 'For components to hear the broadcast, they must be inside the Provider. We wrap our entire `<App />` inside it.',
+        title: 'Step 2: Wrap the App (src/main.jsx)',
+        body: 'For components to hear the broadcast, they must be inside the Provider. Open your `main.jsx` and wrap your entire `<App />` inside it.',
         code: `// src/main.jsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import { UserProvider } from './context/UserContext.jsx' // Import Provider
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import { UserProvider } from './context/UserContext.jsx'; // 1. Import Provider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* Wrap the App to make User data available everywhere! */}
+    {/* 2. Wrap the App to make User data available everywhere! */}
     <UserProvider>
       <App />
     </UserProvider>
   </React.StrictMode>,
-)`,
+);`,
         lang: 'jsx'
       },
       {
         type: 'code',
-        title: 'Step 3: Consume the Data (Navbar.jsx)',
-        body: 'Now, any component can use the `useContext` hook (The Receiver) to grab the data instantly, without any props!',
+        title: 'Step 3: Consume the Data (src/Navbar.jsx)',
+        body: 'Create a `Navbar.jsx` file in your `src` folder. Any component can use the `useContext` hook (The Receiver) to grab the data instantly, without any props!',
         code: `// src/Navbar.jsx
 import { useContext } from 'react';
 import { UserContext } from './context/UserContext';
@@ -2477,7 +2478,8 @@ export default function Navbar() {
   const { user, setUser } = useContext(UserContext);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" style={{ padding: '20px', background: '#333', color: 'white' }}>
+      <h2>Speta App</h2>
       <p>Welcome back, {user}!</p>
       
       {/* We can even update the global state from here! */}
@@ -2488,13 +2490,34 @@ export default function Navbar() {
         lang: 'jsx'
       },
       {
+        type: 'code',
+        title: 'Step 4: Render the Navbar (src/App.jsx)',
+        body: 'Finally, don\'t forget to actually put your Navbar on the screen! Open `App.jsx` and render it.',
+        code: `// src/App.jsx
+import Navbar from './Navbar';
+
+export default function App() {
+  return (
+    <div>
+      {/* The Navbar will automatically grab the user data from Context! */}
+      <Navbar />
+      <div style={{ padding: '20px' }}>
+        <h1>Dashboard</h1>
+        <p>This is the main application content.</p>
+      </div>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
         type: 'text',
         title: 'Unguided Task: The Shopping Cart Context',
         timeEstimate: '30 min',
-        body: 'Time to build your own global state for an E-commerce store!\n\n**Requirements:**\n1. Create a `CartContext.jsx` file.\n2. Inside, create and export a `CartContext`.\n3. Create and export a `CartProvider` component. Inside it, create a state variable `cartCount` (starting at 0).\n4. Return the `<CartContext.Provider>` passing `cartCount` and `setCartCount` in the `value` object.\n5. Wrap a test component in `App.jsx` with your `<CartProvider>`.\n6. In a nested child component, use `useContext` to display the cart count and a button to increase it.',
+        body: 'Time to build your own global state for an E-commerce store!\n\n**Requirements:**\n1. Inside `src/context/`, create a `CartContext.jsx` file.\n2. Inside, create and export a `CartContext`.\n3. Create and export a `CartProvider` component. Inside it, create a state variable `cartCount` (starting at 0).\n4. Return the `<CartContext.Provider>` passing `cartCount` and `setCartCount` in the `value` object.\n5. Wrap your `<App />` in `main.jsx` with your new `<CartProvider>`.\n6. In a child component, use `useContext` to display the cart count and a button to increase it.',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you export BOTH the Context and the Provider? <br/>✓ Did you remember the <code>children</code> prop in your Provider component? <br/>✓ Does clicking the button in the child component successfully update the global state?'
+        boxBody: 'âœ“ Did you export BOTH the Context and the Provider? <br/>âœ“ Did you remember the <code>children</code> prop in your Provider component? <br/>âœ“ Does clicking the button successfully update the global state?'
       },
       {
         type: 'homework',
@@ -2502,11 +2525,11 @@ export default function Navbar() {
         timeEstimate: '20 min',
         body: 'Importing BOTH `useContext` and `UserContext` into every file gets annoying. Professional developers write a custom hook to wrap it!\n\n**Requirements:**\n1. Go back to your `UserContext.jsx` file.\n2. At the bottom, write a new custom hook:\n`export const useUser = () => useContext(UserContext);`\n3. Now, go to your `Navbar.jsx`.\n4. Delete the `useContext` and `UserContext` imports.\n5. Instead, just import your new hook: `import { useUser } from "./context/UserContext";`\n6. Call it cleanly: `const { user, setUser } = useUser();`\n\nThis makes your code dramatically cleaner and easier to read!',
         boxTitle: 'Pro-Tip',
-        boxBody: 'This pattern is used by almost every major React library (like React Router\'s <code>useNavigate</code> or Redux\'s <code>useSelector</code>). They are all just wrappers around React Context!'
+        boxBody: 'This pattern is used by almost every major React library (like React Router\'s <code>useNavigate</code>). They are all just wrappers around React Context!'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         body: 'The Context API is a powerful tool, but understanding exactly how data flows through the component tree requires practice. To master global state and see more advanced architectural patterns, reading the official documentation is highly recommended.',
         boxType: 'info',
         boxTitle: 'Official React Docs',
@@ -2555,27 +2578,18 @@ export default function Navbar() {
               'It fetches the data from the internet instead.'
             ],
             correct: 1
-          },
-          {
-            question: 'Why do Senior Developers often write a custom hook (like useUser) to wrap useContext?',
-            options: [
-              'Because useContext is deprecated.',
-              'It improves performance and stops re-renders.',
-              'It prevents hackers from accessing the state.',
-              'It simplifies imports and makes the code cleaner for other developers to read.'
-            ],
-            correct: 3
           }
         ]
       }
-    ]
+    ],
   },
+  // --- DAY 11 ---
   {
     dayNumber: 11, week: 4,
-    title: 'useRef & The DOM',
-    subtitle: 'Silent memory and direct HTML control',
-    topics: ['The Re-render Problem', 'The Sticky Note Analogy', 'When NOT to use useRef', 'Direct DOM Access', 'Further Reading', 'Knowledge Check'],
-    milestone: { icon: '🎯', title: 'Targeting Elements', text: 'Today you learn how to remember data without triggering re-renders, and how to directly control HTML elements like a pro.' },
+    title: 'useRef & The Grand Finale',
+    subtitle: 'Silent memory and building a full multi-page application',
+    topics: ['The Re-render Problem', 'The Sticky Note Analogy', 'Direct DOM Access', 'Building a Multi-Page App', 'Further Reading', 'Knowledge Check'],
+    milestone: { icon: 'ðŸŽ¯', title: 'Targeting Elements', text: 'Today is your final lesson! You will learn how to directly control HTML elements using useRef, and combine it with everything you learned to build a full 3-page website.' },
     sections: [
       {
         type: 'text',
@@ -2587,47 +2601,140 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: '📝 The Sticky Note Analogy',
+        title: 'ðŸ“ The Sticky Note Analogy',
         body: 'Think of `useState` as a loud megaphone. When you change state, you scream into the megaphone, and React immediately scrambles to redraw the entire screen to match what you said.\n\nThink of `useRef` as a **secret sticky note** on the back of your component. You can write information on it (`ref.current = 5`), and you can read it later. But React doesn\'t know about the sticky note, and it will never redraw the screen when you change it.',
-        boxType: 'rule',
-        boxTitle: 'The .current Property',
-        boxBody: 'When you create a ref: <code>const myRef = useRef(0)</code>, you cannot just log <code>myRef</code>. The data always lives inside the <code>current</code> property. You must write <code>myRef.current</code>.'
-      },
-      {
-        type: 'text',
-        title: '⚠️ When NOT to use useRef',
-        body: 'Because `useRef` is "silent" and doesn\'t trigger a re-render, beginners sometimes try to use it to replace `useState` to make their app "faster."\n\nIf you try to display a ref on the screen (e.g., `<h1>{myRef.current}</h1>`), the screen **will not update** when the ref changes. The user will be stuck looking at stale data.',
         boxType: 'danger',
         boxTitle: 'The Golden Rule',
-        boxBody: 'If the data is going to be displayed on the screen (in your JSX), you MUST use <code>useState</code>. If the data is only used in the background (like a timer ID, or tracking how many times a button was clicked for analytics), use <code>useRef</code>.'
+        boxBody: 'If the data is going to be displayed on the screen, you MUST use <code>useState</code>. If the data is only used in the background (like a timer ID, or grabbing an HTML element to click it), use <code>useRef</code>.'
       },
       {
         type: 'text',
-        title: 'Guided Project: The Auto-Focus Input',
-        body: 'The most common use of `useRef` is to directly grab an HTML element. Let\'s build an input field that automatically focuses (puts the blinking cursor inside it) when the user clicks a button.'
+        title: 'Guided Project: The Speta Agency Website',
+        body: 'For your final teaching day, we are going to build a full 3-page agency website from scratch! \n\n**Setup:** Go to your `src` folder and create a new folder named `pages`. Inside `pages`, create three empty files: `Home.jsx`, `About.jsx`, and `Contact.jsx`.'
       },
       {
         type: 'code',
-        title: 'Wiring up the Ref',
-        body: 'We create a ref, and then pass it to the special `ref` attribute on our HTML element.',
-        code: `import { useRef } from 'react';
+        title: 'Step 1: The Routing Setup (src/App.jsx)',
+        body: 'First, let\'s wire up our navigation. Open your `App.jsx` and use React Router to link our three new pages together.',
+        code: `// src/App.jsx
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
-export default function SearchBar() {
-  // 1. Create a sticky note (starts empty)
-  const inputRef = useRef(null);
+export default function App() {
+  return (
+    <div>
+      <nav style={{ display: 'flex', gap: '15px', padding: '20px', background: '#eee' }}>
+        <strong>Speta Agency</strong>
+        <Link to="/">Home</Link>
+        <Link to="/about">About Us</Link>
+        <Link to="/contact">Contact</Link>
+      </nav>
 
-  const handleFocus = () => {
-    // 3. We can now directly control the HTML element!
-    // We access the raw DOM node via .current, then call the native .focus() method
-    inputRef.current.focus();
+      <div style={{ padding: '20px' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </div>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: Scroll To Footer (src/pages/Home.jsx)',
+        body: 'Let\'s build the Home page. We will use `useRef` to create a "Scroll to Footer" button. We attach a ref to the footer, and use native DOM methods to scroll to it!',
+        code: `// src/pages/Home.jsx
+import { useRef } from 'react';
+
+export default function Home() {
+  // 1. Create the sticky note
+  const footerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    // 3. Use native DOM methods to scroll to the element!
+    footerRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="search-container">
-      {/* 2. Attach the sticky note to this specific input element */}
-      <input ref={inputRef} type="text" placeholder="Search Speta Academy..." />
+    <div>
+      <h1>Welcome to Speta Agency</h1>
+      <button onClick={scrollToBottom}>Scroll to Footer</button>
       
-      <button onClick={handleFocus}>Focus the Input</button>
+      {/* Creating artificial empty space to force scrolling */}
+      <div style={{ height: '150vh', background: 'linear-gradient(#fff, #ccc)' }}></div>
+      
+      {/* 2. Attach the ref to the HTML element we want to target */}
+      <footer ref={footerRef} style={{ padding: '50px', background: '#333', color: 'white' }}>
+        <h3>Agency Footer</h3>
+        <p>Thanks for scrolling down!</p>
+      </footer>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: Custom Video Controls (src/pages/About.jsx)',
+        body: 'On the About page, we have a showcase video. HTML `<video>` tags have built-in `.play()` and `.pause()` methods, but we can only trigger them from custom buttons if we grab the element using `useRef`!',
+        code: `// src/pages/About.jsx
+import { useRef } from 'react';
+
+export default function About() {
+  // 1. Create the sticky note for the video
+  const videoRef = useRef(null);
+
+  return (
+    <div>
+      <h1>About Our Agency</h1>
+      
+      {/* 2. Attach the ref to the video element */}
+      <video 
+        ref={videoRef} 
+        width="400" 
+        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" 
+      />
+      
+      <div style={{ marginTop: '10px', display: 'flex', gap: '10px' }}>
+        {/* 3. Use the ref to trigger native HTML methods! */}
+        <button onClick={() => videoRef.current.play()}>Play Showcase</button>
+        <button onClick={() => videoRef.current.pause()}>Pause Showcase</button>
+      </div>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 4: Auto-Focus the Form (src/pages/Contact.jsx)',
+        body: 'When a user visits the Contact page, we want their cursor to automatically start blinking inside the "Name" input. We combine `useEffect` (Day 7) and `useRef` to do this!',
+        code: `// src/pages/Contact.jsx
+import { useRef, useEffect } from 'react';
+
+export default function Contact() {
+  // 1. Create the sticky note
+  const nameInputRef = useRef(null);
+
+  useEffect(() => {
+    // 3. When the component loads, directly access the HTML and focus it!
+    nameInputRef.current.focus();
+  }, []); // Empty array means this only runs once on load
+
+  return (
+    <div>
+      <h1>Contact Us</h1>
+      <form style={{ display: 'flex', flexDirection: 'column', width: '300px', gap: '10px' }}>
+        {/* 2. Attach the sticky note to this specific input */}
+        <input ref={nameInputRef} type="text" placeholder="Your Name" />
+        <input type="email" placeholder="Your Email" />
+        <button type="submit">Send Message</button>
+      </form>
     </div>
   );
 }`,
@@ -2635,24 +2742,24 @@ export default function SearchBar() {
       },
       {
         type: 'text',
-        title: 'Unguided Task: The Video Controller',
-        timeEstimate: '25 min',
-        body: 'Let\'s use `useRef` to control a media element! HTML `<video>` tags have built-in `.play()` and `.pause()` methods, but you need a ref to access them.\n\n**Requirements:**\n1. Create a `VideoPlayer` component.\n2. Create a `videoRef` using `useRef(null)`.\n3. Add a `<video>` tag to your JSX and attach your ref to it. (You can use this URL for the `src`: `https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4`).\n4. Create two buttons: "Play" and "Pause".\n5. Write onClick handlers for both. The Play button should call `videoRef.current.play()`. The Pause button should call `videoRef.current.pause()`.',
+        title: 'Unguided Task: The Image Carousel',
+        timeEstimate: '30 min',
+        body: 'Let\'s use `useRef` to manipulate the DOM one last time! Build a horizontal scrolling image gallery.\n\n**Requirements:**\n1. In your `pages` folder, create `Gallery.jsx`.\n2. In `App.jsx`, add a new `<Link>` and `<Route>` for `/gallery`.\n3. In `Gallery.jsx`, create a `div` that contains 5 images (or colored boxes). Give the `div` a style of `{ display: "flex", overflowX: "scroll", width: "400px" }`.\n4. Create a `galleryRef` and attach it to that `div`.\n5. Create two buttons: "Scroll Left" and "Scroll Right".\n6. In the onClick handlers, use the native DOM method to scroll the div: `galleryRef.current.scrollBy({ left: 300, behavior: "smooth" })`. (Use `-300` for left).',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: '✓ Did you attach the ref using the <code>ref={videoRef}</code> prop on the video tag? <br/>✓ Did you remember to use <code>.current</code> before calling .play() or .pause()?'
+        boxBody: 'âœ“ Did you remember to add the Route to App.jsx? <br/>âœ“ Did you attach the ref to the parent container, not the individual images? <br/>âœ“ Does clicking the buttons smoothly slide the images?'
       },
       {
         type: 'homework',
         title: 'Advanced Ref: The Silent Stopwatch',
         timeEstimate: '30 min',
-        body: 'We can use `useRef` to store background data. Let\'s build a stopwatch!\n\n**Requirements:**\n1. You need `useState` to track the `seconds` (because we want to see the numbers tick up on the screen).\n2. You need `useRef` to store the `timerId` (because saving the timer ID shouldn\'t cause a screen refresh).\n3. Create a `handleStart` function that uses `setInterval` to increase the seconds every 1000ms. Save the ID returned by `setInterval` into your ref: `timerRef.current = setInterval(...)`.\n4. Create a `handleStop` function that stops the timer by passing your ref to `clearInterval`: `clearInterval(timerRef.current)`.\n5. Render the seconds and the Start/Stop buttons.',
+        body: 'We can also use `useRef` to store background mechanics. Try building a stopwatch!\n\n**Requirements:**\n1. Use `useState` to track the `seconds` (because we want to see the numbers tick up on the screen).\n2. Use `useRef` to store the `timerId` (because saving the timer ID shouldn\'t cause a screen refresh).\n3. Create a `handleStart` function that uses `setInterval` to increase the seconds every 1000ms. Save the ID returned by `setInterval` into your ref: `timerRef.current = setInterval(...)`.\n4. Create a `handleStop` function that stops the timer by passing your ref to `clearInterval`: `clearInterval(timerRef.current)`.',
         boxTitle: 'Pro-Tip',
         boxBody: 'This pattern is incredibly common. We use state for what the user <em>sees</em>, and refs for the background mechanics that the developer needs to <em>control</em>.'
       },
       {
         type: 'text',
-        title: '📚 Further Reading',
+        title: 'ðŸ“š Further Reading',
         body: 'Understanding when to use `useState` versus `useRef` is one of the key milestones in becoming a Senior React Developer. The official docs have a fantastic visual breakdown of this comparison.',
         boxType: 'info',
         boxTitle: 'Official React Docs',
@@ -2673,7 +2780,7 @@ export default function SearchBar() {
             correct: 1
           },
           {
-            question: 'If you create a ref called `myRef`, how do you access the actual data stored inside it?',
+            question: 'If you create a ref called `myRef`, how do you access the actual HTML element stored inside it?',
             options: [
               'myRef.value',
               'myRef.data',
@@ -2688,7 +2795,7 @@ export default function SearchBar() {
               'When you need to store the ID of a setInterval timer.',
               'When you need to directly focus an HTML input element.',
               'When you are building a custom Video Player.',
-              'When you want to display the data on the screen for the user to see.'
+              'When you want to display the changing data on the screen for the user to see.'
             ],
             correct: 3
           },
@@ -2701,16 +2808,6 @@ export default function SearchBar() {
               'By calling document.getElementById().'
             ],
             correct: 1
-          },
-          {
-            question: 'In the Stopwatch homework, why did we store the timer ID in a ref instead of state?',
-            options: [
-              'Because setInterval requires a ref to function.',
-              'Because we wanted to display the ID on the screen.',
-              'Because storing the ID is just background mechanics; putting it in state would cause an unnecessary, invisible re-render.',
-              'Because state cannot hold numbers.'
-            ],
-            correct: 2
           }
         ]
       }
