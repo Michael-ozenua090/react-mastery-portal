@@ -2861,20 +2861,12 @@ export default function Contact() {
     milestone: { icon: '🎓', title: 'React Master', text: 'This is it. Build a full application from scratch, pass the final exam, and claim your Speta Academy certificate.' },
     sections: [
       {
-        type: 'text',
-        title: 'The Capstone Project',
-        body: 'For the past four weeks, you have been learning individual React tools in isolation. Today, the training wheels come off.\n\nYour final task is to build a fully functional E-Commerce frontend for the **Speta Academy Merchandise Store**. You must combine Components, Props, State, Effects, Custom Hooks, Routing, Context, and Refs into a single, cohesive application.',
-        boxType: 'info',
-        boxTitle: 'The API Endpoint',
-        boxBody: 'You will fetch your store products using this free, open-source mock API: <br/><code>https://fakestoreapi.com/products</code>'
-      },
-      {
         type: 'homework',
-        title: 'Project Requirements: The Speta Store',
-        timeEstimate: '3 hours',
-        body: 'Build the application from scratch using your own file structure.\n\n**Architectural Requirements:**\n1. **Routing:** Use React Router to create three pages: `/` (Home), `/products` (Shop), and `/cart` (Shopping Cart). Include a global Navbar that appears on all pages.\n2. **Side Effects:** On the Shop page, write a `useEffect` that fetches the products from the FakeStore API and displays them in a grid.\n3. **Global State:** Create a `CartContext` to hold the user\'s selected items. When a user clicks "Add to Cart" on a product, it should update the global state. The Navbar must display the total number of items currently in the cart.\n4. **DOM Manipulation:** On the Home page, create a Newsletter Signup input. Use `useRef` and `useEffect` to automatically focus the input field as soon as the Home page loads.\n5. **Clean Code:** Extract your API fetching logic into a custom hook (e.g., `useFetchProducts`).\n\nTake your time. Read the errors in your console. You have everything you need to build this.',
-        boxTitle: 'Submission',
-        boxBody: 'Once you have successfully built the Speta Store and confirmed all routes and global state updates work flawlessly, you are authorized to proceed to the Master Exam.'
+        title: 'The Capstone: Speta Merchandise Store',
+        timeEstimate: '3 - 4 hours',
+        body: 'For the past four weeks, you have been learning individual React tools in isolation. Today, the training wheels come off.\n\nYour final task is to build a fully functional E-Commerce frontend from scratch.\n\n**Architectural Requirements:**\n1. **Routing:** Use React Router to create three pages: `/` (Home), `/products` (Shop), and `/cart` (Shopping Cart). Include a global Navbar.\n2. **Side Effects:** On the Shop page, write a `useEffect` that fetches products from the free API: `https://fakestoreapi.com/products`.\n3. **Global State:** Create a `CartContext` to hold the user\'s selected items. The Navbar must display the total number of items currently in the cart.\n4. **DOM Manipulation:** On the Home page, create a Newsletter Signup input. Use `useRef` and `useEffect` to automatically focus the input field as soon as the Home page loads.\n5. **Clean Code:** Extract your API fetching logic into a custom hook (e.g., `useFetchProducts`).\n\nTake your time. Read the errors in your console. You have everything you need to build this.',
+        boxTitle: 'Submission Authorized',
+        boxBody: 'Once you have successfully built the Speta Store and confirmed all routes and global state updates work flawlessly, you are authorized to proceed to the Master Exam below.'
       },
       {
         type: 'exam',
@@ -2984,5 +2976,6 @@ export default function Contact() {
       }
     ]
   }
+
 
 ];
