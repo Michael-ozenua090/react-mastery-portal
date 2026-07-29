@@ -2597,7 +2597,7 @@ export default function App() {
         body: 'By now, you know that `useState` is how we remember data in React. But `useState` has a side effect: every time you update a state variable, React completely redraws (re-renders) the component to show the new data on the screen. \n\nBut what if you want to remember a piece of data in the background *without* forcing the screen to redraw? Or what if you just want to grab a specific HTML element (like an `<input>`) to force the cursor to focus on it? \n\nFor this, we use the **`useRef`** hook.',
         boxType: 'info',
         boxTitle: 'The Definition',
-        boxBody: '`useRef` is a hook that lets you reference a value that\'s not needed for rendering. It returns an object with a single property: <code>current</code>.'
+        boxBody: '`useRef` is a hook that lets you reference a value that\u2019s not needed for rendering. It returns an object with a single property: <code>current</code>.'
       },
       {
         type: 'text',
@@ -2610,21 +2610,56 @@ export default function App() {
       {
         type: 'text',
         title: 'Guided Project: The Speta Agency Website',
-        body: 'For your final teaching day, we are going to build a full 3-page agency website from scratch! \n\n**Setup:** Go to your `src` folder and create a new folder named `pages`. Inside `pages`, create three empty files: `Home.jsx`, `About.jsx`, and `Contact.jsx`.'
+        body: 'For your final teaching day, we are going to build a full multi-page agency website from scratch! \n\n**Setup:** Go to your `src` folder. Create a folder named `pages` and a folder named `components`.\n\nInside `pages`, create four empty files: `Home.jsx`, `About.jsx`, `Contact.jsx`, and `NotFound.jsx`.\nInside `components`, create `Footer.jsx`.'
       },
       {
         type: 'code',
-        title: 'Step 1: The Routing Setup (src/App.jsx)',
-        body: 'First, let\'s wire up our navigation. Open your `App.jsx` and use React Router to link our three new pages together.',
+        title: 'Step 1: The Global Footer (src/components/Footer.jsx)',
+        body: 'Instead of writing the footer on every single page, we create it once as a reusable component. We will place this at the bottom of our entire app.',
+        code: `// src/components/Footer.jsx
+export default function Footer() {
+  return (
+    <footer style={{ padding: '40px 20px', background: '#111', color: '#fff', marginTop: '50px', textAlign: 'center' }}>
+      <h3>Speta Agency</h3>
+      <p>© 2026 All Rights Reserved.</p>
+    </footer>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 2: The 404 Error Page (src/pages/NotFound.jsx)',
+        body: 'We learned about this in Day 9. If a user types a bad URL, we need a fallback screen to catch them.',
+        code: `// src/pages/NotFound.jsx
+import { Link } from 'react-router-dom';
+
+export default function NotFound() {
+  return (
+    <div style={{ padding: '50px', textAlign: 'center' }}>
+      <h1>404 - Page Not Found</h1>
+      <p>Oops! The page you are looking for does not exist.</p>
+      <Link to="/" style={{ color: 'blue', textDecoration: 'underline' }}>Take me back home</Link>
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 3: The Routing Setup (src/App.jsx)',
+        body: 'Now we wire everything together. We will place our new `<Footer />` component outside of the `<Routes>` block so it permanently stays at the bottom of every page.',
         code: `// src/App.jsx
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import NotFound from './pages/NotFound';
+import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <nav style={{ display: 'flex', gap: '15px', padding: '20px', background: '#eee' }}>
         <strong>Speta Agency</strong>
         <Link to="/">Home</Link>
@@ -2632,12 +2667,51 @@ export default function App() {
         <Link to="/contact">Contact</Link>
       </nav>
 
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: '20px', flexGrow: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          {/* The Catch-All Route for our 404 Page */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
+      </div>
+
+      {/* The Global Footer appears on every page automatically! */}
+      <Footer />
+    </div>
+  );
+}`,
+        lang: 'jsx'
+      },
+      {
+        type: 'code',
+        title: 'Step 4: Scroll To Bottom (src/pages/Home.jsx)',
+        body: 'Let\'s build the Home page. We will use `useRef` to create a \"Scroll to Bottom\" button. We attach a ref to a specific section on this page, and use native DOM methods to scroll to it!',
+        code: `// src/pages/Home.jsx
+import { useRef } from 'react';
+
+export default function Home() {
+  // 1. Create the sticky note
+  const bottomSectionRef = useRef(null);
+
+  const scrollToBottom = () => {
+    // 3. Use native DOM methods to scroll to the element!
+    bottomSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div>
+      <h1>Welcome to Speta Agency</h1>
+      <button onClick={scrollToBottom}>Jump to Call to Action</button>
+      
+      {/* Creating artificial empty space to force scrolling */}
+      <div style={{ height: '150vh', background: 'linear-gradient(#fff, #ccc)' }}></div>
+      
+      {/* 2. Attach the ref to the HTML element we want to target */}
+      <div ref={bottomSectionRef} style={{ padding: '50px', background: '#4caf50', color: 'white' }}>
+        <h2>Ready to start your project?</h2>
+        <p>Head over to our Contact page.</p>
       </div>
     </div>
   );
@@ -2646,41 +2720,7 @@ export default function App() {
       },
       {
         type: 'code',
-        title: 'Step 2: Scroll To Footer (src/pages/Home.jsx)',
-        body: 'Let\'s build the Home page. We will use `useRef` to create a "Scroll to Footer" button. We attach a ref to the footer, and use native DOM methods to scroll to it!',
-        code: `// src/pages/Home.jsx
-import { useRef } from 'react';
-
-export default function Home() {
-  // 1. Create the sticky note
-  const footerRef = useRef(null);
-
-  const scrollToBottom = () => {
-    // 3. Use native DOM methods to scroll to the element!
-    footerRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <div>
-      <h1>Welcome to Speta Agency</h1>
-      <button onClick={scrollToBottom}>Scroll to Footer</button>
-      
-      {/* Creating artificial empty space to force scrolling */}
-      <div style={{ height: '150vh', background: 'linear-gradient(#fff, #ccc)' }}></div>
-      
-      {/* 2. Attach the ref to the HTML element we want to target */}
-      <footer ref={footerRef} style={{ padding: '50px', background: '#333', color: 'white' }}>
-        <h3>Agency Footer</h3>
-        <p>Thanks for scrolling down!</p>
-      </footer>
-    </div>
-  );
-}`,
-        lang: 'jsx'
-      },
-      {
-        type: 'code',
-        title: 'Step 3: Custom Video Controls (src/pages/About.jsx)',
+        title: 'Step 5: Custom Video Controls (src/pages/About.jsx)',
         body: 'On the About page, we have a showcase video. HTML `<video>` tags have built-in `.play()` and `.pause()` methods, but we can only trigger them from custom buttons if we grab the element using `useRef`!',
         code: `// src/pages/About.jsx
 import { useRef } from 'react';
@@ -2712,8 +2752,8 @@ export default function About() {
       },
       {
         type: 'code',
-        title: 'Step 4: Auto-Focus the Form (src/pages/Contact.jsx)',
-        body: 'When a user visits the Contact page, we want their cursor to automatically start blinking inside the "Name" input. We combine `useEffect` (Day 7) and `useRef` to do this!',
+        title: 'Step 6: Auto-Focus the Form (src/pages/Contact.jsx)',
+        body: 'When a user visits the Contact page, we want their cursor to automatically start blinking inside the \"Name\" input. We combine `useEffect` (Day 7) and `useRef` to do this!',
         code: `// src/pages/Contact.jsx
 import { useRef, useEffect } from 'react';
 
@@ -2747,7 +2787,7 @@ export default function Contact() {
         body: 'Let\'s use `useRef` to manipulate the DOM one last time! Build a horizontal scrolling image gallery.\n\n**Requirements:**\n1. In your `pages` folder, create `Gallery.jsx`.\n2. In `App.jsx`, add a new `<Link>` and `<Route>` for `/gallery`.\n3. In `Gallery.jsx`, create a `div` that contains 5 images (or colored boxes). Give the `div` a style of `{ display: "flex", overflowX: "scroll", width: "400px" }`.\n4. Create a `galleryRef` and attach it to that `div`.\n5. Create two buttons: "Scroll Left" and "Scroll Right".\n6. In the onClick handlers, use the native DOM method to scroll the div: `galleryRef.current.scrollBy({ left: 300, behavior: "smooth" })`. (Use `-300` for left).',
         boxType: 'rule',
         boxTitle: 'Self-Audit Checklist',
-        boxBody: 'âœ“ Did you remember to add the Route to App.jsx? <br/>âœ“ Did you attach the ref to the parent container, not the individual images? <br/>âœ“ Does clicking the buttons smoothly slide the images?'
+        boxBody: '\u2713 Did you remember to add the Route to App.jsx? <br/>\u2713 Did you attach the ref to the parent container, not the individual images? <br/>\u2713 Does clicking the buttons smoothly slide the images?'
       },
       {
         type: 'homework',
@@ -2813,4 +2853,5 @@ export default function Contact() {
       }
     ]
   }
+
 ];
