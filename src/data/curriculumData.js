@@ -2852,6 +2852,137 @@ export default function Contact() {
         ]
       }
     ]
+  },
+  {
+    dayNumber: 12, week: 4,
+    title: 'Capstone & Certification',
+    subtitle: 'The Final Trial',
+    topics: ['Project Architecture', 'Global State Management', 'Routing', 'Final Exam'],
+    milestone: { icon: '🎓', title: 'React Master', text: 'This is it. Build a full application from scratch, pass the final exam, and claim your Speta Academy certificate.' },
+    sections: [
+      {
+        type: 'text',
+        title: 'The Capstone Project',
+        body: 'For the past four weeks, you have been learning individual React tools in isolation. Today, the training wheels come off.\n\nYour final task is to build a fully functional E-Commerce frontend for the **Speta Academy Merchandise Store**. You must combine Components, Props, State, Effects, Custom Hooks, Routing, Context, and Refs into a single, cohesive application.',
+        boxType: 'info',
+        boxTitle: 'The API Endpoint',
+        boxBody: 'You will fetch your store products using this free, open-source mock API: <br/><code>https://fakestoreapi.com/products</code>'
+      },
+      {
+        type: 'homework',
+        title: 'Project Requirements: The Speta Store',
+        timeEstimate: '3 hours',
+        body: 'Build the application from scratch using your own file structure.\n\n**Architectural Requirements:**\n1. **Routing:** Use React Router to create three pages: `/` (Home), `/products` (Shop), and `/cart` (Shopping Cart). Include a global Navbar that appears on all pages.\n2. **Side Effects:** On the Shop page, write a `useEffect` that fetches the products from the FakeStore API and displays them in a grid.\n3. **Global State:** Create a `CartContext` to hold the user\'s selected items. When a user clicks "Add to Cart" on a product, it should update the global state. The Navbar must display the total number of items currently in the cart.\n4. **DOM Manipulation:** On the Home page, create a Newsletter Signup input. Use `useRef` and `useEffect` to automatically focus the input field as soon as the Home page loads.\n5. **Clean Code:** Extract your API fetching logic into a custom hook (e.g., `useFetchProducts`).\n\nTake your time. Read the errors in your console. You have everything you need to build this.',
+        boxTitle: 'Submission',
+        boxBody: 'Once you have successfully built the Speta Store and confirmed all routes and global state updates work flawlessly, you are authorized to proceed to the Master Exam.'
+      },
+      {
+        type: 'exam',
+        title: 'Master Certification Exam',
+        questions: [
+          {
+            question: 'What is the absolute golden rule of returning JSX from a component?',
+            options: [
+              'You must write it in single quotes.',
+              'You must return one single parent element.',
+              'You must always use a <div> as the wrapper.',
+              'You cannot return standard HTML tags.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'If you want to map over an array of users and display their names, what special prop MUST you provide to the top-level element in the map return?',
+            options: [
+              'The "id" prop.',
+              'The "key" prop, using a unique identifier.',
+              'The "index" prop.',
+              'The "map" prop.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'When submitting a form in React, how do you stop the browser from refreshing the page and wiping out your state?',
+            options: [
+              'Use a <button type="button"> instead of "submit".',
+              'Pass the form to useEffect.',
+              'Call event.preventDefault() inside your onSubmit handler.',
+              'React automatically stops the refresh for you.'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you provide an empty dependency array [] to a useEffect hook, when will the effect run?',
+            options: [
+              'Every time the component re-renders.',
+              'Only when the component first mounts to the screen.',
+              'Only when the component unmounts.',
+              'Never.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What happens if you use standard HTML <a href="..."> tags for internal navigation in a React Single Page Application?',
+            options: [
+              'The app crashes instantly.',
+              'The browser does a full page refresh, permanently destroying your React state (like your shopping cart).',
+              'React Router automatically converts it into a <Link>.',
+              'The styles break.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'What is the purpose of the React Context API?',
+            options: [
+              'To fetch data from backend servers.',
+              'To teleport global state directly to any component, completely avoiding Prop Drilling.',
+              'To create multi-page navigation.',
+              'To force a component to re-render.'
+            ],
+            correct: 1
+          },
+          {
+            question: 'Why is it a terrible idea to put a rapidly changing text input into a global Context Provider?',
+            options: [
+              'It will cause every single component listening to that Context to re-render on every keystroke, causing severe lag.',
+              'Context can only hold arrays and objects.',
+              'It is a security vulnerability.',
+              'React will throw a syntax error.'
+            ],
+            correct: 0
+          },
+          {
+            question: 'Which hook should you use if you need to remember data in the background WITHOUT triggering a component re-render?',
+            options: [
+              'useState',
+              'useContext',
+              'useRef',
+              'useEffect'
+            ],
+            correct: 2
+          },
+          {
+            question: 'If you create a ref called `inputRef`, how do you access the actual raw HTML element to call native methods like .focus()?',
+            options: [
+              'inputRef.html',
+              'inputRef.current',
+              'inputRef.element',
+              'inputRef()'
+            ],
+            correct: 1
+          },
+          {
+            question: 'You want to display a counter number on the screen. The user clicks a button to increase it. Should you use useState or useRef?',
+            options: [
+              'useRef, because it is faster.',
+              'useState, because the data must be displayed on the screen, requiring a re-render to show the new number.',
+              'It doesn\'t matter, both work exactly the same.',
+              'useContext, because the button is clicking it.'
+            ],
+            correct: 1
+          }
+        ]
+      }
+    ]
   }
 
 ];
