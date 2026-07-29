@@ -1,4 +1,4 @@
-﻿// src/data/curriculumData.js
+// src/data/curriculumData.js
 
 export const WEEK_COLORS = {
   1: { color: '#00d4aa', label: 'Week 1 â€” Foundations' },
@@ -13,7 +13,7 @@ export const curriculum = [
     title: 'Getting Started with React',
     subtitle: 'Setup, file structure & JSX explained',
     topics: ['Node Setup', 'What is React', 'Vite Setup', 'JSX Rules', 'Expressions', 'Knowledge Check'],
-    milestone: { icon: 'ðŸš€', title: 'Welcome to React!', text: 'Today is your foundation. We will set up your professional environment and learn the core language of React: JSX.' },
+    milestone: { icon: '🚀', title: 'Welcome to React!', text: 'Today is your foundation. We will set up your professional environment and learn the core language of React: JSX.' },
     sections: [
       {
         type: 'text',
@@ -43,7 +43,7 @@ export const curriculum = [
       },
       {
         type: 'text',
-        title: 'ðŸ”§ Install React DevTools (Do This Now!)',
+        title: '🔧 Install React DevTools (Do This Now!)',
         body: 'React DevTools is a free browser extension that gives you superpowers. Without it, when your code breaks you are essentially debugging blindfolded. With it, you can see exactly what data is inside every component in real time.\n\n**Install it in 30 seconds:**\n1. Open Chrome (or Firefox) and search for **"React Developer Tools extension"**.\n2. Click "Add to Chrome" â†’ "Add extension".\n3. A small React icon will appear in your browser toolbar.\n4. Once your Vite app is running, click the icon â€” it turns from grey to coloured. You will see two new tabs in Chrome DevTools (F12): **"âš› Components"** and **"âš› Profiler"**.',
         boxType: 'tip',
         boxTitle: 'What does it actually show me?',
@@ -67,8 +67,8 @@ export const curriculum = [
 â”œâ”€â”€ ðŸ“ src/                â† âœ… YOUR CODE GOES HERE
 â”‚   â”œâ”€â”€ App.jsx            â† âœ… Main app component (you will edit this a lot)
 â”‚   â”œâ”€â”€ App.css            â† âœ… Styles for App
-â”‚   â””â”€â”€ main.jsx           â† âš ï¸  Entry point â€” leave alone for now
-â””â”€â”€ package.json           â† âš ï¸  Project config`
+â”‚   â””â”€â”€ main.jsx           â† ⚠️  Entry point â€” leave alone for now
+â””â”€â”€ package.json           â† ⚠️  Project config`
       },
       {
         type: 'rules',
@@ -114,7 +114,7 @@ export const curriculum = [
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: 'âš¡ What are those backticks (`)?',
+        boxTitle: '⚡ What are those backticks (`)?',
         boxBody: 'Look at line 3 in the code: <code>{`card theme-${user}`}</code>. Those backtick quotes (<code>`</code>) are called a <strong>Template Literal</strong> â€” a special type of JavaScript string that lets you embed variables directly using <code>${}</code>. Compare: <br/><strong>Old way:</strong> <code>"card theme-" + user</code> <br/><strong>Template literal:</strong> <code>`card theme-${user}`</code> <br/>They do the same thing â€” template literals are just cleaner to read. You will see them throughout this course whenever we need to mix a variable into a string.'
       },
       {
@@ -226,7 +226,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/writing-markup-with-jsx">Writing Markup with JSX</a>'
@@ -294,7 +294,7 @@ export default App;`,
     title: 'Components & Props',
     subtitle: 'Building reusable UI pieces that talk to each other',
     topics: ['Component Tree', 'Import & Export', 'Props (Custom Attributes)', 'Destructuring', 'Knowledge Check'],
-    milestone: { icon: 'ðŸ§±', title: 'Think in Components', text: 'Today you stop writing web pages and start building Lego blocks. By the end of today, you will know how to build a component once and reuse it everywhere.' },
+    milestone: { icon: '🧱', title: 'Think in Components', text: 'Today you stop writing web pages and start building Lego blocks. By the end of today, you will know how to build a component once and reuse it everywhere.' },
     sections: [
       {
         type: 'text',
@@ -352,7 +352,7 @@ function StudentCard({ name, grade }) {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: 'âš¡ Quick JS Refresher: What is Destructuring?',
+        boxTitle: '⚡ Quick JS Refresher: What is Destructuring?',
         boxBody: 'Destructuring is a standard JavaScript shortcut â€” it is not React-specific. It unpacks values from an object into separate variables in one line. <br/><strong>Without destructuring:</strong> <code>const name = props.name; const grade = props.grade;</code> <br/><strong>With destructuring:</strong> <code>const { name, grade } = props;</code> <br/>React lets us do this shortcut right inside the function parentheses: <code>function StudentCard({ name, grade })</code>. Same result, cleaner code.'
       },
       {
@@ -474,7 +474,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/your-first-component">Your First Component</a><br/>â€¢ <a href="https://react.dev/learn/passing-props-to-a-component">Passing Props to a Component</a>'
@@ -542,7 +542,7 @@ export default App;`,
     title: 'State with useState',
     subtitle: 'Making components remember and react to change',
     topics: ['What is State', 'useState Hook', 'State Updates', 'Never Mutate State', 'Certification Exam'],
-    milestone: { icon: 'âš¡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
+    milestone: { icon: '⚡', title: 'State is the heartbeat of React', text: 'Props are for passing data in. State is for data that changes. Master this and your websites officially become interactive web applications.' },
     sections: [
       {
         type: 'text',
@@ -582,7 +582,7 @@ export default function Counter() {
       },
       {
         type: 'code',
-        title: 'âš ï¸ The Golden Rule: Never Mutate State',
+        title: '⚠️ The Golden Rule: Never Mutate State',
         body: 'This is the #1 mistake beginners make. You are NEVER allowed to change a state variable directly. You must always use the setter function, and if it is a list (array), you must give React a **brand new list**. The three dots (`...`) you will see below are the **Spread Operator** â€” they unpack all the existing items from the old array into a brand new one, then we add the new item at the end.',
         code: `import { useState } from "react";
 
@@ -639,7 +639,7 @@ export default function UserProfile() {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: 'âš¡ The Spread + Override Pattern',
+        boxTitle: '⚡ The Spread + Override Pattern',
         boxBody: '<code>{ ...user, name: "Michael" }</code> means: â€œcopy every field from the user object, then set <code>name</code> to "Michael"â€. Any field listed after the spread <strong>overwrites</strong> the copied value. Fields you do not list are kept exactly as they were. You will use this pattern constantly when building forms and user profile pages.'
       },
       {
@@ -759,7 +759,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ”­ Coming Up in Week 2',
+        title: '🔭 Coming Up in Week 2',
         body: 'You have now covered the three pillars of React: JSX, Components & Props, and State. Here is a preview of what Week 2 will build on top of this foundation:\n\n1. **Events & Conditional Rendering (Day 4):** How to react to user actions like clicks and typing â€” and how to show or hide UI based on conditions using the Ternary operator and `&&`.\n2. **Lists & .map() (Day 5):** How to render dynamic lists of data from arrays â€” the skill behind every feed, product grid, and todo list you have ever seen.\n3. **Forms & User Input (Day 6):** How to capture user input safely with controlled components, prevent page reloads, and combine everything you have learned to build a working To-Do List.\n\nYou are further along than you think. Keep your projects open and keep tinkering!',
         boxType: 'tip',
         boxTitle: 'Tip: Keep Building Between Classes',
@@ -767,7 +767,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/state-a-components-memory">State: A Componentâ€™s Memory</a><br/>â€¢ <a href="https://react.dev/learn/updating-objects-in-state">Updating Objects in State</a>'
@@ -836,14 +836,14 @@ export default App;`,
     title: 'Events & Conditional Rendering',
     subtitle: 'Making your app react to the user',
     topics: ['onClick & onChange', 'Pass, Don\'t Call', 'Ternary (? :)', 'Logical AND (&&)', 'Knowledge Check'],
-    milestone: { icon: 'ðŸŽ¯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
+    milestone: { icon: '🎯', title: 'Welcome to Week 2!', text: 'You know how to store data. Now you will learn how to change it based on user actions, and dynamically hide or show UI based on those changes.' },
     sections: [
       {
         type: 'text',
         title: 'Event Handling in React',
         body: 'React handles events similarly to standard HTML, but with a few very important differences:\n\n1. **CamelCase:** In HTML you write `onclick`. In React, you must write `onClick`.\n2. **Pass, Don\'t Call:** You pass a function to the event, you don\'t call it as a string. \n3. **The Event Object (e):** Just like vanilla JS, React gives you an event object containing details about the action (like what the user typed).',
         boxType: 'danger',
-        boxTitle: 'The Infinite Loop Crash (âš ï¸ CRITICAL)',
+        boxTitle: 'The Infinite Loop Crash (⚠️ CRITICAL)',
         boxBody: 'If you write <code>onClick={calculateScore()}</code> with parentheses, the function runs <strong>immediately</strong> when the page loads. If that function updates State, it forces a reload, which runs the function again, causing an Infinite Loop that crashes the browser! <br><br><strong>Always pass the function name without parentheses:</strong> <code>onClick={calculateScore}</code> or use an arrow function: <code>onClick={() => calculateScore(5)}</code>.'
       },
       {
@@ -1010,7 +1010,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/responding-to-events">Responding to Events</a><br/>â€¢ <a href="https://react.dev/learn/conditional-rendering">Conditional Rendering</a>'
@@ -1079,7 +1079,7 @@ export default App;`,
     title: 'Lists & Keys',
     subtitle: 'Rendering arrays of data dynamically',
     topics: ['Array.map()', 'Dynamic UI', 'The Key Prop', 'List of Components', 'Knowledge Check'],
-    milestone: { icon: 'ðŸ“‹', title: 'Data-Driven UI', text: 'Stop hardcoding your components. Today you will learn how to take an array of data and automatically generate a beautiful interface for it.' },
+    milestone: { icon: '🗺️', title: 'Data-Driven UI', text: 'Stop hardcoding your components. Today you will learn how to take an array of data and automatically generate a beautiful interface for it.' },
     sections: [
       {
         type: 'text',
@@ -1120,7 +1120,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ”‘ The Danger Zone: The Key Prop',
+        title: '🔑 The Danger Zone: The Key Prop',
         body: 'Did you notice the `key={skill}` in the code above? **This is mandatory.**\n\nWhenever you map over a list in React, the outermost element you return MUST have a unique `key` prop. If you forget it, React will scream at you in the console with a red warning.',
         boxType: 'danger',
         boxTitle: 'Why does React need Keys?',
@@ -1273,7 +1273,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/rendering-lists">Rendering Lists</a>'
@@ -1342,7 +1342,7 @@ export default App;`,
     title: 'Forms & User Input',
     subtitle: 'Controlled components and submitting data',
     topics: ['Controlled Inputs', 'onSubmit', 'e.preventDefault()', 'Clearing Forms', 'Certification Exam'],
-    milestone: { icon: 'ðŸ“', title: 'Two-Way Communication', text: 'Today you learn how to safely capture user data, prevent page reloads, and use forms to build truly interactive applications.' },
+    milestone: { icon: '📝', title: 'Two-Way Communication', text: 'Today you learn how to safely capture user data, prevent page reloads, and use forms to build truly interactive applications.' },
     sections: [
       {
         type: 'text',
@@ -1354,7 +1354,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'âš ï¸ The Page Refresh Killer',
+        title: '⚠️ The Page Refresh Killer',
         body: 'HTML forms have a built-in behavior from the 1990s: when you click a `<button type="submit">`, the browser attempts to send the data to a server and **refreshes the page**. \n\nIn a Single Page Application like React, a page refresh destroys all your state! You lose everything.',
         boxType: 'danger',
         boxTitle: 'e.preventDefault() is Mandatory',
@@ -1518,7 +1518,7 @@ export default function ContactForm() {
 }`,
         lang: 'jsx',
         boxType: 'info',
-        boxTitle: 'âš¡ How [e.target.name] Works',
+        boxTitle: '⚡ How [e.target.name] Works',
         boxBody: 'The square brackets in <code>{ ...form, [e.target.name]: e.target.value }</code> are called a <strong>Computed Property Name</strong>. It means: "use the value of <code>e.target.name</code> as the key." So if the user typed in the email field, <code>e.target.name</code> is <code>"email"</code>, and the result is <code>{ ...form, email: "what they typed" }</code>. This one handler replaces three separate handlers.'
       },
       {
@@ -1559,7 +1559,7 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: 'ðŸ›¡ï¸ Basic Form Validation: The Disabled Button Pattern',
+        title: '🛡️ Basic Form Validation: The Disabled Button Pattern',
         body: 'One of the most common UX patterns in real apps is disabling the submit button when required fields are empty. This prevents blank or broken form submissions before they happen.\n\nBecause JSX attributes can hold any JavaScript expression, you can wire `disabled` directly to your state:',
         boxType: 'tip',
         boxTitle: 'disabled={!email}',
@@ -1584,7 +1584,7 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/reference/react-dom/components/input">React &lt;input&gt; Reference</a>'
@@ -1658,7 +1658,7 @@ export default function ProfileSetup() {
     title: 'The useEffect Hook',
     subtitle: 'Connecting your app to the outside world',
     topics: ['What is a Side Effect?', 'useEffect Syntax', 'The Dependency Array', 'Cleanup Functions', 'Knowledge Check'],
-    milestone: { icon: 'ðŸŒ', title: 'Welcome to Week 3!', text: 'Your apps are about to get real. Today, you learn how to reach outside of React to fetch data from the internet, control the browser, and manage timers.' },
+    milestone: { icon: '🌍', title: 'Welcome to Week 3!', text: 'Your apps are about to get real. Today, you learn how to reach outside of React to fetch data from the internet, control the browser, and manage timers.' },
     sections: [
       {
         type: 'text',
@@ -1670,7 +1670,7 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: 'âš ï¸ The Dependency Array (The Infinite Loop Killer)',
+        title: '⚠️ The Dependency Array (The Infinite Loop Killer)',
         body: 'The `useEffect` hook takes two arguments: a function, and an array.\n`useEffect(() => { /* your code */ }, [dependencies]);`\n\nThe second argument (the array) tells React exactly *when* to run the effect. If you mess this up, you will crash your browser.',
         boxType: 'danger',
         boxTitle: 'The 3 Rules of the Dependency Array',
@@ -1678,7 +1678,7 @@ export default function ProfileSetup() {
       },
       {
         type: 'text',
-        title: 'âš¡ Quick JS Refresher: async / await',
+        title: '⚡ Quick JS Refresher: async / await',
         body: 'Before we build the guided project, we need to understand two JavaScript keywords that will appear in the code: `async` and `await`. These are not React concepts â€” they are standard JavaScript used for anything that takes time (like fetching data from the internet).\n\nJavaScript normally runs line by line, instantly. But fetching data from a server takes time â€” sometimes milliseconds, sometimes seconds. Without `async/await`, your code would continue running before the data arrives, giving you `undefined` instead of real data.',
         boxType: 'info',
         boxTitle: '\ud83d\udd0d How async / await works',
@@ -1807,7 +1807,7 @@ export default App;`,
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/synchronizing-with-effects">Synchronizing with Effects</a>'
@@ -1877,7 +1877,7 @@ export default App;`,
     title: 'Custom Hooks',
     subtitle: 'Creating your own reusable React superpower',
     topics: ['Why Custom Hooks?', 'Rules of Hooks', 'Building useFetch', 'Loading & Error States', 'Knowledge Check'],
-    milestone: { icon: 'ðŸ› ï¸', title: 'Extracting Logic', text: 'You have used React\'s built-in hooks. Now it is time to build your own. Custom hooks separate your app\'s logic from its UI, making your code incredibly clean and professional.' },
+    milestone: { icon: '🪝', title: 'Extracting Logic', text: 'You have used React\'s built-in hooks. Now it is time to build your own. Custom hooks separate your app\'s logic from its UI, making your code incredibly clean and professional.' },
     sections: [
       {
         type: 'text',
@@ -1946,7 +1946,7 @@ export default function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // ðŸ›¡ï¸ Professional Habit: Create an AbortController to cancel stale requests
+    // 🛡️ Professional Habit: Create an AbortController to cancel stale requests
     const controller = new AbortController();
 
     const fetchData = async () => {
@@ -2087,7 +2087,7 @@ export default function useToggle(initialValue = false) {
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Documentation',
         boxBody: 'For deeper reading on what we covered today, check out the official React docs:<br/><br/>â€¢ <a href="https://react.dev/learn/reusing-logic-with-custom-hooks" target="_blank">Reusing Logic with Custom Hooks</a>'
@@ -2166,7 +2166,7 @@ export default function useToggle(initialValue = false) {
     title: 'React Router',
     subtitle: 'Multi-page navigation in a Single Page App',
     topics: ['Client-Side Routing', 'BrowserRouter', 'Routes & Route', 'The Link Component', 'Certification Exam'],
-    milestone: { icon: 'ðŸ§­', title: 'Mapping the Web', text: 'Real applications have multiple pages. Today, you learn how to seamlessly navigate between URLs without ever refreshing the browser.' },
+    milestone: { icon: '🧭', title: 'Mapping the Web', text: 'Real applications have multiple pages. Today, you learn how to seamlessly navigate between URLs without ever refreshing the browser.' },
     sections: [
       {
         type: 'text',
@@ -2178,7 +2178,7 @@ export default function useToggle(initialValue = false) {
       },
       {
         type: 'text',
-        title: 'âš ï¸ The Golden Rule of Navigation',
+        title: '⚠️ The Golden Rule of Navigation',
         body: 'Because we are preventing the browser from refreshing, we can **never use standard HTML anchor tags** (`<a href="/about">`). \n\nIf you use an `<a>` tag, the browser will refresh, and all your React State (like logged-in users or shopping cart items) will be instantly destroyed.',
         boxType: 'danger',
         boxTitle: 'Use <Link> instead of <a>',
@@ -2277,7 +2277,7 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         boxType: 'resource',
         boxTitle: 'Official React Router Docs',
         boxBody: 'Routing can get incredibly complex. Check out the <a href="https://reactrouter.com/en/main/start/tutorial" target="_blank" style="color: var(--accent); text-decoration: underline;">Official React Router Tutorial</a> to see how to handle nested routes and data loaders.'
@@ -2391,7 +2391,7 @@ export default function Navbar() {
     title: 'The Context API',
     subtitle: 'Managing global state without Prop Drilling',
     topics: ['Prop Drilling', 'The Radio Analogy', 'When NOT to use Context', 'createContext & Provider', 'useContext', 'Knowledge Check'],
-    milestone: { icon: 'ðŸŒ', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
+    milestone: { icon: '🌍', title: 'Global State', text: 'Welcome to the final week! Today you learn how to teleport data across your entire application without passing a single prop.' },
     sections: [
       {
         type: 'text',
@@ -2403,7 +2403,7 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: 'ðŸ“» How it Works: The Radio Analogy',
+        title: '📻 How it Works: The Radio Analogy',
         body: 'Before we write any code, you need to understand that React Context is exactly like a real-world Radio Station. It requires three distinct pieces to work:\n\n1. **The Frequency (`createContext`)**: You have to claim a specific channel for your data (e.g., 99.5 FM).\n2. **The Radio Tower (`Provider`)**: You need a massive tower at the very top of your application to broadcast the music (your state) into the air.\n3. **The Radio Receiver (`useContext`)**: Down in your individual components, you turn on the radio, tune it to 99.5 FM, and instantly hear the music.',
         boxType: 'rule',
         boxTitle: 'The Component Tree Rule',
@@ -2411,7 +2411,7 @@ export default function Navbar() {
       },
       {
         type: 'text',
-        title: 'âš ï¸ When NOT to use Context',
+        title: '⚠️ When NOT to use Context',
         body: 'Context feels like magic, so beginners often try to put *every* piece of state into it. This is a massive mistake.\n\nWhenever the state inside a Provider changes, **every single component listening to that Provider will re-render.** If you put a rapidly changing text input into a global Context, your entire application will re-render every time the user types a single letter, causing massive lag.',
         boxType: 'danger',
         boxTitle: 'The Rule of Thumb',
@@ -2529,7 +2529,7 @@ export default function App() {
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         body: 'The Context API is a powerful tool, but understanding exactly how data flows through the component tree requires practice. To master global state and see more advanced architectural patterns, reading the official documentation is highly recommended.',
         boxType: 'info',
         boxTitle: 'Official React Docs',
@@ -2589,7 +2589,7 @@ export default function App() {
     title: 'useRef & The Grand Finale',
     subtitle: 'Silent memory and building a full multi-page application',
     topics: ['The Re-render Problem', 'The Sticky Note Analogy', 'Direct DOM Access', 'Building a Multi-Page App', 'Further Reading', 'Knowledge Check'],
-    milestone: { icon: 'ðŸŽ¯', title: 'Targeting Elements', text: 'Today is your final lesson! You will learn how to directly control HTML elements using useRef, and combine it with everything you learned to build a full 3-page website.' },
+    milestone: { icon: '🎯', title: 'Targeting Elements', text: 'Today is your final lesson! You will learn how to directly control HTML elements using useRef, and combine it with everything you learned to build a full 3-page website.' },
     sections: [
       {
         type: 'text',
@@ -2601,7 +2601,7 @@ export default function App() {
       },
       {
         type: 'text',
-        title: 'ðŸ“ The Sticky Note Analogy',
+        title: '📝 The Sticky Note Analogy',
         body: 'Think of `useState` as a loud megaphone. When you change state, you scream into the megaphone, and React immediately scrambles to redraw the entire screen to match what you said.\n\nThink of `useRef` as a **secret sticky note** on the back of your component. You can write information on it (`ref.current = 5`), and you can read it later. But React doesn\'t know about the sticky note, and it will never redraw the screen when you change it.',
         boxType: 'danger',
         boxTitle: 'The Golden Rule',
@@ -2759,7 +2759,7 @@ export default function Contact() {
       },
       {
         type: 'text',
-        title: 'ðŸ“š Further Reading',
+        title: '📚 Further Reading',
         body: 'Understanding when to use `useState` versus `useRef` is one of the key milestones in becoming a Senior React Developer. The official docs have a fantastic visual breakdown of this comparison.',
         boxType: 'info',
         boxTitle: 'Official React Docs',
